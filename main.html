@@ -9,10 +9,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
+    <div id="codefield">
         <h1>SpeedDev</h1>
         <p id='code'>
+            public static int findMin(int[] list) <br>
+                {	assert list != null && list.length > 0 : "failed precondition"; <br>
+<br>
+                    int indexOfMin = 0; <br>
+                    for(int i = 1; i < list.length; i++) <br>
+                    {	if(list[i] < list[indexOfMin]) <br>
+                        {	indexOfMin = i; <br>
+                        } <br>
+                    } <br>
+<br>
+                    return indexOfMin; <br>
+                } <br>
         </p>
+    </div>
+    <div id="input_area">
+        <input id="textField" type="text">
     </div>
 </body>
 </html>
