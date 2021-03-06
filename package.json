@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/juliuswunderlich/speed.dev/issues"
   },
-  "homepage": "https://github.com/juliuswunderlich/speed.dev#readme"
+  "homepage": "https://github.com/juliuswunderlich/speed.dev#readme",
+  "dependencies": {
+    "mongodb": "^3.6.4"
+  }
 }

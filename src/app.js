@@ -1,6 +1,7 @@
-let express = require('express');
-let app = express();
+const express = require('express');
+const MongoClient = require('mongodb').MongoClient;
 
+const app = express();
 const port = 3000;
 
 app.listen(port, () => {
@@ -8,7 +9,7 @@ app.listen(port, () => {
 });
 
 // where we land initially
-app.get('/',(req,res)=>{
+app.get('/',(req,res) => {
     res.status(200).send('Hello World!\n');
 });
 
@@ -20,6 +21,4 @@ app.get("/codeSnippet", (req, res, next) => {
             "code": ["class", " ", "MyClass", " ", "{","}"]
         }
         )
-})
-
-["class", " ", "MyClass", " ", "{","}"]
+});
