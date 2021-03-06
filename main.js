@@ -1,2 +1,0 @@
-var text = ["public", "static", ...];
-

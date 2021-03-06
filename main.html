@@ -5,29 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="main.js"></script>
+    <script src="frontend.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="codefield">
         <h1>SpeedDev</h1>
         <p id='code'>
-            public static int findMin(int[] list) <br>
-                {	assert list != null && list.length > 0 : "failed precondition"; <br>
-<br>
-                    int indexOfMin = 0; <br>
-                    for(int i = 1; i < list.length; i++) <br>
-                    {	if(list[i] < list[indexOfMin]) <br>
-                        {	indexOfMin = i; <br>
-                        } <br>
-                    } <br>
-<br>
-                    return indexOfMin; <br>
-                } <br>
+            public static void main (String[] args) {<br>
+                System.out.println("Hello World!");<br>
+            }<br>
+        </p>
+    </div>
+    <div id="current_token_field">
+        <p id="current_token">
+            [current_token]
         </p>
     </div>
     <div id="input_area">
-        <input id="textField" type="text">
+        <label for="textField"></label><input id="textField" type="text">
+    </div>
+    <div id ="test_field">
+        <p id="key_label">
+            [key label]
+        </p>
+        <p id="forward">
+            [forward]
+        </p>
+
     </div>
 </body>
 </html>
