@@ -1,4 +1,3 @@
-var text = ["public", "static", ...];
 
 
 
