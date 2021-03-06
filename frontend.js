@@ -22,7 +22,7 @@ function forwardCursor() {
         token_idx++
         current_token = text[token_idx]
         cursor_pos = 0
-        document.getElementById("textField").textContent = ""
+        document.getElementById("textField").value = ""
     }
 }
 
