@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/juliuswunderlich/speed.dev#readme",
   "dependencies": {
-    "mongodb": "^3.6.4"
+    "axios": "^0.21.1"
   }
 }
