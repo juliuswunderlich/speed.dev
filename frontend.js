@@ -28,8 +28,9 @@ function forwardCursor() {
 }
 
 // POST: daraus den aufruf bauen, den wir brauchen sobald ein Code abgeschlossen ist 
-const userAction = async () => {
-    const response = await fetch('http://example.com/movies.json', {
+const get_new_snippet = async () => {
+    document.getElementById("code").innerHTML = "loading new snippet..."
+    const response = await fetch('localhost:3000/codeSnippet', {
       method: 'POST',
       body: myBody, // string or object
       headers: {
@@ -37,5 +38,9 @@ const userAction = async () => {
       }
     });
     const myJson = await response.json(); //extract JSON from the http response
-    // do something with myJson
+    const snippet = JSON.parse(myJson)
+    text = snippet.code_array
+    document.getElementById("code").innerHTML = snippet.code
+
+
   }
