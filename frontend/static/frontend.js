@@ -102,6 +102,7 @@ const get_new_snippet = async() => {
     displaySnippet()
 }
 
+// dude prolly sth with this
 // POST: daraus den aufruf bauen, den wir brauchen sobald ein Code abgeschlossen ist 
 // const get_new_snippet = async () => {
 //     const response = await fetch('localhost:3000/codeSnippet', {
