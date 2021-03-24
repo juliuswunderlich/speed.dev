@@ -21,8 +21,8 @@ func codeRequestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fileServer := http.FileServer(http.Dir("./static")) // New code
-	http.Handle("/", fileServer)                        // New code
+	fileServer := http.FileServer(http.Dir("../frontend/static/"))
+	http.Handle("/", fileServer)
 	http.HandleFunc("/code", codeRequestHandler)
 
 	fmt.Printf("Starting server at port 3000\n")
