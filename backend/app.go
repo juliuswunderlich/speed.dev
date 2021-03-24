@@ -21,7 +21,7 @@ func codeRequestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fileServer := http.FileServer(http.Dir("../frontend/static/"))
+	fileServer := http.FileServer(http.Dir("../frontend/static"))
 	http.Handle("/", fileServer)
 	http.HandleFunc("/code", codeRequestHandler)
 

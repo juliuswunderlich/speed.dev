@@ -94,7 +94,7 @@ function highlightFirstCharacter() {
 }
 
 //for testing
-function get_new_snippet() {
+const get_new_snippet = async() => {
     paras = {}
     line_idx = 0
     current_line = text[line_idx][0]
