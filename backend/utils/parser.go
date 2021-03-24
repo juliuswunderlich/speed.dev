@@ -1,7 +1,8 @@
-package main
+package utils
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
 	"io"
 	"io/ioutil"
@@ -9,10 +10,6 @@ import (
 	"os"
 	"strings"
 )
-
-type Codes struct {
-	Elements []Code
-}
 
 type Line struct {
 	NumSpaceIndent int
@@ -26,6 +23,11 @@ type Code struct {
 	Lines []Line `json:"lines[]"`
 }
 
+type Codes struct {
+	Elements []Code
+}
+
+/*
 func main() {
 	err := ReadAllDirFilesIntoJsonFile("./Codes/files")
 	if err != nil {
@@ -34,6 +36,16 @@ func main() {
 		println("Read all files successfully!")
 	}
 
+}
+*/
+
+// remove the html escape functionality
+func jSONMarshalNoHtmlEscape(t interface{}) ([]byte, error) {
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(t)
+	return buffer.Bytes(), err
 }
 
 // returns how many spaces there were and the modified string
@@ -92,6 +104,8 @@ func ReadAllDirFilesIntoJsonFile(dir string) (err error) {
 	if err != nil {
 		return err
 	}
+
+	// 0644 is a weird write code
 	err = os.WriteFile("codes.json", jFile, 0644)
 	if err != nil {
 		return err
