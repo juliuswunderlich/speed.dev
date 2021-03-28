@@ -14,6 +14,8 @@ let line_idx = 0
 let current_line = text[line_idx][0]
 let cursor_pos = 0
 
+let history = []
+
 window.onload = function (event) {
     displaySnippet()
 };
@@ -26,6 +28,7 @@ document.addEventListener('keydown', function (event) {
             cursor_pos = 0
             line_idx++
             current_line = text[line_idx][0]
+            history = []
             highlightFirstCharacter()
             document.getElementById("textField").value = ""
         }
@@ -38,17 +41,48 @@ document.addEventListener('keydown', function (event) {
         }
     } else {
         if (key === "Backspace") {
-            reverseCursor()
-        } else {
+            if(cursor_pos > 0) {
+                reverseCursor()
+            }
+        } else if (key.length === 1) {
             forwardCursor(false)
         }
-
-
     }
 
 });
 
+function updateText() {
+    if (cursor_pos == 0) {
+        highlightFirstCharacter()
+        return
+    }
+    innerHTML = ""
+    for (i = 0; i < history.length; i++) {
+        innerHTML +=
+            '<span style=\"color:' + getColor(history[i]) + ';\">'
+            + current_line.slice(i, i + 1)
+            + '</span>'
+    }
+
+    innerHTML += '<span style=\"background-color:' + HIGHLIGHT_COLOR + ';\">'
+        + current_line.slice(cursor_pos, cursor_pos + 1)
+        + '</span>'
+        + current_line.slice(cursor_pos + 1, current_line.length)
+
+    paras[line_idx].innerHTML = innerHTML
+
+}
+
+function getColor(correct) {
+    if (correct) {
+        return CORRECT_COLOR
+    } else {
+        return INCORRECT_COLOR
+    }
+}
+
 function displaySnippet() {
+    document.getElementById("textField").value = ""
     document.getElementById("code_field").innerHTML = ''
     for (l = 0; l < text.length; l++) {
         line = text[l]
@@ -68,22 +102,17 @@ function displaySnippet() {
 function forwardCursor(correct) {
     cursor_pos++
     if (correct) {
-        color = CORRECT_COLOR
+        history.push(true)
     } else {
-        color = INCORRECT_COLOR
+        history.push(false)
     }
-    paras[line_idx].innerHTML = '<span style=\"color:' + color + ';\">'
-        + text[line_idx][0].slice(0, cursor_pos)
-        + '</span>'
-        + '<span style=\"background-color:' + HIGHLIGHT_COLOR + ';\">'
-        + text[line_idx][0].slice(cursor_pos, cursor_pos + 1)
-        + '</span>'
-        + text[line_idx][0].slice(cursor_pos + 1, current_line.length)
+    updateText()
 }
 
 function reverseCursor() {
-
-
+    cursor_pos--
+    history.pop()
+    updateText()
 }
 
 function highlightFirstCharacter() {
@@ -94,11 +123,12 @@ function highlightFirstCharacter() {
 }
 
 //for testing
-const get_new_snippet = async() => {
+const get_new_snippet = async () => {
     paras = {}
     line_idx = 0
     current_line = text[line_idx][0]
     cursor_pos = 0
+    history = []
     displaySnippet()
 }
 
