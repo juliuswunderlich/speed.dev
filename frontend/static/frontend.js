@@ -1,6 +1,10 @@
-//const text = document.getElementById("code").split(" ")
+// const text = [
+//     ["public static void main (String[] args) {", 0],
+//     ["System.out.println(\"Hello World!\");", 1],
+//     ["}", 0]
+// ]
 const text = [
-    ["public static void main (String[] args) {", 0],
+    ["public static", 0],
     ["System.out.println(\"Hello World!\");", 1],
     ["}", 0]
 ]
@@ -14,10 +18,10 @@ let line_idx = 0
 let current_line = text[line_idx][0]
 let cursor_pos = 0
 
-let history = []
+let history = {}
 
 window.onload = function (event) {
-    displaySnippet()
+    get_new_snippet()
 };
 
 document.addEventListener('keydown', function (event) {
@@ -28,7 +32,7 @@ document.addEventListener('keydown', function (event) {
             cursor_pos = 0
             line_idx++
             current_line = text[line_idx][0]
-            history = []
+            current_history = history[line_idx]
             highlightFirstCharacter()
             document.getElementById("textField").value = ""
         }
@@ -41,7 +45,7 @@ document.addEventListener('keydown', function (event) {
         }
     } else {
         if (key === "Backspace") {
-            if(cursor_pos > 0) {
+            if (line_idx != 0 || cursor_pos != 0) {
                 reverseCursor()
             }
         } else if (key.length === 1) {
@@ -52,14 +56,10 @@ document.addEventListener('keydown', function (event) {
 });
 
 function updateText() {
-    if (cursor_pos == 0) {
-        highlightFirstCharacter()
-        return
-    }
     innerHTML = ""
-    for (i = 0; i < history.length; i++) {
+    for (i = 0; i < current_history.length; i++) {
         innerHTML +=
-            '<span style=\"color:' + getColor(history[i]) + ';\">'
+            '<span style=\"color:' + getColor(current_history[i]) + ';\">'
             + current_line.slice(i, i + 1)
             + '</span>'
     }
@@ -102,17 +102,26 @@ function displaySnippet() {
 function forwardCursor(correct) {
     cursor_pos++
     if (correct) {
-        history.push(true)
+        current_history.push(true)
     } else {
-        history.push(false)
+        current_history.push(false)
     }
     updateText()
 }
 
 function reverseCursor() {
-    cursor_pos--
-    history.pop()
+    if (cursor_pos === 0 && line_idx != 0) {
+        paras[line_idx].innerHTML = current_line
+        line_idx--
+        current_line = text[line_idx][0]
+        cursor_pos = current_line.length
+        current_history = history[line_idx]
+    } else {
+        current_history.pop()
+        cursor_pos--
+    }
     updateText()
+
 }
 
 function highlightFirstCharacter() {
@@ -129,6 +138,10 @@ const get_new_snippet = async () => {
     current_line = text[line_idx][0]
     cursor_pos = 0
     history = []
+    for(i = 0; i < text.length; i++) {
+        history[i] = []
+    }
+    current_history = history[line_idx]
     displaySnippet()
 }
 
