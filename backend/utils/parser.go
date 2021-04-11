@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"math"
@@ -27,18 +28,6 @@ type Codes struct {
 	Elements []Code
 }
 
-/*
-func main() {
-	err := ReadAllDirFilesIntoJsonFile("./Codes/files")
-	if err != nil {
-		panic(err)
-	} else {
-		println("Read all files successfully!")
-	}
-
-}
-*/
-
 // remove the html escape functionality
 func jSONMarshalNoHtmlEscape(t interface{}) ([]byte, error) {
 	buffer := &bytes.Buffer{}
@@ -46,6 +35,10 @@ func jSONMarshalNoHtmlEscape(t interface{}) ([]byte, error) {
 	encoder.SetEscapeHTML(false)
 	err := encoder.Encode(t)
 	return buffer.Bytes(), err
+}
+
+func PrintTest() {
+	fmt.Print("Das Modul backend scheint zu funktionieren!")
 }
 
 // returns how many spaces there were and the modified string
@@ -112,4 +105,57 @@ func ReadAllDirFilesIntoJsonFile(dir string) (err error) {
 	}
 
 	return nil
+}
+
+// reads all the files in the given directory
+func ReadAllDirFilesIntoJson(dir string) (err error, js []byte) {
+	filename := dir
+	files, err := ioutil.ReadDir(filename)
+	if err != nil {
+		return err, nil
+	}
+
+	codes := Codes{make([]Code, 0)}
+
+	counter := 0
+	for _, f := range files {
+		code := Code{}
+		counter++
+		code.Id = counter
+		code.Title = strings.TrimRight(strings.SplitAfterN(f.Name(), ".", 2)[0], ".")
+		code.Fe = strings.ToLower((strings.SplitAfterN(f.Name(), ".", 2)[1]))
+		code.Lines = make([]Line, 0)
+
+		file, err := os.Open(filename + "/" + f.Name())
+		if err != nil {
+			return err, nil
+		}
+		defer file.Close()
+
+		reader := bufio.NewReader(file)
+		var line string
+		for {
+			line, err = reader.ReadString('\n')
+			if err != nil && err != io.EOF {
+				break
+			}
+			i, str := removeLeftSpaces(line)
+			l := Line{i, str}
+			// append to struct
+			code.Lines = append(code.Lines, l)
+			//fmt.Printf("%v\n", code.Lines)
+
+			if err != nil {
+				break
+			}
+		}
+		codes.Elements = append(codes.Elements, code)
+	}
+	// Marshall the struct into json
+	jFile, err := json.MarshalIndent(codes, "", " ")
+	if err != nil {
+		return err, nil
+	}
+
+	return nil, jFile
 }
