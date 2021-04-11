@@ -1,13 +1,36 @@
-// const text = [
-//     ["public static void main (String[] args) {", 0],
-//     ["System.out.println(\"Hello World!\");", 1],
-//     ["}", 0]
-// ]
-const text = [
-    ["public static", 0],
+const text1 = [
+    ["public static void main (String[] args) {", 0],
     ["System.out.println(\"Hello World!\");", 1],
     ["}", 0]
 ]
+const text2 = [
+    ["pubic static hair (String[] tanga) {", 0],
+    ["System.out.println(\"Sadi Gali!\");", 1],
+    ["}", 0]
+]
+const text3 = [
+    ["private synchronized void whee (int count) {", 0],
+    ["text = \"\";", 1],
+    ["for (int i = 0; i < count; i++) {", 1],
+    ["text += \"whee! \";", 2],
+    ["System.out.println(text);", 2],
+    ["}", 1],
+    ["}", 0]
+]
+const text4 = [
+    ["class Docker{", 0],
+    ["private int levelOfShittiness;", 1],
+    ["", 1],
+    ["public Docker(){", 1],
+    ["levelOfShittiness = 9000;", 2],
+    ["}", 1],
+    ["}", 0]
+
+]
+
+const texts = [text1, text2, text3, text4]
+let text = text1
+
 const INDENT_PX = 25
 const HIGHLIGHT_COLOR = "#e79f0b"
 const CORRECT_COLOR = "#00ff00"
@@ -17,8 +40,8 @@ let paras = {}
 let line_idx = 0
 let current_line = text[line_idx][0]
 let cursor_pos = 0
-
 let history = {}
+let return_next = false
 
 window.onload = function (event) {
     get_new_snippet()
@@ -27,26 +50,18 @@ window.onload = function (event) {
 document.addEventListener('keydown', function (event) {
     let key = event.key
 
-    if (key === "Enter") {
-        if (cursor_pos >= current_line.length) {
-            cursor_pos = 0
-            line_idx++
-            current_line = text[line_idx][0]
-            current_history = history[line_idx]
-            highlightFirstCharacter()
-            document.getElementById("textField").value = ""
-        }
-    }
-
     if (key === current_line.charAt(cursor_pos)) {
         forwardCursor(true)
-        if (key === " ") {
-            document.getElementById("textField").value = ""
-        }
     } else {
         if (key === "Backspace") {
             if (line_idx != 0 || cursor_pos != 0) {
                 reverseCursor()
+            }
+        } else if (key === "Enter") {
+            if (cursor_pos >= current_line.length) {
+                newLine()
+            } else {
+                forwardCursor(false)
             }
         } else if (key.length === 1) {
             forwardCursor(false)
@@ -55,34 +70,8 @@ document.addEventListener('keydown', function (event) {
 
 });
 
-function updateText() {
-    innerHTML = ""
-    for (i = 0; i < current_history.length; i++) {
-        innerHTML +=
-            '<span style=\"color:' + getColor(current_history[i]) + ';\">'
-            + current_line.slice(i, i + 1)
-            + '</span>'
-    }
-
-    innerHTML += '<span style=\"background-color:' + HIGHLIGHT_COLOR + ';\">'
-        + current_line.slice(cursor_pos, cursor_pos + 1)
-        + '</span>'
-        + current_line.slice(cursor_pos + 1, current_line.length)
-
-    paras[line_idx].innerHTML = innerHTML
-
-}
-
-function getColor(correct) {
-    if (correct) {
-        return CORRECT_COLOR
-    } else {
-        return INCORRECT_COLOR
-    }
-}
 
 function displaySnippet() {
-    document.getElementById("textField").value = ""
     document.getElementById("code_field").innerHTML = ''
     for (l = 0; l < text.length; l++) {
         line = text[l]
@@ -96,17 +85,22 @@ function displaySnippet() {
         para.appendChild(text_node);
         document.getElementById("code_field").appendChild(para)
     }
-    highlightFirstCharacter()
+    updatePara()
 }
 
 function forwardCursor(correct) {
+    if (cursor_pos+1 >= current_line.length) {
+        return_next = true
+        updatePara()
+        return
+    }
     cursor_pos++
     if (correct) {
         current_history.push(true)
     } else {
         current_history.push(false)
     }
-    updateText()
+    updatePara()
 }
 
 function reverseCursor() {
@@ -120,29 +114,76 @@ function reverseCursor() {
         current_history.pop()
         cursor_pos--
     }
-    updateText()
+    updatePara()
 
 }
 
-function highlightFirstCharacter() {
-    paras[line_idx].innerHTML = '<span style=\"background-color:' + HIGHLIGHT_COLOR + ';\">'
-        + text[line_idx][0].slice(0, cursor_pos + 1)
-        + '</span>'
-        + text[line_idx][0].slice(cursor_pos + 1, current_line.length)
+function newLine() {
+    if (line_idx + 1 === text.length) {
+        get_new_snippet()
+        return
+    }
+    //TODO: kinda hacky (remove ↵)
+    return_next = false
+    updatePara()
+
+    cursor_pos = 0
+    line_idx++
+    current_line = text[line_idx][0]
+    current_history = history[line_idx]
+    updatePara()
 }
+
+function updatePara() {
+    innerHTML = ""
+    for (i = 0; i < current_history.length; i++) {
+        innerHTML +=
+            '<span style=\"color:' + getColor(current_history[i]) + ';\">'
+            + current_line.slice(i, i + 1)
+            + '</span>'
+    }
+
+    if (cursor_pos < current_line.length) {
+        innerHTML += '<span style=\"background-color:' + HIGHLIGHT_COLOR + ';\">'
+            + current_line.slice(cursor_pos, cursor_pos + 1)
+            + '</span>'
+            + current_line.slice(cursor_pos + 1, current_line.length)
+    }
+
+
+    if (return_next) {
+        innerHTML += '<span style=\"background-color:' + HIGHLIGHT_COLOR + ';\">' + "↵" + '</span>'
+    }
+
+    paras[line_idx].innerHTML = innerHTML
+}
+
+function getColor(correct) {
+    if (correct) {
+        return CORRECT_COLOR
+    } else {
+        return INCORRECT_COLOR
+    }
+}
+
 
 //for testing
 const get_new_snippet = async () => {
+    text = randomChoice(texts)
     paras = {}
     line_idx = 0
     current_line = text[line_idx][0]
     cursor_pos = 0
     history = []
-    for(i = 0; i < text.length; i++) {
+    for (i = 0; i < text.length; i++) {
         history[i] = []
     }
     current_history = history[line_idx]
     displaySnippet()
+}
+
+function randomChoice(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
 }
 
 // dude prolly sth with this
