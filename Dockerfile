@@ -1,18 +1,26 @@
-FROM golang:1.15.7-buster
+## We specify the base image we need for our
+## go application
+FROM golang:1.16.3
+## We create an /app directory within our
+## image that will hold our application source
+## files
+RUN mkdir /app
+## We copy everything in the root directory
+## into our /app directory
+ADD . /app
+## We specify that we now wish to execute 
+## any further commands inside our /app
+## directory
+WORKDIR /app/backend
 
-ENV GO111MODULE=on
-ENV GOFLAGS=-mod=vendor
-ENV APP_USER app
-ENV APP_HOME /go/src/speeddevapp
-ARG GROUP_ID
-ARG USER_ID
-RUN groupadd -o --gid $GROUP_ID app && useradd -m -l --uid $USER_ID --gid $GROUP_ID $APP_USER
-RUN mkdir -p $APP_HOME && chown -R $APP_USER:$APP_USER $APP_HOME
-USER $APP_USER
-WORKDIR $APP_HOME
-EXPOSE 3000
-CMD ["run"]
+RUN go mod download
 
+## we run go build to compile the binary
+## executable of our Go program
+RUN go build -o backend .
+## Our start command which kicks off
+## our newly created binary executable
+CMD ["./backend"]
 
 
 

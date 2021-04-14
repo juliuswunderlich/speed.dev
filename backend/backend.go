@@ -1,10 +1,10 @@
 package main
 
 import (
-	"backend/utils"
 	"fmt"
 	"log"
 	"net/http"
+	"utils"
 )
 
 func main() {
