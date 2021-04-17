@@ -5,18 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPEEEED</title>
-    <script src="frontend/static/frontend.js"></script>
     <link rel="stylesheet" href="frontend/static/style.css">
+
+    <script src="https://unpkg.com/vue@next"></script>
+
 </head>
 <body>
+<div id="app">
     <div id="snippet">
         <h1 class="center">speed.dev</h1>
         <button onclick="get_new_snippet()" class="button">snippetum nuevum</button>
         <div id='code_field' class="codebox">
         </div>
     </div>
-<!--    <div id="input_area" class="center">-->
-<!--        <label for="textField"></label><input id="textField" type="text">-->
-<!--    </div>-->
+    <div id="test">
+        <p v-for="line in text">{{ line[0] }}</p>
+    </div>
+
+    <!-- Import Vue App -->
+    <script src="frontend/static/frontend.js"></script>
+
+    <!-- Mount Vue App -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+
+</div>
 </body>
 </html>

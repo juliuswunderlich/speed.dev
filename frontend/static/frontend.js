@@ -1,3 +1,11 @@
+const app = Vue.createApp({
+    data() {
+        return {
+            text: text1
+        }
+    }
+})
+
 const text1 = [
     ["public static void main (String[] args) {", 0],
     ["System.out.println(\"Hello World!\");", 1],
