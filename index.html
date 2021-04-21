@@ -12,18 +12,16 @@
 </head>
 <body>
 <div id="app">
-    <div id="snippet">
-        <h1 class="center">speed.dev</h1>
-        <button onclick="get_new_snippet()" class="button">snippetum nuevum</button>
-        <div id='code_field' class="codebox">
-        </div>
-    </div>
-    <div id="test">
-        <p v-for="line in text">{{ line[0] }}</p>
-    </div>
 
-    <!-- Import Vue App -->
+    <!-- component defined in CodeDisplay.js -->
+    <code-display></code-display>
+
+
+    <!-- Import App -->
     <script src="frontend/static/frontend.js"></script>
+
+    <!-- Import Components -->
+    <script src="frontend/static/components/CodeDisplay.js"></script>
 
     <!-- Mount Vue App -->
     <script>
