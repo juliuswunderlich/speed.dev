@@ -6,27 +6,32 @@ app.component('code-display', {
         :style="{ marginLeft: getIndent(index) + 'px' }">
         {{ line.content }}
         </p>
+        <p v-for="char in charsTyped" >{{ char }}</p>
     </div>`,
     data() {
         return {
             text: [
-                { line_idx: 0, content: "public static void main (String[] args) {", indent: 0 },
-                { line_idx: 1, content: "System.out.println(\"Hello World!\");", indent: 1 },
-                { line_idx: 3, content: "}", indent: 0 },
-            ]
+                {line_idx: 0, content: "public static void main (String[] args) {", indent: 0},
+                {line_idx: 1, content: "System.out.println(\"Hello World!\");", indent: 1},
+                {line_idx: 3, content: "}", indent: 0},
+            ],
+            charsTyped: []
         }
 
     },
     methods: {
         getIndent(line_index) {
             return this.text[line_index].indent * INDENT_PX
+        },
+        onkeydown(event) {
+            this.charsTyped.push(event.key)
+            console.log(this.charsTyped)
         }
     },
-    computed: {
-
-
+    computed: {},
+    created() {
+        document.onkeydown = this.onkeydown
     }
-
 })
 const text1 = [
     ["public static void main (String[] args) {", 0],
@@ -78,6 +83,7 @@ window.onload = function (event) {
 };
 
 document.addEventListener('keydown', function (event) {
+    return
     let key = event.key
 
     if (key === current_line.charAt(cursor_pos)) {
