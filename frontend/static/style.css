@@ -5,3 +5,15 @@
     border: 3px solid green;
     padding: 10px;
 }
+.correct {
+    background-color: lightgreen;
+}
+.wrong {
+    background-color: red;
+}
+.plain {
+
+}
+.highlighted {
+    background-color: palegoldenrod;
+}

@@ -2,12 +2,15 @@ app.component('code-display', {
     template:
         `<div id="code-field">
         <p
-        v-for="(line, index) in text"
-        :style="{ marginLeft: getIndent(index) + 'px' }">
-        {{ line.content }}
+        v-for="(line, line_idx) in text"
+        :style="{ marginLeft: getIndent(line_idx) + 'px' }">
+        <span
+        v-for="(character, char_idx) in line.content"     
+        :class="getClassAt(char_idx)">              
+            {{ character }}
+        </span>
         </p>
-        <p v-for="char in charsTyped" >{{ char }}</p>
-    </div>`,
+        </div>`,
     data() {
         return {
             text: [
@@ -15,24 +18,60 @@ app.component('code-display', {
                 {line_idx: 1, content: "System.out.println(\"Hello World!\");", indent: 1},
                 {line_idx: 3, content: "}", indent: 0},
             ],
-            charsTyped: []
+            currentLine: 0,
+            cursorPosition: 0,
+            charsTyped: [],
+            keysTyped: []
         }
-
     },
     methods: {
         getIndent(line_index) {
             return this.text[line_index].indent * INDENT_PX
         },
         onkeydown(event) {
-            this.charsTyped.push(event.key)
+            let key = event.key
+            if (key === "Backspace") {
+                this.charsTyped.pop()
+                this.keysTyped.push(key)
+                if (this.cursorPosition > this.currentLineLength) {
+                    this.cursorPosition--
+                }
+
+            } else if (key.length === 1) {
+                this.charsTyped.push(key)
+                this.keysTyped.push(key)
+                this.cursorPosition++
+            }
             console.log(this.charsTyped)
+        },
+        getClassAt(index) {
+            if (index === this.charsTyped.length) {
+                return "highlighted"
+            }
+            if (index > this.charsTyped.length) {
+                return "plain"
+            }
+            if (this.currentLineText.charAt(index) === this.charsTyped[index]) {
+                return "correct"
+            } else {
+                return "wrong"
+            }
         }
     },
-    computed: {},
+    computed: {
+        currentLineLength() {
+            return this.text[this.currentLine].content.length
+        },
+        currentLineText() {
+            return this.text[this.currentLine].content
+        }
+    },
     created() {
         document.onkeydown = this.onkeydown
     }
 })
+
+
 const text1 = [
     ["public static void main (String[] args) {", 0],
     ["System.out.println(\"Hello World!\");", 1],
