@@ -2,12 +2,15 @@ app.component('code-display', {
     template:
         `<div id="code-field">
         <p
-        v-for="(line, index) in text"
-        :style="{ marginLeft: getIndent(index) + 'px' }">
-        {{ line.content }}
+            v-for="(line, line_idx) in text"
+            :style="{ marginLeft: getIndent(line_idx) + 'px' }">
+            <span
+                v-for="(character, char_idx) in line.content"     
+                :class="getClassAt(line_idx, char_idx)"> 
+                {{ character }}
+            </span>
         </p>
-        <p v-for="char in charsTyped" >{{ char }}</p>
-    </div>`,
+        </div>`,
     data() {
         return {
             text: [
@@ -15,24 +18,79 @@ app.component('code-display', {
                 {line_idx: 1, content: "System.out.println(\"Hello World!\");", indent: 1},
                 {line_idx: 3, content: "}", indent: 0},
             ],
-            charsTyped: []
+            currentLine: 0,
+            cursorPosition: 0,
+            charsTyped: [],
+            keysTyped: []
         }
-
     },
     methods: {
         getIndent(line_index) {
             return this.text[line_index].indent * INDENT_PX
         },
         onkeydown(event) {
-            this.charsTyped.push(event.key)
-            console.log(this.charsTyped)
+            let key = event.key
+            if (key === "Backspace") {
+                if (this.currentLine !== 0 || this.cursorPosition !== 0) {
+                    this.reverseCursor()
+                }
+            } else if (key === "Enter") {
+                if (this.cursorPosition >= this.currentLineLength) {
+                    this.newLine()
+                } else {
+                    this.charsTyped[this.currentLine].push(key)
+                }
+            } else if (key.length === 1) {
+                this.charsTyped[this.currentLine].push(key)
+                this.keysTyped.push(key)
+                this.cursorPosition++
+            }
+        },
+        getClassAt(line_idx, char_idx) {
+            if (this.currentLine === line_idx && char_idx === this.charsTyped[line_idx].length) {
+                return "highlighted"
+            }
+            if (char_idx >= this.charsTyped[line_idx].length) {
+                return "plain"
+            }
+            if (this.text[line_idx].content.charAt(char_idx) === this.charsTyped[line_idx][char_idx]) {
+                return "correct"
+            } else {
+                return "wrong"
+            }
+        },
+        newLine() {
+            this.currentLine++
+            this.cursorPosition = 0
+        },
+        reverseCursor() {
+            if (this.cursorPosition === 0 && this.currentLine !== 0) {
+                this.currentLine--
+                this.cursorPosition = this.currentLineLength
+            } else {
+                this.charsTyped[this.currentLine].pop()
+                this.keysTyped.push("Backspace")
+                this.cursorPosition--
+            }
         }
     },
-    computed: {},
+    computed: {
+        currentLineLength() {
+            return this.text[this.currentLine].content.length
+        },
+        currentLineText() {
+            return this.text[this.currentLine].content
+        }
+    },
     created() {
         document.onkeydown = this.onkeydown
+        // getText()
+        for (let l = 0; l < this.text.length; l++) {
+            this.charsTyped[l] = []
+        }
     }
 })
+
 const text1 = [
     ["public static void main (String[] args) {", 0],
     ["System.out.println(\"Hello World!\");", 1],
@@ -139,36 +197,36 @@ function forwardCursor(correct) {
     updatePara()
 }
 
-function reverseCursor() {
-    if (cursor_pos === 0 && line_idx != 0) {
-        paras[line_idx].innerHTML = current_line
-        line_idx--
-        current_line = text_old[line_idx][0]
-        cursor_pos = current_line.length
-        current_history = history[line_idx]
-    } else {
-        current_history.pop()
-        cursor_pos--
-    }
-    updatePara()
+// function reverseCursor() {
+//     if (cursor_pos === 0 && line_idx != 0) {
+//         paras[line_idx].innerHTML = current_line
+//         line_idx--
+//         current_line = text_old[line_idx][0]
+//         cursor_pos = current_line.length
+//         current_history = history[line_idx]
+//     } else {
+//         current_history.pop()
+//         cursor_pos--
+//     }
+//     updatePara()
+//
+// }
 
-}
-
-function newLine() {
-    if (line_idx + 1 === text_old.length) {
-        get_new_snippet()
-        return
-    }
-    //TODO: kinda hacky (remove ↵)
-    return_next = false
-    updatePara()
-
-    cursor_pos = 0
-    line_idx++
-    current_line = text_old[line_idx][0]
-    current_history = history[line_idx]
-    updatePara()
-}
+// function newLine() {
+//     if (line_idx + 1 === text_old.length) {
+//         get_new_snippet()
+//         return
+//     }
+//     //TODO: kinda hacky (remove ↵)
+//     return_next = false
+//     updatePara()
+//
+//     cursor_pos = 0
+//     line_idx++
+//     current_line = text_old[line_idx][0]
+//     current_history = history[line_idx]
+//     updatePara()
+// }
 
 function updatePara() {
     innerHTML = ""
