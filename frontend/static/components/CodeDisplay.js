@@ -60,9 +60,14 @@ app.component('code-display', {
                 this.cursorPosition++
             }
         },
+        //return the style class given a character at a specific position
         getClassAt(line_idx, char_idx) {
             if (this.currentLine === line_idx && char_idx === this.charsTyped[line_idx].length) {
                 return "highlighted"
+            }
+            //enter symbol
+            if (char_idx >= this.text[line_idx].content.length - 1 && (this.currentLine !== line_idx || (this.currentLine === line_idx && this.cursorPosition < this.currentLineLength - 1))) {
+                return "invisible"
             }
             if (char_idx >= this.charsTyped[line_idx].length) {
                 return "plain"
@@ -74,6 +79,7 @@ app.component('code-display', {
             }
         },
         newLine() {
+            this.keysTyped.push("↵") //TODO: kinda hacky but it works :-$
             this.currentLine++
             this.cursorPosition = 0
         },
@@ -96,15 +102,19 @@ app.component('code-display', {
             return this.text[this.currentLine].content
         },
     },
-    created(){
+    created() {
+        //add keyListener
+        document.onkeydown = this.onkeydown
+
         // get snippet from server
         this.text = this.text1;
+
+        // add return symbol after each line
         for (let l = 0; l < this.text.length; l++) {
             this.text[l].content = this.text[l].content += "↵"
         }
 
-        document.onkeydown = this.onkeydown
-
+        //initialize key history for each line
         for (let l = 0; l < this.text.length; l++) {
             this.charsTyped[l] = []
         }

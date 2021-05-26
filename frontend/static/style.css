@@ -31,5 +31,8 @@ body {
 
 }
 .highlighted {
-    background-color: rgba(242, 231, 80, .1);
+    background-color: rgba(242, 231, 80, .2);
+}
+.invisible {
+    opacity: 0;
 }
