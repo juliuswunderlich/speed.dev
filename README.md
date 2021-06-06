@@ -12,6 +12,20 @@ Alternatively, use -v to mount the directory on host as a volume inside the imag
 so we don't need to rebuild and rerun the docker image after changes to the source code:
 (doesn't work on windows?)
 
+Docker committing seems like the way to go:
+    Make whatever changes you want to your docker container instance.
+    Then get the container id using this command
+    
+    sudo docker ps -l 
+
+    Commit changes to the container:
+    sudo docker commit <container_id> <new-image-name>
+
+    Then run the container:
+    sudo docker run <new-image-name> <command>
+
+
+
 ```
 docker run -p 3000:3000 -v host/path/:/app/backend -it speeddev
 ```

@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"utils"
 
-	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,20 +20,29 @@ func (config *Config) SetDefault() {
 	config.IndexFile = "../index.html"
 }
 
+// global config variable
+var config Config
+
 func main() {
 	// gin router
 	router := gin.Default()
 	// use default config for now
-	config := Config{}
+	config = Config{}
 	config.SetDefault()
 
 	// frontend
-	router.Use(static.Serve("/", static.LocalFile(config.StaticFolder, true)))
-	router.LoadHTMLGlob(config.IndexFile)
+	//router.LoadHTMLGlob(config.StaticFolder)
+	//router.Use(static.Serve("/", static.LocalFile(config.IndexFile, true)))
+	router.StaticFS("/frontend/static", http.Dir("frontend/static"))
+	router.StaticFile("/", config.IndexFile)
 
 	// define some routes
+	//router.GET("/", defaultRouteHandler)
 	router.GET("/code", codesRequestHandler)
 	router.Run(config.Port)
+}
+
+func defaultRouteHandler(c *gin.Context) {
 }
 
 func codesRequestHandler(c *gin.Context) {
