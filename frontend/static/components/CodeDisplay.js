@@ -69,6 +69,7 @@ app.component('code-display', {
             }
         },
         //return the style class given a character at a specific position
+        //TODO: display wrong/correct enter symbol
         getClassAt(line_idx, char_idx) {
             if (this.currentLine === line_idx && char_idx === this.charsTyped[line_idx].length) {
                 return "highlighted"
@@ -100,7 +101,8 @@ app.component('code-display', {
         reverseCursor() {
             if (this.cursorPosition === 0 && this.currentLine !== 0) {
                 this.currentLine--
-                this.cursorPosition = this.currentLineLength
+                this.charsTyped[this.currentLine].pop()
+                this.cursorPosition = this.currentLineLength-1
             } else {
                 this.charsTyped[this.currentLine].pop()
                 this.keysTyped.push("Backspace")
