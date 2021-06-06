@@ -16,21 +16,23 @@ body {
     line-height: 40%;
     color: white;
 
-    /*min-width: 700px; <- make this dynamic*/
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 .correct {
-    background-color: rgba(0, 255, 0, .3);
+    background-color: rgba(0, 255, 0, .1);
 }
 .wrong {
-    background-color: rgba(255, 0, 0, .6);
+    background-color: rgba(255, 0, 0, .1);
 }
 .plain {
 
 }
 .highlighted {
-    background-color: rgba(242, 231, 80, .6);
+    background-color: rgba(242, 231, 80, .2);
+}
+.invisible {
+    opacity: 0;
 }
