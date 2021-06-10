@@ -7,7 +7,7 @@ app.component('code-display', {
             <span
                 v-for="(character, char_idx) in line.content"    
                 :class="getClassAt(line_idx, char_idx)"> 
-                {{ character }}
+                {{ getCharacterAt(line_idx, char_idx) }}
             </span>
         </p>
         </div>`,
@@ -29,7 +29,7 @@ app.component('code-display', {
             currentLine: 0,
             cursorPosition: 0,
             charsTyped: [],
-            keysTyped: []
+            //(for stats) keysTyped: []
         }
     },
     methods: {
@@ -63,7 +63,6 @@ app.component('code-display', {
                 if (this.cursorPosition >= this.currentLineLength - 1) {
                     this.newLine()
                 } else {
-                    this.keysTyped.push(key)
                     this.cursorPosition++
                 }
             }
@@ -90,6 +89,15 @@ app.component('code-display', {
             }
 
         },
+        //if a space is typed incorrectly, an underscore is displayed instead
+        getCharacterAt(line_idx, char_idx) {
+            let char = this.text[line_idx].content.charAt(char_idx)
+            if(char === " " && this.getClassAt(line_idx, char_idx) === "wrong") {
+                return "_"
+            } else {
+                return char
+            }
+        },
         newLine() {
             if (this.currentLine === this.text.length - 1) {
                 this.displayNewSnippet()
@@ -107,7 +115,6 @@ app.component('code-display', {
                 this.cursorPosition = this.currentLineLength-1
             } else {
                 this.charsTyped[this.currentLine].pop()
-                this.keysTyped.push("Backspace")
                 this.cursorPosition--
             }
         },
@@ -148,7 +155,6 @@ app.component('code-display', {
                 this.texts[t][l].content = this.texts[t][l].content += "↵"
             }
         }
-
 
         //add keyListener
         document.onkeydown = this.onkeydown
