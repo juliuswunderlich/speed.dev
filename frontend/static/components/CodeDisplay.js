@@ -24,7 +24,7 @@ app.component('code-display', {
                 {line_idx: 3, content: "}", indent: 0}
             ],
             texts: [],
-            text: "",
+            text: null,
             INDENT_PX: 25,
             currentLine: 0,
             cursorPosition: 0,
@@ -95,7 +95,6 @@ app.component('code-display', {
                 this.displayNewSnippet()
                 this.currentLine = 0
                 this.cursorPosition = 0
-
             } else {
                 this.currentLine++
                 this.cursorPosition = 0
@@ -117,9 +116,10 @@ app.component('code-display', {
             this.text = this.randomChoice(this.texts)
 
             // add return symbol after each line
-            for (let l = 0; l < this.text.length; l++) {
-                this.text[l].content = this.text[l].content += "↵"
-            }
+            //TODO: put back in once snippet is pulled from server
+            // for (let l = 0; l < this.text.length; l++) {
+            //     this.text[l].content = this.text[l].content += "↵"
+            // }
 
             //initialize key history for each line
             for (let l = 0; l < this.text.length; l++) {
@@ -140,6 +140,15 @@ app.component('code-display', {
     },
     created() {
         this.texts = [this.text1, this.text2]
+
+        //TODO: remove once snippets get pulled from server
+        // add return symbol after each line
+        for (let t = 0; t < this.texts.length; t++) {
+            for (let l = 0; l < this.texts[t].length; l++) {
+                this.texts[t][l].content = this.texts[t][l].content += "↵"
+            }
+        }
+
 
         //add keyListener
         document.onkeydown = this.onkeydown
