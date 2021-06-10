@@ -69,23 +69,26 @@ app.component('code-display', {
             }
         },
         //return the style class given a character at a specific position
-        //TODO: display wrong/correct enter symbol
         getClassAt(line_idx, char_idx) {
+            //character after cursor
+            if(line_idx > this.currentLine || (line_idx === this.currentLine && char_idx > this.cursorPosition)) {
+                //enter symbol
+                if (char_idx === this.text[line_idx].content.length - 1) {
+                    return "invisible"
+                }
+                return "plain"
+            }
+            //character at cursor
             if (this.currentLine === line_idx && char_idx === this.charsTyped[line_idx].length) {
                 return "highlighted"
             }
-            //enter symbol
-            if (char_idx >= this.text[line_idx].content.length - 1 && (this.currentLine !== line_idx || (this.currentLine === line_idx && this.cursorPosition < this.currentLineLength))) {
-                return "invisible"
-            }
-            if (char_idx >= this.charsTyped[line_idx].length) {
-                return "plain"
-            }
+            //character before cursor
             if (this.text[line_idx].content.charAt(char_idx) === this.charsTyped[line_idx][char_idx]) {
                 return "correct"
             } else {
                 return "wrong"
             }
+
         },
         newLine() {
             if (this.currentLine === this.text.length - 1) {
