@@ -7,7 +7,7 @@ app.component('code-display', {
             <span
                 v-for="(character, char_idx) in line.content"    
                 :class="getClassAt(line_idx, char_idx)"> 
-                {{ character }}
+                {{ getCharacterAt(line_idx, char_idx) }}
             </span>
         </p>
         </div>`,
@@ -23,12 +23,13 @@ app.component('code-display', {
                 {line_idx: 1, content: "System.out.println(\"Sadi Gali!\");", indent: 1},
                 {line_idx: 3, content: "}", indent: 0}
             ],
-            text: "",
+            texts: [],
+            text: null,
             INDENT_PX: 25,
             currentLine: 0,
             cursorPosition: 0,
             charsTyped: [],
-            keysTyped: []
+            //(for stats) keysTyped: []
         }
     },
     methods: {
@@ -49,49 +50,91 @@ app.component('code-display', {
                     this.reverseCursor()
                 }
             } else if (key === "Enter") {
+                this.charsTyped[this.currentLine].push("↵")
+                if (this.cursorPosition >= this.currentLineLength - 1) {
+                    this.newLine()
+                }
+                else {
+                    this.cursorPosition++
+                }
+
+            } else if (key.length === 1) {
+                this.charsTyped[this.currentLine].push(key)
                 if (this.cursorPosition >= this.currentLineLength - 1) {
                     this.newLine()
                 } else {
-                    this.charsTyped[this.currentLine].push(key)
+                    this.cursorPosition++
                 }
-            } else if (key.length === 1) {
-                this.charsTyped[this.currentLine].push(key)
-                this.keysTyped.push(key)
-                this.cursorPosition++
             }
         },
         //return the style class given a character at a specific position
         getClassAt(line_idx, char_idx) {
+            //character after cursor
+            if(line_idx > this.currentLine || (line_idx === this.currentLine && char_idx > this.cursorPosition)) {
+                //enter symbol
+                if (char_idx === this.text[line_idx].content.length - 1) {
+                    return "invisible"
+                }
+                return "plain"
+            }
+            //character at cursor
             if (this.currentLine === line_idx && char_idx === this.charsTyped[line_idx].length) {
                 return "highlighted"
             }
-            //enter symbol
-            if (char_idx >= this.text[line_idx].content.length - 1 && (this.currentLine !== line_idx || (this.currentLine === line_idx && this.cursorPosition < this.currentLineLength - 1))) {
-                return "invisible"
-            }
-            if (char_idx >= this.charsTyped[line_idx].length) {
-                return "plain"
-            }
+            //character before cursor
             if (this.text[line_idx].content.charAt(char_idx) === this.charsTyped[line_idx][char_idx]) {
                 return "correct"
             } else {
                 return "wrong"
             }
+
+        },
+        //if a space is typed incorrectly, an underscore is displayed instead
+        getCharacterAt(line_idx, char_idx) {
+            let char = this.text[line_idx].content.charAt(char_idx)
+            if(char === " " && this.getClassAt(line_idx, char_idx) === "wrong") {
+                return "_"
+            } else {
+                return char
+            }
         },
         newLine() {
-            this.keysTyped.push("↵") //TODO: kinda hacky but it works :-$
-            this.currentLine++
-            this.cursorPosition = 0
+            if (this.currentLine === this.text.length - 1) {
+                this.displayNewSnippet()
+                this.currentLine = 0
+                this.cursorPosition = 0
+            } else {
+                this.currentLine++
+                this.cursorPosition = 0
+            }
         },
         reverseCursor() {
             if (this.cursorPosition === 0 && this.currentLine !== 0) {
                 this.currentLine--
-                this.cursorPosition = this.currentLineLength
+                this.charsTyped[this.currentLine].pop()
+                this.cursorPosition = this.currentLineLength-1
             } else {
                 this.charsTyped[this.currentLine].pop()
-                this.keysTyped.push("Backspace")
                 this.cursorPosition--
             }
+        },
+        displayNewSnippet() {
+            // get snippet from server
+            this.text = this.randomChoice(this.texts)
+
+            // add return symbol after each line
+            //TODO: put back in once snippet is pulled from server
+            // for (let l = 0; l < this.text.length; l++) {
+            //     this.text[l].content = this.text[l].content += "↵"
+            // }
+
+            //initialize key history for each line
+            for (let l = 0; l < this.text.length; l++) {
+                this.charsTyped[l] = []
+            }
+        },
+        randomChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
         },
     },
     computed: {
@@ -103,21 +146,20 @@ app.component('code-display', {
         },
     },
     created() {
+        this.texts = [this.text1, this.text2]
+
+        //TODO: remove once snippets get pulled from server
+        // add return symbol after each line
+        for (let t = 0; t < this.texts.length; t++) {
+            for (let l = 0; l < this.texts[t].length; l++) {
+                this.texts[t][l].content = this.texts[t][l].content += "↵"
+            }
+        }
+
         //add keyListener
         document.onkeydown = this.onkeydown
 
-        // get snippet from server
-        this.text = this.text1;
-
-        // add return symbol after each line
-        for (let l = 0; l < this.text.length; l++) {
-            this.text[l].content = this.text[l].content += "↵"
-        }
-
-        //initialize key history for each line
-        for (let l = 0; l < this.text.length; l++) {
-            this.charsTyped[l] = []
-        }
+        this.displayNewSnippet()
     }
 })
 
