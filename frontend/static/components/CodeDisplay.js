@@ -1,9 +1,15 @@
 app.component('code-display', {
     template:
-        `<div id="code-field">
+        `<div id="line-numbers">
+         <p
+            v-for="line_number in visibleLines">
+            {{ line_number + 1 }}
+        </p>
+        </div>
+        <div id="code-field">
         <p
             v-for="(line, line_idx) in text"
-            :style="{ marginLeft: getIndent(line_idx) + 'px' , opacity: getOpacity(line_idx)}">
+            :style="{ marginLeft: getIndent(line_idx) + 'px', opacity: getOpacity(line_idx)}">
             <span
                 v-for="(character, char_idx) in line.content"    
                 :class="getClassAt(line_idx, char_idx)"> 
@@ -16,12 +22,12 @@ app.component('code-display', {
             text1: [
                 {line_idx: 0, content: "public static void main (String[] args) {", indent: 0},
                 {line_idx: 1, content: "System.out.println(\"Hello World!\");", indent: 1},
-                {line_idx: 3, content: "}", indent: 0}
+                {line_idx: 2, content: "}", indent: 0}
             ],
             text2: [
                 {line_idx: 0, content: "pubic static hair (String[] tanga) {", indent: 0},
                 {line_idx: 1, content: "System.out.println(\"Sadi Gali!\");", indent: 1},
-                {line_idx: 3, content: "}", indent: 0}
+                {line_idx: 2, content: "}", indent: 0}
             ],
             texts: [],
             text: null,
@@ -144,6 +150,14 @@ app.component('code-display', {
         currentLineText() {
             return this.text[this.currentLine].content
         },
+        visibleLines() {
+            let list = [];
+            for (let i = 0; i <= this.currentLine; i++) {
+                list.push(i);
+            }
+            return list
+        }
+
     },
     created() {
         this.texts = [this.text1, this.text2]
