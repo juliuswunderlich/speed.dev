@@ -1,12 +1,15 @@
-import express from 'express';
+const express = require('express')
 
 const app = express();
 
-import cors from 'cors';
+const cors = require('cors');
 
+//.use is a middleware function (middleware = access to req, resp and their respective bodies)
+// this one is not mounted to a route. It gets called on every request
+// json is a middleware to handle json bodies
 app.use(express.json());
 app.use(cors());
-import postRoutes from './routes/posts.js'
+const postRoutes = require('./routes/posts.js');
 import './db/db.js';
 app.use('/posts', postRoutes)
 app.listen(3000)
