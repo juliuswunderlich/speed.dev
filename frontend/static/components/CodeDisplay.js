@@ -1,21 +1,23 @@
 app.component('code-display', {
     template:
-        `<div id="line-numbers">
-         <p
-            v-for="line_number in visibleLines">
-            {{ line_number + 1 }}
-        </p>
-        </div>
-        <div id="code-field">
-        <p
-            v-for="(line, line_idx) in text"
-            :style="{ marginLeft: getIndent(line_idx) + 'px', opacity: getOpacity(line_idx)}">
-            <span
-                v-for="(character, char_idx) in line.content"    
-                :class="getClassAt(line_idx, char_idx)"> 
-                {{ getCharacterAt(line_idx, char_idx) }}
-            </span>
-        </p>
+        `<div id="wrapper">
+            <div id="line-numbers">
+                <p
+                    v-for="line_number in visibleLines">
+                    {{ line_number + 1 }}
+                </p>
+            </div>
+            <div id="code-field">
+                <p
+                    v-for="(line, line_idx) in text"
+                    :style="{ marginLeft: getIndent(line_idx) + 'px', opacity: getOpacity(line_idx)}">
+                    <span
+                        v-for="(character, char_idx) in line.content"    
+                        :class="getClassAt(line_idx, char_idx)"> 
+                        {{ getCharacterAt(line_idx, char_idx) }}
+                    </span>
+                </p>
+            </div>
         </div>`,
     data() {
         return {
@@ -59,8 +61,7 @@ app.component('code-display', {
                 this.charsTyped[this.currentLine].push("↵")
                 if (this.cursorPosition >= this.currentLineLength - 1) {
                     this.newLine()
-                }
-                else {
+                } else {
                     this.cursorPosition++
                 }
 
@@ -76,7 +77,7 @@ app.component('code-display', {
         //return the style class given a character at a specific position
         getClassAt(line_idx, char_idx) {
             //character after cursor
-            if(line_idx > this.currentLine || (line_idx === this.currentLine && char_idx > this.cursorPosition)) {
+            if (line_idx > this.currentLine || (line_idx === this.currentLine && char_idx > this.cursorPosition)) {
                 //enter symbol
                 if (char_idx === this.text[line_idx].content.length - 1) {
                     return "invisible"
@@ -98,7 +99,7 @@ app.component('code-display', {
         //if a space is typed incorrectly, an underscore is displayed instead
         getCharacterAt(line_idx, char_idx) {
             let char = this.text[line_idx].content.charAt(char_idx)
-            if(char === " " && this.getClassAt(line_idx, char_idx) === "wrong") {
+            if (char === " " && this.getClassAt(line_idx, char_idx) === "wrong") {
                 return "_"
             } else {
                 return char
@@ -118,7 +119,7 @@ app.component('code-display', {
             if (this.cursorPosition === 0 && this.currentLine !== 0) {
                 this.currentLine--
                 this.charsTyped[this.currentLine].pop()
-                this.cursorPosition = this.currentLineLength-1
+                this.cursorPosition = this.currentLineLength - 1
             } else {
                 this.charsTyped[this.currentLine].pop()
                 this.cursorPosition--

@@ -9,30 +9,28 @@ body {
     width: 100vw;
     background-color: #151718;
 }
-#line-numbers {
-    font-family: "Hack", monospace;
-    font-size: 25px;
-    line-height: 30%;
-    color: white;
-    opacity: 50%;
 
-    position: absolute;
-    top: 40%;
-    left: 35%;
-    transform: translate(-50%, -50%);
-
-}
-#code-field {
+#wrapper {
     font-family: "Hack", monospace;
     font-size: 25px;
     line-height: 30%;
     color: white;
 
     position: absolute;
+    max-width: 75%; /* TODO */
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+#line-numbers {
+    opacity: 15%;
+    float: left;
+    padding-right: 75px;
+}
+#code-field {
+    float: left;
+}
+
 .correct {
     /*background-color: rgba(0, 255, 0, .1);*/
     color: white;
