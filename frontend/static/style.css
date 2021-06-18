@@ -16,19 +16,22 @@ body {
     line-height: 30%;
     color: white;
 
+    display: flex;
+    justify-content: center;
     position: absolute;
-    max-width: 75%; /* TODO */
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 #line-numbers {
-    opacity: 15%;
-    float: left;
-    padding-right: 75px;
+    text-align: right;
+    opacity: 10%;
+    width: 30px;
+    padding-right: 70px;
+    flex-shrink: 0;
 }
 #code-field {
-    float: left;
+    flex-shrink: 0;
 }
 
 .correct {
@@ -40,7 +43,7 @@ body {
     color: red;
 }
 .plain {
-    color: rgba(255, 255, 255, .5)
+    color: rgba(255, 255, 255, .3)
 }
 .highlighted {
     background-color: rgba(196, 196, 196, .5);
