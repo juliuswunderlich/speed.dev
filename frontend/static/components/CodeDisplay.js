@@ -18,6 +18,15 @@ app.component('code-display', {
                     </span>
                 </p>
             </div>
+            <div id="info">
+                <img src="frontend/assets/buttonInfo.svg" alt="info" class="icon">
+            </div>
+            <div id="retry">
+                <img src="frontend/assets/buttonRetry.svg" alt="retry" class="icon">
+            </div>
+            <div id="next">
+                <img src="frontend/assets/buttonNext.svg" alt="next" class="icon">
+            </div>            
         </div>`,
     data() {
         return {
