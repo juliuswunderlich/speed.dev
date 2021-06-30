@@ -49,6 +49,9 @@ body {
     height: 25px;
     opacity: 50%;
 }
+.icon:hover {
+    opacity: 100%;
+}
 
 .correct {
     /*background-color: rgba(0, 255, 0, .1);*/

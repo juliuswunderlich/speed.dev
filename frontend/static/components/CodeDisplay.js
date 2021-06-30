@@ -19,13 +19,13 @@ app.component('code-display', {
                 </p>
             </div>
             <div id="info">
-                <img src="frontend/assets/buttonInfo.svg" alt="info" class="icon">
+                <img src="frontend/assets/buttonInfo.svg" alt="info" class="icon" v-on:click="showInfo">
             </div>
             <div id="retry">
-                <img src="frontend/assets/buttonRetry.svg" alt="retry" class="icon">
+                <img src="frontend/assets/buttonRetry.svg" alt="retry" class="icon" v-on:click="resetSnippet">
             </div>
             <div id="next">
-                <img src="frontend/assets/buttonNext.svg" alt="next" class="icon">
+                <img src="frontend/assets/buttonNext.svg" alt="next" class="icon" v-on:click="displayNewSnippet">
             </div>            
         </div>`,
     data() {
@@ -131,8 +131,6 @@ app.component('code-display', {
         newLine() {
             if (this.currentLine === this.text.length - 1) {
                 this.displayNewSnippet()
-                this.currentLine = 0
-                this.cursorPosition = 0
             } else {
                 this.currentLine++
                 this.cursorPosition = 0
@@ -158,10 +156,20 @@ app.component('code-display', {
             //     this.text[l].content = this.text[l].content += "↵"
             // }
 
-            //initialize key history for each line
+            this.resetSnippet()
+        },
+        resetSnippet() {
+            //initialize/reset key history for each line
             for (let l = 0; l < this.text.length; l++) {
                 this.charsTyped[l] = []
             }
+
+            this.currentLine = 0
+            this.cursorPosition = 0
+        },
+        showInfo() {
+            //TODO
+            alert ("Info for this snippet...")
         },
         randomChoice(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
