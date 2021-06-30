@@ -51,6 +51,10 @@ body {
 }
 .icon:hover {
     opacity: 100%;
+    cursor: pointer;
+}
+.icon:active {
+    transform: scale(1.1);
 }
 
 .correct {
