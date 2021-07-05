@@ -26,7 +26,10 @@ app.component('code-display', {
             </div>
             <div id="next">
                 <img src="frontend/assets/buttonNext.svg" alt="next" class="icon" v-on:click="displayNewSnippet">
-            </div>            
+            </div>
+            <div id="timer">
+                {{ formattedTime }}
+            </div>       
         </div>`,
     data() {
         return {
@@ -57,9 +60,18 @@ app.component('code-display', {
             texts: [],
             text: null,
             INDENT_PX: 40,
+
+            //typing logic
             currentLine: 0,
             cursorPosition: 0,
             charsTyped: [],
+            endReached: false,
+
+            //timer
+            timerRunning: false,
+            msRunning: 0,
+            startTime: 0,
+            endTime: 0,
             //(for stats) keysTyped: []
         }
     },
@@ -75,20 +87,28 @@ app.component('code-display', {
             }
         },
         onkeydown(event) {
+            if (this.endReached) {
+                return
+            }
             let key = event.key
             if (key === "Backspace") {
                 if (this.currentLine !== 0 || this.cursorPosition !== 0) {
                     this.reverseCursor()
                 }
             } else if (key === "Enter") {
+                if(!this.timerRunning) {
+                    this.startTimer()
+                }
                 this.charsTyped[this.currentLine].push("↵")
                 if (this.cursorPosition >= this.currentLineLength - 1) {
                     this.newLine()
                 } else {
                     this.cursorPosition++
                 }
-
             } else if (key.length === 1) {
+                if(!this.timerRunning) {
+                    this.startTimer()
+                }
                 this.charsTyped[this.currentLine].push(key)
                 if (this.cursorPosition >= this.currentLineLength - 1) {
                     this.newLine()
@@ -130,7 +150,9 @@ app.component('code-display', {
         },
         newLine() {
             if (this.currentLine === this.text.length - 1) {
-                this.displayNewSnippet()
+                this.stopTimer()
+                this.endReached = true
+                // this.displayNewSnippet()
             } else {
                 this.currentLine++
                 this.cursorPosition = 0
@@ -166,6 +188,8 @@ app.component('code-display', {
 
             this.currentLine = 0
             this.cursorPosition = 0
+            this.endReached = false
+            this.resetTimer()
         },
         showInfo() {
             //TODO
@@ -174,6 +198,28 @@ app.component('code-display', {
         randomChoice(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
         },
+        startTimer() {
+            this.timerRunning = true
+            this.startTime = Date.now()
+
+            let updateTimer = setInterval(() => {
+                if (!this.timerRunning) {
+                    clearInterval(updateTimer)
+                } else {
+                    this.msRunning = Date.now() - this.startTime
+                }
+            }, 100)
+        },
+        stopTimer() {
+            this.timerRunning = false
+            this.endTime = Date.now()
+        },
+        resetTimer() {
+            this.timerRunning = false
+            this.msRunning = 0
+
+
+        }
     },
     computed: {
         currentLineLength() {
@@ -188,6 +234,12 @@ app.component('code-display', {
                 list.push(i);
             }
             return list
+        },
+        formattedTime() {
+            let secondsTotal = Math.floor(this.msRunning / 1000)
+            let minutes = Math.floor(secondsTotal / 60)
+            let seconds = secondsTotal % 60
+            return minutes + ":" + seconds.toString().padStart(2, '0')
         }
 
     },

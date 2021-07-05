@@ -26,6 +26,7 @@ body {
     left: 50%;
     transform: translate(calc(-50% - 50px), -50%);
 }
+
 #line-numbers {
     text-align: right;
     opacity: 10%;
@@ -35,15 +36,28 @@ body {
 #code-field {
     grid-area: 1/ 2/ 2/ 6;
 }
+
 #info {
     grid-area: 2/ 2/ 3/ 3;
+    align-self: end;
 }
 #retry {
     grid-area: 2/ 4/ 3/ 5;
+    justify-self: right;
+    align-self: end;
 }
 #next {
     grid-area: 2/ 5/ 3/ 6;
+    justify-self: right;
+    align-self: end;
 }
+#timer {
+    grid-area: 2/ 3/ 3/ 4;
+    justify-self: center;
+    align-self: end;
+    line-height: 100%;
+}
+
 .icon {
     width: 25px;
     height: 25px;
