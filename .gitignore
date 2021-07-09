@@ -16,6 +16,9 @@ workspace.xml
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+db.js
+
+#=====Vue-CLI generated====
 .DS_Store
 node_modules
 /dist
