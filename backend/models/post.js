@@ -6,5 +6,9 @@ const postSchema = new mongoose.Schema({
     "tags": [String],
 }, { timestamps: true });
 
+const postSnippetschema = new mongoose.Schema({
+    ""
+})
+
 const Post = mongoose.model('post', postSchema);
-exports.Post = Post;
+exports.Post = Post;s

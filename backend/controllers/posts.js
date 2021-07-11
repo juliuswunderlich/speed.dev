@@ -21,6 +21,15 @@ const getPosts = async (req, res) => {
     }
    }
 
+const getSnippet = async (req, res) => {
+    try {
+     //const posts = await Post.find();
+     res.status(200).json(posts);
+    } catch (error) {
+     res.status(400).json({ success: false, error });
+    }
+   }
+
 //const updatePost = async (req, res) => {
     //const allowedOptions = ['title', 'content', 'tags', 'author'];
     //const selectedOption = Object.keys(req.body);
