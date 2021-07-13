@@ -1,5 +1,9 @@
 <template>
   <div id="wrapper">
+      <img id="logo"
+        src="@/assets/java.svg"
+        alt="java logo"
+      >    
     <div id="line-numbers">
       <p v-for="line_number in visibleLines" :key="line_number.id">
         {{ line_number + 1 }}
@@ -119,6 +123,8 @@ export default {
       startTime: 0,
       endTime: 0,
       //(for stats) keysTyped: []
+      //for testing:
+      langs: ["java", "python", "csharp", "cpp", "php", "javascript"]
     };
   },
   methods: {
@@ -292,6 +298,10 @@ export default {
     currentLineText() {
       return this.text[this.currentLine].content;
     },
+    currentLogo() {
+      //TODO
+      return "@/assets/" + this.text.lang + ".svg"
+    },
     visibleLines() {
       let list = [];
       for (let i = 0; i <= this.currentLine; i++) {
@@ -330,14 +340,14 @@ export default {
 <style scoped>
 #wrapper {
   font-family: "Hack", monospace;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 30%;
   color: white;
 
   display: grid;
   grid-template-columns: 100px 50px 1fr 50px 50px;
-  grid-template-rows: 1fr 50px;
-  row-gap: 100px;
+  grid-template-rows: 40px 1fr 30px;
+  row-gap: 75px;
 
   position: absolute;
   top: 45%;
@@ -345,33 +355,42 @@ export default {
   /* center snippet without line numbers -> deduct half the width of #line-numbers*/
   transform: translate(calc(-50% - 50px), -50%);
 }
-
+#logo {
+  width: auto;
+  max-width: 40px;
+  height: 40px;
+  grid-area: 1/ 2/ 2/ 6;
+  justify-self: center;
+  align-self: end;
+  opacity: 50%;
+}
 #line-numbers {
   text-align: right;
   opacity: 10%;
   width: 30px;
   padding-right: 70px;
+  grid-area: 2/ 1/ 3/ 2;
 }
 #code-field {
-  grid-area: 1/ 2/ 2/ 6;
+  grid-area: 2/ 2/ 3/ 6;
 }
 
 #info {
-  grid-area: 2/ 2/ 3/ 3;
+  grid-area: 3/ 2/ 4/ 3;
   align-self: end;
 }
 #retry {
-  grid-area: 2/ 4/ 3/ 5;
+  grid-area: 3/ 4/ 4/ 5;
   justify-self: right;
   align-self: end;
 }
 #next {
-  grid-area: 2/ 5/ 3/ 6;
+  grid-area: 3/ 5/ 4/ 6;
   justify-self: right;
   align-self: end;
 }
 #timer {
-  grid-area: 2/ 3/ 3/ 4;
+  grid-area: 3/ 3/ 4/ 4;
   justify-self: center;
   align-self: end;
   line-height: 100%;
@@ -380,7 +399,7 @@ export default {
 .icon {
   width: 25px;
   height: 25px;
-  opacity: 50%;
+  opacity: 25%;
 }
 .icon:hover {
   opacity: 100%;
@@ -399,7 +418,7 @@ export default {
   color: red;
 }
 .plain {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
 }
 .highlighted {
   background-color: rgba(196, 196, 196, 0.5);
