@@ -11,7 +11,7 @@
     </div>
     <div id="code-field">
       <p
-        v-for="(line, line_idx) in text"
+        v-for="(line, line_idx) in text.lines"
         :key="line.id"
         :style="{
           marginLeft: getIndent(line_idx) + 'px',
@@ -129,7 +129,7 @@ export default {
   },
   methods: {
     getIndent(line_index) {
-      return this.text[line_index].indent * this.INDENT_PX;
+      return this.text.lines[line_index].indent * this.INDENT_PX;
     },
     getOpacity(line_index) {
       if (this.endReached) {
@@ -143,8 +143,8 @@ export default {
     },
     onkeydown(event) {
       let key = event.key;
+      event.preventDefault()
       if (key === "Tab") {
-        event.preventDefault()
         if (this.timerRunning) {
           this.resetSnippet();
         } else {
@@ -189,7 +189,7 @@ export default {
         (line_idx === this.currentLine && char_idx > this.cursorPosition)
       ) {
         //enter symbol
-        if (char_idx === this.text[line_idx].content.length - 1) {
+        if (char_idx === this.getLine(line_idx).length - 1) {
           return "invisible";
         }
         return "plain";
@@ -203,7 +203,7 @@ export default {
       }
       //character before cursor
       if (
-        this.text[line_idx].content.charAt(char_idx) ===
+        this.getLine(line_idx).charAt(char_idx) ===
         this.charsTyped[line_idx][char_idx]
       ) {
         return "correct";
@@ -213,7 +213,7 @@ export default {
     },
     //if a space is typed incorrectly, an underscore is displayed instead
     getCharacterAt(line_idx, char_idx) {
-      let char = this.text[line_idx].content.charAt(char_idx);
+      let char = this.getLine(line_idx).charAt(char_idx);
       if (char === " " && this.getClassAt(line_idx, char_idx) === "wrong") {
         return "_";
       } else {
@@ -221,7 +221,8 @@ export default {
       }
     },
     newLine() {
-      if (this.currentLine === this.text.length - 1) {
+      console.log("new line");
+      if (this.currentLine === this.numberOfLines - 1) {
         this.stopTimer();
         this.endReached = true;
         // this.displayNewSnippet()
@@ -254,7 +255,7 @@ export default {
     },
     resetSnippet() {
       //initialize/reset key history for each line
-      for (let l = 0; l < this.text.length; l++) {
+      for (let l = 0; l < this.numberOfLines; l++) {
         this.charsTyped[l] = [];
       }
 
@@ -290,13 +291,19 @@ export default {
       this.timerRunning = false;
       this.msRunning = 0;
     },
+    getLine(line_idx) {
+      return this.text.lines[line_idx].content;
+    }
   },
   computed: {
     currentLineLength() {
-      return this.text[this.currentLine].content.length;
+      return this.currentLineText.length;
     },
     currentLineText() {
-      return this.text[this.currentLine].content;
+      return this.getLine(this.currentLine);
+    },
+    numberOfLines() {
+      return this.text.lines.length;
     },
     currentLogo() {
       //TODO
@@ -317,15 +324,21 @@ export default {
     },
   },
   created() {
-    this.texts = [this.text1, this.text2, this.text3];
+    // this.texts = [this.text1, this.text2, this.text3];
+    const codes = require("../test_codes.json");
+    this.texts = codes.Elements;
 
     //TODO: remove once snippets get pulled from server
     // add return symbol after each line
     for (let t = 0; t < this.texts.length; t++) {
-      for (let l = 0; l < this.texts[t].length; l++) {
-        this.texts[t][l].content = this.texts[t][l].content += "↵";
+      for (let l = 0; l < this.texts[t].lines.length; l++) {
+        this.texts[t].lines[l].content = this.texts[t].lines[l].content += "↵"; 
       }
     }
+    
+    
+    console.log(this.texts[1]);
+    console.log(this.texts[1].lines[3].content);
 
     //add keyListener
     document.onkeydown = this.onkeydown;
@@ -352,7 +365,7 @@ export default {
   position: absolute;
   top: 45%;
   left: 50%;
-  /* center snippet without line numbers -> deduct half the width of #line-numbers*/
+  /* center snippet without line numbers -> deduct half the width of #line-numbers (50px) */
   transform: translate(calc(-50% - 50px), -50%);
 }
 #logo {

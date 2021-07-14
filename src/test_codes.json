@@ -1,0 +1,218 @@
+{
+ "Elements": [
+  {
+   "id": 1,
+   "fileEnding": "java",
+   "title": "bubblesort",
+   "lines": [
+    {
+     "indent": 0,
+     "content": "public static void bubbleSort(int[] arr) {"
+    },
+    {
+     "indent": 1,
+     "content": "var lastIndex = arr.length - 1;"
+    },
+    {
+     "indent": 0,
+     "content": ""
+    },
+    {
+     "indent": 1,
+     "content": "for(var j = 0; j \u003c lastIndex; j++) {"
+    },
+    {
+     "indent": 1,
+     "content": "for(var i = 0; i \u003c lastIndex - j; i++) {"
+    },
+    {
+     "indent": 1,
+     "content": "if(arr[i] \u003e arr[i + 1]) {"
+    },
+    {
+     "indent": 4,
+     "content": "var tmp = arr[i];"
+    },
+    {
+     "indent": 4,
+     "content": "arr[i] = arr[i + 1];"
+    },
+    {
+     "indent": 4,
+     "content": "arr[i + 1] = tmp;"
+    },
+    {
+     "indent": 3,
+     "content": "}"
+    },
+    {
+     "indent": 2,
+     "content": "}"
+    },
+    {
+     "indent": 1,
+     "content": "}"
+    },
+    {
+     "indent": 0,
+     "content": "}"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "fileEnding": "java",
+   "title": "hello",
+   "lines": [
+    {
+     "indent": 0,
+     "content": "public class Exercise1 {"
+    },
+    {
+     "indent": 1,
+     "content": ""
+    },
+    {
+     "indent": 1,
+     "content": "public static void main(String[] args) {"
+    },
+    {
+     "indent": 2,
+     "content": "System.out.println(\"Hello Alexandra Abramov!\");"
+    },
+    {
+     "indent": 1,
+     "content": "}"
+    },
+    {
+     "indent": 1,
+     "content": ""
+    },
+    {
+     "indent": 0,
+     "content": "}"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "fileEnding": "cpp",
+   "title": "helloworld",
+   "lines": [
+    {
+     "indent": 0,
+     "content": "// Hello World in C++ (pre-ISO)"
+    },
+    {
+     "indent": 0,
+     "content": ""
+    },
+    {
+     "indent": 0,
+     "content": "#include \u003ciostream.h\u003e"
+    },
+    {
+     "indent": 0,
+     "content": ""
+    },
+    {
+     "indent": 0,
+     "content": "main()"
+    },
+    {
+     "indent": 0,
+     "content": "{"
+    },
+    {
+     "indent": 1,
+     "content": "cout \u003c\u003c \"Hello World!\" \u003c\u003c endl;"
+    },
+    {
+     "indent": 1,
+     "content": "return 0;"
+    },
+    {
+     "indent": 0,
+     "content": "}"
+    },
+    {
+     "indent": 0,
+     "content": ""
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "fileEnding": "cs",
+   "title": "helloworld",
+   "lines": [
+    {
+     "indent": 0,
+     "content": "//Hello World in C#"
+    },
+    {
+     "indent": 0,
+     "content": "class HelloWorld"
+    },
+    {
+     "indent": 0,
+     "content": "{"
+    },
+    {
+     "indent": 1,
+     "content": "static void Main()"
+    },
+    {
+     "indent": 1,
+     "content": "{"
+    },
+    {
+     "indent": 2,
+     "content": "System.Console.Writecontent(\"Hello, World!\");"
+    },
+    {
+     "indent": 1,
+     "content": "}"
+    },
+    {
+     "indent": 0,
+     "content": "}"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "fileEnding": "rb",
+   "title": "helloworld",
+   "lines": [
+    {
+     "indent": 0,
+     "content": "# Hello world in ruby"
+    },
+    {
+     "indent": 1,
+     "content": "puts 'Hello World!'"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "fileEnding": "sql",
+   "title": "helloworld",
+   "lines": [
+    {
+     "indent": 0,
+     "content": "# Hello World in SQL for Oracle"
+    },
+    {
+     "indent": 0,
+     "content": ""
+    },
+    {
+     "indent": 0,
+     "content": "SELECT 'Hello World' FROM dual;"
+    }
+   ]
+  }
+ ]
+}
