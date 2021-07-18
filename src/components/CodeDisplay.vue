@@ -329,11 +329,11 @@ export default {
   grid-area: 1/ 2/ 2/ 6;
   justify-self: center;
   align-self: end;
-  opacity: 50%;
+  opacity: .5;
 }
 #line-numbers {
   text-align: right;
-  opacity: 10%;
+  opacity: .1;
   width: 30px;
   padding-right: 70px;
   grid-area: 2/ 1/ 3/ 2;
@@ -366,10 +366,10 @@ export default {
 .icon {
   width: 25px;
   height: 25px;
-  opacity: 25%;
+  opacity: .25;
 }
 .icon:hover {
-  opacity: 100%;
+  opacity: 1;
   cursor: pointer;
 }
 .icon:active {

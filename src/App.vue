@@ -76,11 +76,11 @@ body {
   img {
     width: 30px;
     height: 30px;
-    opacity: 75%;
+    opacity: .75;
     margin: 0.75em 0.6em;
 
     &:hover {
-      opacity: 100%;
+      opacity: 1;
       cursor: pointer;
       transform: scale(1.1);
     }
