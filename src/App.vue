@@ -4,39 +4,41 @@
     <span id="login">Login</span>
   </div>
   <div id="nav">
-    <img src="@/assets/home.svg" alt="Home"/>
-    <img src="@/assets/stats.svg" alt="Statisctics"/>
-    <img src="@/assets/settings.svg" alt="Settings"/>
+    <img src="@/assets/home.svg" alt="Home" />
+    <img src="@/assets/stats.svg" alt="Statisctics" />
+    <img src="@/assets/settings.svg" alt="Settings" />
   </div>
   <CodeDisplay></CodeDisplay>
   <div id="footer">
     <ul>
       <li><a href="#"> Impressum </a></li>
-      <li><a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a></li>
+      <li>
+        <a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a>
+      </li>
       <li><a href="https://twitter.com"> Twitter </a></li>
     </ul>
   </div>
 </template>
 
 <script>
-import CodeDisplay from './components/CodeDisplay.vue'
+import CodeDisplay from "./components/CodeDisplay.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    CodeDisplay
-  }
-}
+    CodeDisplay,
+  },
+};
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap");
 
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto Mono', monospace;;
+  font-family: "Roboto Mono", monospace;
 }
 
 body {
@@ -54,7 +56,12 @@ body {
     font-size: 1.5em;
   }
   #login {
-    margin: .8em;
+    margin: 0.8em;
+
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
 }
 
@@ -70,23 +77,22 @@ body {
     width: 30px;
     height: 30px;
     opacity: 75%;
-    margin: .75em .6em;
+    margin: 0.75em 0.6em;
 
     &:hover {
       opacity: 100%;
       cursor: pointer;
-     transform: scale(1.1);
+      transform: scale(1.1);
     }
 
     &:active {
       transform: scale(1.2);
     }
   }
-
 }
 
 #footer {
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   position: absolute;
   bottom: 0;
 
@@ -101,10 +107,10 @@ body {
 
     a {
       text-decoration: none;
-      color: #C4C4C4;
+      color: #c4c4c4;
       display: block;
       text-align: center;
-      padding: .8em;
+      padding: 0.8em;
 
       &:hover {
         font-weight: bold;
@@ -114,7 +120,7 @@ body {
 }
 
 #app {
-  color: #C4C4C4;
+  color: #c4c4c4;
 }
 
 /* #app {

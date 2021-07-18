@@ -116,6 +116,7 @@ export default {
       cursorPosition: 0,
       charsTyped: [],
       endReached: false,
+      preventDefaultKeys: ["Tab", "/", "'"],
 
       //timer
       timerRunning: false,
@@ -143,8 +144,10 @@ export default {
     },
     onkeydown(event) {
       let key = event.key;
-      if (key === "Tab") {
+      if (this.preventDefaultKeys.includes(key)) {
         event.preventDefault();
+      }
+      if (key === "Tab") {
         if (this.timerRunning) {
           this.resetSnippet();
         } else {
@@ -221,7 +224,6 @@ export default {
       }
     },
     newLine() {
-      console.log("new line");
       if (this.currentLine === this.numberOfLines - 1) {
         this.stopTimer();
         this.endReached = true;
@@ -335,10 +337,6 @@ export default {
         this.texts[t].lines[l].content = this.texts[t].lines[l].content += "↵"; 
       }
     }
-    
-    
-    console.log(this.texts[1]);
-    console.log(this.texts[1].lines[3].content);
 
     //add keyListener
     document.onkeydown = this.onkeydown;
