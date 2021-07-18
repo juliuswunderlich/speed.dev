@@ -143,8 +143,8 @@ export default {
     },
     onkeydown(event) {
       let key = event.key;
-      event.preventDefault()
       if (key === "Tab") {
+        event.preventDefault();
         if (this.timerRunning) {
           this.resetSnippet();
         } else {
