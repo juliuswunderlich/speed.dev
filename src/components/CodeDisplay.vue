@@ -63,50 +63,6 @@ export default {
   name: "CodeDisplay",
   data() {
     return {
-      text1: [
-        {
-          line_idx: 0,
-          content: "public static void main (String[] args) {",
-          indent: 0,
-        },
-        {
-          line_idx: 1,
-          content: 'System.out.println("Hello World!");',
-          indent: 1,
-        },
-        { line_idx: 2, content: "}", indent: 0 },
-      ],
-      text2: [
-        {
-          line_idx: 0,
-          content: "pubic static hair (String[] tanga) {",
-          indent: 0,
-        },
-        {
-          line_idx: 1,
-          content: 'System.out.println("Sadi Gali!");',
-          indent: 1,
-        },
-        { line_idx: 2, content: "}", indent: 0 },
-      ],
-      text3: [
-        { line_idx: 0, content: "void bubbleSort(int arr[]) {", indent: 0 },
-        { line_idx: 1, content: "int n = arr.length;", indent: 1 },
-        { line_idx: 2, content: "for (int i = 0; i < n-1; i++) {", indent: 1 },
-        {
-          line_idx: 3,
-          content: "for (int j = 0; j < n-i-1; j++) {",
-          indent: 2,
-        },
-        { line_idx: 4, content: "if (arr[j] > arr[j+1]) {", indent: 3 },
-        { line_idx: 5, content: "int temp = arr[j];", indent: 4 },
-        { line_idx: 6, content: "arr[j] = arr[j+1];", indent: 4 },
-        { line_idx: 7, content: "arr[j+1] = temp;", indent: 4 },
-        { line_idx: 8, content: "}", indent: 3 },
-        { line_idx: 9, content: "}", indent: 2 },
-        { line_idx: 10, content: "}", indent: 1 },
-        { line_idx: 10, content: "}", indent: 0 },
-      ],
       texts: [],
       text: null,
       INDENT_PX: 40,
