@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <span id="logo">[speed.dev]</span>
+    <img id="logo" src="@/assets/logo.svg" alt="Logo">
     <span id="login">Login</span>
   </div>
   <div id="nav">
@@ -53,10 +53,11 @@ body {
   padding: 1em;
 
   #logo {
-    font-size: 1.5em;
+    max-width: 80px;
   }
+
   #login {
-    margin: 0.8em;
+    margin: 1em;
 
     &:hover {
       font-weight: bold;
@@ -70,7 +71,7 @@ body {
   left: 10px;
   display: flex;
   flex-direction: column;
-  top: 35%;
+  top: 40%;
   transform: translateY(-50%);
 
   img {
