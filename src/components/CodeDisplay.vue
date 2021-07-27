@@ -5,12 +5,12 @@
         alt="java logo"
       >    
     <div id="line-numbers">
-      <p v-for="line_number in visibleLines" :key="line_number.id">
+      <span class="line" v-for="line_number in visibleLines" :key="line_number.id">
         {{ line_number + 1 }}
-      </p>
+      </span>
     </div>
     <div id="code-field">
-      <p
+      <span id="code-line" class="line"
         v-for="(line, line_idx) in text.lines"
         :key="line.id"
         :style="{
@@ -25,7 +25,7 @@
         >
           {{ getCharacterAt(line_idx, char_idx) }}
         </span>
-      </p>
+      </span>
     </div>
     <div id="info">
       <img
@@ -307,8 +307,8 @@ export default {
 <style scoped>
 #wrapper {
   font-family: "Hack", monospace;
-  font-size: 20px;
-  line-height: 30%;
+  font-size: 1.2em;
+  /* line-height: 30%; */
   color: white;
 
   display: grid;
@@ -342,6 +342,12 @@ export default {
   grid-area: 2/ 2/ 3/ 6;
 }
 
+.line {
+  display: block;
+  margin: .1em 0;
+  white-space: nowrap;
+}
+
 #info {
   grid-area: 3/ 2/ 4/ 3;
   align-self: end;
@@ -361,6 +367,7 @@ export default {
   justify-self: center;
   align-self: end;
   line-height: 100%;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .icon {

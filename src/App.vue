@@ -1,23 +1,23 @@
 <template>
-  <div id="header">
-    <img id="logo" src="@/assets/logo.svg" alt="Logo">
-    <span id="login">Login</span>
-  </div>
-  <div id="nav">
-    <img src="@/assets/home.svg" alt="Home" />
-    <img src="@/assets/stats.svg" alt="Statisctics" />
-    <img src="@/assets/settings.svg" alt="Settings" />
-  </div>
-  <CodeDisplay></CodeDisplay>
-  <div id="footer">
-    <ul>
-      <li><a href="#"> Impressum </a></li>
-      <li>
-        <a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a>
-      </li>
-      <li><a href="https://twitter.com"> Twitter </a></li>
-    </ul>
-  </div>
+    <div id="header">
+      <img id="logo" src="@/assets/logo.svg" alt="Logo" />
+      <span id="login">Login</span>
+    </div>
+    <div id="nav">
+      <img src="@/assets/home.svg" alt="Home" />
+      <img src="@/assets/stats.svg" alt="Statisctics" />
+      <img src="@/assets/settings.svg" alt="Settings" />
+    </div>
+    <CodeDisplay></CodeDisplay>
+    <div id="footer">
+      <ul>
+        <li><a href="#"> Impressum </a></li>
+        <li>
+          <a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a>
+        </li>
+        <li><a href="https://twitter.com"> Twitter </a></li>
+      </ul>
+    </div>
 </template>
 
 <script>
@@ -47,10 +47,21 @@ body {
   background-color: #151718;
 }
 
+#app {
+  // height: 100vh; TODO
+  color: #c4c4c4;
+  margin: 0em 15%;
+  padding: 1em;
+
+  @media only screen and (max-width: 1500px) {
+    margin: 0;
+  }
+}
+
 #header {
+  top: 1em;
   display: flex;
   place-content: space-between;
-  padding: 1em;
 
   #logo {
     max-width: 80px;
@@ -68,17 +79,16 @@ body {
 
 #nav {
   position: absolute;
-  left: 10px;
   display: flex;
   flex-direction: column;
-  top: 40%;
-  transform: translateY(-50%);
+  top: 30%;
+  transform: translateY(50%);
 
   img {
-    width: 30px;
-    height: 30px;
-    opacity: .75;
-    margin: 0.75em 0.6em;
+    width: 25px;
+    height: 25px;
+    opacity: 0.75;
+    margin: 0.75em 0em;
 
     &:hover {
       opacity: 1;
@@ -93,9 +103,8 @@ body {
 }
 
 #footer {
-  padding: 0.5em 1em;
   position: absolute;
-  bottom: 0;
+  bottom: 1em; //TODO
 
   ul {
     list-style-type: none;
@@ -110,18 +119,13 @@ body {
       text-decoration: none;
       color: #c4c4c4;
       display: block;
-      text-align: center;
-      padding: 0.8em;
+      padding-right: 1.6em;
 
       &:hover {
         font-weight: bold;
       }
     }
   }
-}
-
-#app {
-  color: #c4c4c4;
 }
 
 /* #app {
