@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <img id="logo" src="@/assets/java.svg" alt="java logo" />
+    <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
     <div id="line-numbers">
       <span
         class="line"
@@ -365,11 +365,11 @@ export default {
 
   display: grid;
   grid-template-columns: 70px 50px auto 50px 50px;
-  grid-template-rows: 40px auto 30px;
+  grid-template-rows: auto 30px;
   row-gap: 75px;
 
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 50%;
   /* center snippet without line numbers -> deduct half the width of #line-numbers (50px) */
   transform: translate(calc(-50% - 50px), -50%);
@@ -386,14 +386,14 @@ export default {
   text-align: right;
   opacity: 0.1;
   padding-right: 40px;
-  grid-area: 2/ 1/ 3/ 2;
+  grid-area: 1/ 1/ 2/ 2;
 }
 #code-field {
-  grid-area: 2/ 2/ 3/ 6;
+  grid-area: 1/ 2/ 2/ 6;
 }
 
 #stats {
-  grid-area: 2/ 1/ 3/ 6;
+  grid-area: 1/ 1/ 2/ 6;
   z-index: 999;
   background-color: #151718;
   opacity: 0.9;
@@ -414,21 +414,21 @@ export default {
 }
 
 #info {
-  grid-area: 3/ 2/ 4/ 3;
+  grid-area: 2/ 2/ 3/ 3;
   align-self: end;
 }
 #retry {
-  grid-area: 3/ 4/ 4/ 5;
+  grid-area: 2/ 4/ 3/ 5;
   justify-self: right;
   align-self: end;
 }
 #next {
-  grid-area: 3/ 5/ 4/ 6;
+  grid-area: 2/ 5/ 3/ 6;
   justify-self: right;
   align-self: end;
 }
 #timer {
-  grid-area: 3/ 3/ 4/ 4;
+  grid-area: 2/ 3/ 3/ 4;
   justify-self: center;
   align-self: end;
   line-height: 100%;
