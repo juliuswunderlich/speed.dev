@@ -14,7 +14,7 @@
         v-for="(line, line_idx) in text.lines"
         :key="line.id"
         :style="{
-          marginLeft: getIndent(line_idx) + 'px',
+          paddingLeft: getIndent(line_idx) + 'px',
           opacity: getOpacity(line_idx),
         }"
       >
@@ -305,15 +305,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+* {
+  box-sizing: border-box;
+}
 #wrapper {
   font-family: "Hack", monospace;
   font-size: 1.2em;
-  /* line-height: 30%; */
   color: white;
 
   display: grid;
-  grid-template-columns: 100px 50px 1fr 50px 50px;
-  grid-template-rows: 40px 1fr 30px;
+  grid-template-columns: 70px 50px auto 50px 50px;
+  grid-template-rows: 40px auto 30px;
   row-gap: 75px;
 
   position: absolute;
@@ -323,7 +325,6 @@ export default {
   transform: translate(calc(-50% - 50px), -50%);
 }
 #logo {
-  width: auto;
   max-width: 40px;
   height: 40px;
   grid-area: 1/ 2/ 2/ 6;
@@ -334,8 +335,7 @@ export default {
 #line-numbers {
   text-align: right;
   opacity: .1;
-  width: 30px;
-  padding-right: 70px;
+  padding-right: 40px;
   grid-area: 2/ 1/ 3/ 2;
 }
 #code-field {

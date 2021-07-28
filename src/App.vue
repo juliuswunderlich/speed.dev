@@ -53,7 +53,7 @@ body {
   margin: 0em 15%;
   padding: 1em;
 
-  @media only screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1600px) {
     margin: 0;
   }
 }
