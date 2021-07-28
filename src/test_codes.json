@@ -4,6 +4,7 @@
    "id": 1,
    "fileEnding": "java",
    "title": "bubblesort",
+   "charCount": "245",
    "lines": [
     {
      "indent": 0,
@@ -63,6 +64,7 @@
    "id": 2,
    "fileEnding": "java",
    "title": "hello",
+   "charCount": "120",
    "lines": [
     {
      "indent": 0,
@@ -98,6 +100,7 @@
    "id": 3,
    "fileEnding": "cpp",
    "title": "helloworld",
+   "charCount": "109",
    "lines": [
     {
      "indent": 0,
@@ -141,6 +144,7 @@
    "id": 4,
    "fileEnding": "cs",
    "title": "helloworld",
+   "charCount": "110",
    "lines": [
     {
      "indent": 0,
@@ -180,6 +184,7 @@
    "id": 5,
    "fileEnding": "rb",
    "title": "helloworld",
+   "charCount": "41",
    "lines": [
     {
      "indent": 0,
@@ -195,6 +200,7 @@
    "id": 6,
    "fileEnding": "sql",
    "title": "helloworld",
+   "charCount": "65",
    "lines": [
     {
      "indent": 0,

@@ -54,6 +54,11 @@
     <div id="timer">
       {{ formattedTime }}
     </div>
+    <div id="stats" v-if="displayStats">
+      <span>{{ Math.max(0, Math.round(netWpm)) }}wpm</span>
+      <span>{{ accuracy }}%</span>
+      <span>{{ secondsTotal }}s</span>
+    </div>
   </div>
 </template>
 
@@ -79,7 +84,16 @@ export default {
       msRunning: 0,
       startTime: 0,
       endTime: 0,
-      //(for stats) keysTyped: []
+
+      //stats
+      //keysTyped: [],
+      displayStats: false,
+      secondsTotal: 0,
+      errors: 0,
+      rawWpm: 0,
+      netWpm: 0,
+      accuracy: 0,
+
       //for testing:
       langs: ["java", "python", "csharp", "cpp", "php", "javascript"]
     };
@@ -181,8 +195,7 @@ export default {
     },
     newLine() {
       if (this.currentLine === this.numberOfLines - 1) {
-        this.stopTimer();
-        this.endReached = true;
+        this.snippetFinished();
         // this.displayNewSnippet()
       } else {
         this.currentLine++;
@@ -199,10 +212,23 @@ export default {
         this.cursorPosition--;
       }
     },
+    snippetFinished() {
+      this.stopTimer();
+      this.endReached = true;
+     
+      this.secondsTotal = Math.floor(this.msRunning / 1000);
+      let minutesTotal = this.secondsTotal / 60;
+      this.rawWpm = (this.text.charCount / 5) / minutesTotal;
+      this.netWpm = this.rawWpm - (this.numWrongChars / minutesTotal); 
+
+      // this.accuracy
+      
+      this.displayStats = true;
+    },
     displayNewSnippet() {
       // get snippet from server
       this.text = this.randomChoice(this.texts);
-
+      
       // add return symbol after each line
       //TODO: put back in once snippet is pulled from server
       // for (let l = 0; l < this.text.length; l++) {
@@ -221,6 +247,7 @@ export default {
       this.cursorPosition = 0;
       this.endReached = false;
       this.resetTimer();
+      this.displayStats = false;
     },
     showInfo() {
       //TODO
@@ -280,6 +307,17 @@ export default {
       let seconds = secondsTotal % 60;
       return minutes + ":" + seconds.toString().padStart(2, "0");
     },
+    numWrongChars() {
+      let wrongChars = 0;
+      for(let l = 0; l < this.numberOfLines; l++) {
+        for(let c = 0; c < this.getLine(l).length; c++) {
+          if (this.charsTyped[l][c] != this.getLine(l).charAt(c)) {
+            wrongChars++;
+          }
+        } 
+      }
+      return wrongChars;
+    }
   },
   created() {
     // this.texts = [this.text1, this.text2, this.text3];
@@ -304,7 +342,7 @@ export default {
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 * {
   box-sizing: border-box;
 }
@@ -340,6 +378,21 @@ export default {
 }
 #code-field {
   grid-area: 2/ 2/ 3/ 6;
+}
+
+#stats {
+  grid-area: 2/ 1/ 3/ 6;
+  z-index: 999;
+  background-color: #151718;
+  opacity: .9;
+  display: flex;
+  place-content: center;
+  align-items: center;
+
+  span {
+    font-size: 1.5em;
+    padding: 0 1.5em;
+  }
 }
 
 .line {
