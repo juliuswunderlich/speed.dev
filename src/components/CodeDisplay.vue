@@ -1,16 +1,19 @@
 <template>
   <div id="wrapper">
-      <img id="logo"
-        src="@/assets/java.svg"
-        alt="java logo"
-      >    
+    <img id="logo" src="@/assets/java.svg" alt="java logo" />
     <div id="line-numbers">
-      <span class="line" v-for="line_number in visibleLines" :key="line_number.id">
+      <span
+        class="line"
+        v-for="line_number in visibleLines"
+        :key="line_number.id"
+      >
         {{ line_number + 1 }}
       </span>
     </div>
     <div id="code-field">
-      <span id="code-line" class="line"
+      <span
+        id="code-line"
+        class="line"
         v-for="(line, line_idx) in text.lines"
         :key="line.id"
         :style="{
@@ -56,7 +59,7 @@
     </div>
     <div id="stats" v-if="displayStats">
       <span>{{ Math.max(0, Math.round(netWpm)) }}wpm</span>
-      <span>{{ accuracy }}%</span>
+      <span>{{ Math.round(accuracy) }}%</span>
       <span>{{ secondsTotal }}s</span>
     </div>
   </div>
@@ -86,16 +89,15 @@ export default {
       endTime: 0,
 
       //stats
-      //keysTyped: [],
+      keysTyped: [],
       displayStats: false,
       secondsTotal: 0,
       errors: 0,
       rawWpm: 0,
       netWpm: 0,
-      accuracy: 0,
 
       //for testing:
-      langs: ["java", "python", "csharp", "cpp", "php", "javascript"]
+      langs: ["java", "python", "csharp", "cpp", "php", "javascript"],
     };
   },
   methods: {
@@ -104,7 +106,7 @@ export default {
     },
     getOpacity(line_index) {
       if (this.endReached) {
-        return "40%"
+        return "40%";
       }
       if (line_index <= this.currentLine) {
         return "100%";
@@ -127,7 +129,7 @@ export default {
       }
       if (this.endReached) {
         return;
-      }      
+      }
       if (key === "Backspace") {
         if (this.currentLine !== 0 || this.cursorPosition !== 0) {
           this.reverseCursor();
@@ -136,6 +138,7 @@ export default {
         if (!this.timerRunning) {
           this.startTimer();
         }
+        this.keysTyped[this.currentLine].push("↵");
         this.charsTyped[this.currentLine].push("↵");
         if (this.cursorPosition >= this.currentLineLength - 1) {
           this.newLine();
@@ -147,6 +150,7 @@ export default {
           this.startTimer();
         }
         this.charsTyped[this.currentLine].push(key);
+        this.keysTyped[this.currentLine].push(key);
         if (this.cursorPosition >= this.currentLineLength - 1) {
           this.newLine();
         } else {
@@ -215,20 +219,18 @@ export default {
     snippetFinished() {
       this.stopTimer();
       this.endReached = true;
-     
+
       this.secondsTotal = Math.floor(this.msRunning / 1000);
       let minutesTotal = this.secondsTotal / 60;
-      this.rawWpm = (this.text.charCount / 5) / minutesTotal;
-      this.netWpm = this.rawWpm - (this.numWrongChars / minutesTotal); 
+      this.rawWpm = this.text.charCount / 5 / minutesTotal;
+      this.netWpm = this.rawWpm - this.numUncorrectedErrors / minutesTotal;
 
-      // this.accuracy
-      
       this.displayStats = true;
     },
     displayNewSnippet() {
       // get snippet from server
       this.text = this.randomChoice(this.texts);
-      
+
       // add return symbol after each line
       //TODO: put back in once snippet is pulled from server
       // for (let l = 0; l < this.text.length; l++) {
@@ -241,6 +243,7 @@ export default {
       //initialize/reset key history for each line
       for (let l = 0; l < this.numberOfLines; l++) {
         this.charsTyped[l] = [];
+        this.keysTyped[l] = [];
       }
 
       this.currentLine = 0;
@@ -278,7 +281,7 @@ export default {
     },
     getLine(line_idx) {
       return this.text.lines[line_idx].content;
-    }
+    },
   },
   computed: {
     currentLineLength() {
@@ -292,7 +295,7 @@ export default {
     },
     currentLogo() {
       //TODO
-      return "@/assets/" + this.text.lang + ".svg"
+      return "@/assets/" + this.text.lang + ".svg";
     },
     visibleLines() {
       let list = [];
@@ -307,17 +310,26 @@ export default {
       let seconds = secondsTotal % 60;
       return minutes + ":" + seconds.toString().padStart(2, "0");
     },
-    numWrongChars() {
+    numUncorrectedErrors() {
       let wrongChars = 0;
-      for(let l = 0; l < this.numberOfLines; l++) {
-        for(let c = 0; c < this.getLine(l).length; c++) {
+      for (let l = 0; l < this.numberOfLines; l++) {
+        for (let c = 0; c < this.getLine(l).length; c++) {
           if (this.charsTyped[l][c] != this.getLine(l).charAt(c)) {
             wrongChars++;
           }
-        } 
+        }
       }
       return wrongChars;
-    }
+    },
+    accuracy() {
+      let lengthTotal = 0;
+      for (let l = 0; l < this.numberOfLines; l++) {
+        lengthTotal += this.keysTyped[l].length;
+      }
+      let correctedErrors = lengthTotal - this.text.charCount;
+      let errors = correctedErrors + this.numUncorrectedErrors;
+      return 100 - (errors / lengthTotal) * 100;
+    },
   },
   created() {
     // this.texts = [this.text1, this.text2, this.text3];
@@ -328,7 +340,7 @@ export default {
     // add return symbol after each line
     for (let t = 0; t < this.texts.length; t++) {
       for (let l = 0; l < this.texts[t].lines.length; l++) {
-        this.texts[t].lines[l].content = this.texts[t].lines[l].content += "↵"; 
+        this.texts[t].lines[l].content = this.texts[t].lines[l].content += "↵";
       }
     }
 
@@ -368,11 +380,11 @@ export default {
   grid-area: 1/ 2/ 2/ 6;
   justify-self: center;
   align-self: end;
-  opacity: .5;
+  opacity: 0.5;
 }
 #line-numbers {
   text-align: right;
-  opacity: .1;
+  opacity: 0.1;
   padding-right: 40px;
   grid-area: 2/ 1/ 3/ 2;
 }
@@ -384,7 +396,7 @@ export default {
   grid-area: 2/ 1/ 3/ 6;
   z-index: 999;
   background-color: #151718;
-  opacity: .9;
+  opacity: 0.9;
   display: flex;
   place-content: center;
   align-items: center;
@@ -397,7 +409,7 @@ export default {
 
 .line {
   display: block;
-  margin: .1em 0;
+  margin: 0.1em 0;
   white-space: nowrap;
 }
 
@@ -420,13 +432,13 @@ export default {
   justify-self: center;
   align-self: end;
   line-height: 100%;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 .icon {
   width: 25px;
   height: 25px;
-  opacity: .25;
+  opacity: 0.25;
 }
 .icon:hover {
   opacity: 1;
