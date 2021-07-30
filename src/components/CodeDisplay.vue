@@ -38,7 +38,7 @@
         v-on:click="showInfo"
       />
     </div>
-    <div id="retry">
+    <div id="retry" title="Restart (TAB)">
       <img
         src="@/assets/buttonRetry.svg"
         alt="retry"
@@ -46,7 +46,7 @@
         v-on:click="resetSnippet"
       />
     </div>
-    <div id="next">
+    <div id="next" title="Next (TAB)">
       <img
         src="@/assets/buttonNext.svg"
         alt="next"

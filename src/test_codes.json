@@ -23,11 +23,11 @@
      "content": "for(var j = 0; j \u003c lastIndex; j++) {"
     },
     {
-     "indent": 1,
+     "indent": 2,
      "content": "for(var i = 0; i \u003c lastIndex - j; i++) {"
     },
     {
-     "indent": 1,
+     "indent": 3,
      "content": "if(arr[i] \u003e arr[i + 1]) {"
     },
     {
@@ -68,7 +68,7 @@
    "lines": [
     {
      "indent": 0,
-     "content": "public class Exercise1 {"
+     "content": "public class HelloWorld {"
     },
     {
      "indent": 1,
