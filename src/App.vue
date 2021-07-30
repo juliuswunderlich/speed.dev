@@ -34,6 +34,10 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
@@ -48,7 +52,8 @@ body {
 }
 
 #app {
-  // height: 100vh; TODO
+  position: relative;
+  height: 100vh;
   color: #c4c4c4;
   margin: 0em 15%;
   padding: 1em;
@@ -59,7 +64,6 @@ body {
 }
 
 #header {
-  top: 1em;
   display: flex;
   place-content: space-between;
 
@@ -104,7 +108,8 @@ body {
 
 #footer {
   position: absolute;
-  bottom: 1em; //TODO
+  bottom: 0em;
+  padding-bottom: inherit;
 
   ul {
     list-style-type: none;
