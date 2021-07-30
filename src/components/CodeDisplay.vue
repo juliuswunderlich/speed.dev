@@ -360,7 +360,7 @@ export default {
 }
 #wrapper {
   font-family: "Hack", monospace;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   color: white;
 
   display: grid;
@@ -402,7 +402,7 @@ export default {
   align-items: center;
 
   span {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     padding: 0 1.5em;
   }
 }
@@ -430,7 +430,7 @@ export default {
 #timer {
   grid-area: 2/ 3/ 3/ 4;
   justify-self: center;
-  align-self: end;
+  align-self: center;
   line-height: 100%;
   font-family: "Roboto Mono", monospace;
 }
