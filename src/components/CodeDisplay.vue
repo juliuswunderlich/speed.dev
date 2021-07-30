@@ -355,6 +355,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
 * {
   box-sizing: border-box;
 }
@@ -364,15 +365,15 @@ export default {
   color: white;
 
   display: grid;
-  grid-template-columns: 70px 50px auto 50px 50px;
+  grid-template-columns: 50px 50px auto 50px 50px;
   grid-template-rows: auto 30px;
-  row-gap: 75px;
+  row-gap: 2em;
 
   position: absolute;
   top: 50%;
   left: 50%;
   /* center snippet without line numbers -> deduct half the width of #line-numbers (50px) */
-  transform: translate(calc(-50% - 50px), -50%);
+  transform: translate(calc(-50% - 25px), -50%);
 }
 #logo {
   max-width: 40px;
@@ -385,11 +386,18 @@ export default {
 #line-numbers {
   text-align: right;
   opacity: 0.1;
-  padding-right: 40px;
+  padding-top: .5em;
+  padding-right: 1em;
   grid-area: 1/ 1/ 2/ 2;
 }
 #code-field {
   grid-area: 1/ 2/ 2/ 6;
+  height: 20em;
+  width: 60ch;
+  border-color: #464646;
+	border-width: 1px;
+	border-style: solid;
+	padding: .5em;
 }
 
 #stats {
@@ -454,7 +462,7 @@ export default {
 }
 .wrong {
   /*background-color: rgba(255, 0, 0, .1);*/
-  color: red;
+  color: #ff4a4a;
 }
 .plain {
   color: rgba(255, 255, 255, 0.5);
