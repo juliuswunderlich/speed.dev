@@ -85,8 +85,8 @@ body {
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 30%;
-  transform: translateY(50%);
+  top: 40%; 
+  transform: translateY(-50%);
 
   img {
     width: 25px;

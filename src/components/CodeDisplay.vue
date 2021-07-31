@@ -367,7 +367,7 @@ export default {
   display: grid;
   grid-template-columns: 50px 50px auto 50px 50px;
   grid-template-rows: auto 30px;
-  row-gap: 2em;
+  row-gap: 1.5em;
 
   position: absolute;
   top: 50%;
@@ -394,10 +394,17 @@ export default {
   grid-area: 1/ 2/ 2/ 6;
   height: 20em;
   width: 60ch;
-  border-color: #464646;
-	border-width: 1px;
-	border-style: solid;
 	padding: .5em;
+
+  border-color: #333;
+	border-width: 2px;
+	border-style: solid;
+  border-radius: 10px;
+
+  // box-shadow: rgb(223, 222, 222) 0px 0px 6px 1px inset;
+  // background-color: rgba(233, 233, 233, 0.25);
+
+
 }
 
 #stats {
