@@ -59,8 +59,9 @@
     </div>
     <div id="stats" v-if="displayStats">
       <span>{{ Math.max(0, Math.round(netWpm)) }}wpm</span>
+      <span>{{ Math.round(rawWpm) }}raw</span>
       <span>{{ Math.round(accuracy) }}%</span>
-      <span>{{ secondsTotal }}s</span>
+      <span>{{ secondsTotal.toFixed(2) }}s</span>
     </div>
   </div>
 </template>
@@ -91,13 +92,6 @@ export default {
       //stats
       keysTyped: [],
       displayStats: false,
-      secondsTotal: 0,
-      errors: 0,
-      rawWpm: 0,
-      netWpm: 0,
-
-      //for testing:
-      langs: ["java", "python", "csharp", "cpp", "php", "javascript"],
     };
   },
   methods: {
@@ -219,12 +213,6 @@ export default {
     snippetFinished() {
       this.stopTimer();
       this.endReached = true;
-
-      this.secondsTotal = Math.floor(this.msRunning / 1000);
-      let minutesTotal = this.secondsTotal / 60;
-      this.rawWpm = this.text.charCount / 5 / minutesTotal;
-      this.netWpm = this.rawWpm - this.numUncorrectedErrors / minutesTotal;
-
       this.displayStats = true;
     },
     displayNewSnippet() {
@@ -241,6 +229,8 @@ export default {
     },
     resetSnippet() {
       //initialize/reset key history for each line
+      this.charsTyped.length = 0;
+      this.keysTyped.length = 0;
       for (let l = 0; l < this.numberOfLines; l++) {
         this.charsTyped[l] = [];
         this.keysTyped[l] = [];
@@ -254,7 +244,6 @@ export default {
     },
     showInfo() {
       //TODO
-      alert("Info for this snippet...");
     },
     randomChoice(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
@@ -305,10 +294,13 @@ export default {
       return list;
     },
     formattedTime() {
-      let secondsTotal = Math.floor(this.msRunning / 1000);
-      let minutes = Math.floor(secondsTotal / 60);
-      let seconds = secondsTotal % 60;
+      let minutes = Math.floor(this.secondsTotal / 60);
+      let seconds = Math.floor(this.secondsTotal % 60);
       return minutes + ":" + seconds.toString().padStart(2, "0");
+    },
+
+    secondsTotal() {
+      return this.msRunning / 1000;
     },
     numUncorrectedErrors() {
       let wrongChars = 0;
@@ -321,14 +313,33 @@ export default {
       }
       return wrongChars;
     },
-    accuracy() {
+    minutesTotal() {
+      return this.secondsTotal / 60;
+    },
+    numKeysTyped() {
       let lengthTotal = 0;
       for (let l = 0; l < this.numberOfLines; l++) {
         lengthTotal += this.keysTyped[l].length;
       }
-      let correctedErrors = lengthTotal - this.text.charCount;
-      let errors = correctedErrors + this.numUncorrectedErrors;
-      return 100 - (errors / lengthTotal) * 100;
+      return lengthTotal;
+    },
+    numCharsTyped() {
+      let lengthTotal = 0;
+      for (let l = 0; l < this.numberOfLines; l++) {
+        lengthTotal += this.charsTyped[l].length;
+      }
+      return lengthTotal;
+    },
+    rawWpm() {
+      return this.numKeysTyped / 5 / this.minutesTotal;
+    },
+    netWpm() {
+      return this.rawWpm - this.numUncorrectedErrors / this.minutesTotal;
+    },
+    accuracy() {
+      let correctedErrors = this.numKeysTyped - this.numCharsTyped;
+      let totalErrors = correctedErrors + this.numUncorrectedErrors;
+      return 100 - (totalErrors / this.numKeysTyped) * 100;
     },
   },
   created() {
@@ -355,7 +366,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
 * {
   box-sizing: border-box;
 }
@@ -386,7 +396,7 @@ export default {
 #line-numbers {
   text-align: right;
   opacity: 0.1;
-  padding-top: .5em;
+  padding-top: 0.5em;
   padding-right: 1em;
   grid-area: 1/ 1/ 2/ 2;
 }
@@ -394,17 +404,15 @@ export default {
   grid-area: 1/ 2/ 2/ 6;
   height: 20em;
   width: 60ch;
-	padding: .5em;
+  padding: 0.5em;
 
   border-color: #333;
-	border-width: 2px;
-	border-style: solid;
+  border-width: 2px;
+  border-style: solid;
   border-radius: 10px;
 
   // box-shadow: rgb(223, 222, 222) 0px 0px 6px 1px inset;
   // background-color: rgba(233, 233, 233, 0.25);
-
-
 }
 
 #stats {
