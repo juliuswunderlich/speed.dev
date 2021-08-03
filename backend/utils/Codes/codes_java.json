@@ -1,0 +1,70 @@
+[
+ {
+  "lines": [
+   {
+    "content": "public static void checkPrimeNumber(int num) {",
+    "indent": 0
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "boolean flag = false;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 2; i <= num / 2; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (num % i == 0) {",
+    "indent": 4
+   },
+   {
+    "content": "flag = true;",
+    "indent": 6
+   },
+   {
+    "content": "break;",
+    "indent": 6
+   },
+   {
+    "content": "}",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "if (!flag)",
+    "indent": 2
+   },
+   {
+    "content": "System.out.println(num + \" is a prime number.\");",
+    "indent": 4
+   },
+   {
+    "content": "else",
+    "indent": 2
+   },
+   {
+    "content": "System.out.println(num + \" is not a prime number.\");",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 0
+   }
+  ],
+  "id": 0,
+  "fileEnding": "java",
+  "title": "prime",
+  "charCount": 269
+ }
+]
