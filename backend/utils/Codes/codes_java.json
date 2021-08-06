@@ -7,7 +7,7 @@
    },
    {
     "content": "",
-    "indent": 1
+    "indent": 0
    },
    {
     "content": "boolean flag = false;",
@@ -39,7 +39,7 @@
    },
    {
     "content": "",
-    "indent": 1
+    "indent": 2
    },
    {
     "content": "if (!flag)",
@@ -65,6 +65,70 @@
   "id": 0,
   "fileEnding": "java",
   "title": "prime",
-  "charCount": 269
+  "charCount": 271
+ },
+ {
+  "lines": [
+   {
+    "content": "private <T extends Comparable<T>> int search(T array[], T key, int left, int right) {",
+    "indent": 0
+   },
+   {
+    "content": "if (right < left) return -1;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "int median = (left + right) >>> 1;",
+    "indent": 2
+   },
+   {
+    "content": "int comp = key.compareTo(array[median]);",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "if (comp == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return median;",
+    "indent": 4
+   },
+   {
+    "content": "} else if (comp < 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return search(array, key, left, median - 1);",
+    "indent": 4
+   },
+   {
+    "content": "} else {",
+    "indent": 2
+   },
+   {
+    "content": "return search(array, key, median + 1, right);",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 0
+   }
+  ],
+  "id": 1,
+  "fileEnding": "java",
+  "title": "search",
+  "charCount": 351
  }
 ]

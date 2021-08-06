@@ -11,6 +11,7 @@ def parse():
             Code = {}
             Code['lines'] = []
             num_chars = 0
+            last_indent = 0
             for l in file:
                 # ignore comments
                 if l.strip().startswith("//"):
@@ -18,10 +19,18 @@ def parse():
                 # build and add line structs
                 line = {}
                 # remove indent and newline char
-                content = l.lstrip()
-                num_chars += len(content)
-                indent = len(l) - len(content)
-                content = content.rstrip()
+                #if line not empty
+                if l.strip():                  
+                  content = l.lstrip()
+                  num_chars += len(content)
+                  indent = len(l) - len(content)
+                  last_indent = indent
+                  content = content.rstrip()
+                #if line is empty (or only whitespaces)
+                else:
+                  content = ""
+                  num_chars += 1
+                  indent = last_indent
                 line['content'] = content
                 line['indent'] = indent
                 Code['lines'].append(line)
