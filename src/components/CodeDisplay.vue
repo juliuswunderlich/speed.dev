@@ -17,7 +17,7 @@
         v-for="(line, line_idx) in text.lines"
         :key="line.id"
         :style="{
-          paddingLeft: getIndent(line_idx) + 'px',
+          paddingLeft: getIndent(line_idx) + 'em',
           opacity: getOpacity(line_idx),
         }"
       >
@@ -74,7 +74,7 @@ export default {
     return {
       texts: [],
       text: null,
-      INDENT_PX: 40,
+      INDENT_EM: 1.6,
 
       //typing logic
       currentLine: 0,
@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     getIndent(line_index) {
-      return this.text.lines[line_index].indent * this.INDENT_PX;
+      return this.text.lines[line_index].indent * this.INDENT_EM;
     },
     getOpacity(line_index) {
       if (this.endReached) {
@@ -344,8 +344,8 @@ export default {
   },
   created() {
     // this.texts = [this.text1, this.text2, this.text3];
-    const codes = require("../test_codes.json");
-    this.texts = codes.Elements;
+    const codes = require("../codes_java.json");
+    this.texts = codes;
 
     //TODO: remove once snippets get pulled from server
     // add return symbol after each line
@@ -402,8 +402,8 @@ export default {
 }
 #code-field {
   grid-area: 1/ 2/ 2/ 6;
-  height: 20em;
-  width: 60ch;
+  height: 22em;
+  width: 65ch;
   padding: 0.5em;
 
   border-color: #333;

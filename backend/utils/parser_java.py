@@ -1,6 +1,7 @@
 from os import listdir
 import json
 PATH = 'Codes/files_java/'
+TAB_SIZE = 2
 
 
 def parse():
@@ -23,7 +24,7 @@ def parse():
                 if l.strip():                  
                   content = l.lstrip()
                   num_chars += len(content)
-                  indent = len(l) - len(content)
+                  indent = int((len(l) - len(content)) / TAB_SIZE)
                   last_indent = indent
                   content = content.rstrip()
                 #if line is empty (or only whitespaces)
