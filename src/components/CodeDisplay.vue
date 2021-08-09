@@ -80,7 +80,6 @@ export default {
       currentLine: 0,
       cursorPosition: 0,
       charsTyped: [],
-      endReached: false,
       preventDefaultKeys: ["Tab", "/", "'"],
 
       //timer
@@ -99,8 +98,8 @@ export default {
       return this.text.lines[line_index].indent * this.INDENT_EM;
     },
     getOpacity(line_index) {
-      if (this.endReached) {
-        return "40%";
+      if (this.displayStats) {
+        return "15%";
       }
       if (line_index <= this.currentLine) {
         return "100%";
@@ -121,7 +120,7 @@ export default {
         }
         return;
       }
-      if (this.endReached) {
+      if (this.displayStats) {
         return;
       }
       if (key === "Backspace") {
@@ -212,7 +211,6 @@ export default {
     },
     snippetFinished() {
       this.stopTimer();
-      this.endReached = true;
       this.displayStats = true;
     },
     displayNewSnippet() {
@@ -238,7 +236,6 @@ export default {
 
       this.currentLine = 0;
       this.cursorPosition = 0;
-      this.endReached = false;
       this.resetTimer();
       this.displayStats = false;
     },
@@ -416,13 +413,25 @@ export default {
 }
 
 #stats {
-  grid-area: 1/ 1/ 2/ 6;
+  font-family: "Roboto Mono", monospace;
+  grid-area: 1/ 2/ 2/ 6;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 999;
-  background-color: #151718;
+  border-radius: .5em;
+  
+  padding: 1.5em;
+  background-color: #111213;
   opacity: 0.9;
   display: flex;
   place-content: center;
   align-items: center;
+  box-shadow:
+    0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0,0,0,.12);
 
   span {
     font-size: 1.5rem;
