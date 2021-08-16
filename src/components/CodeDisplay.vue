@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       texts: [],
-      text: null,
+      text: "",
       INDENT_EM: 1.6,
 
       //typing logic
@@ -214,15 +214,8 @@ export default {
       this.displayStats = true;
     },
     displayNewSnippet() {
-      // get snippet from server
+      // TODO: get new snippets from server once all buffered snippets have been shown
       this.text = this.randomChoice(this.texts);
-
-      // add return symbol after each line
-      //TODO: put back in once snippet is pulled from server
-      // for (let l = 0; l < this.text.length; l++) {
-      //     this.text[l].content = this.text[l].content += "↵"
-      // }
-
       this.resetSnippet();
     },
     resetSnippet() {
@@ -340,22 +333,27 @@ export default {
     },
   },
   created() {
-    // this.texts = [this.text1, this.text2, this.text3];
-    const codes = require("../codes_java.json");
-    this.texts = codes;
-
-    //TODO: remove once snippets get pulled from server
-    // add return symbol after each line
-    for (let t = 0; t < this.texts.length; t++) {
-      for (let l = 0; l < this.texts[t].lines.length; l++) {
-        this.texts[t].lines[l].content = this.texts[t].lines[l].content += "↵";
-      }
-    }
-
     //add keyListener
     document.onkeydown = this.onkeydown;
 
-    this.displayNewSnippet();
+    // load all snippets for now
+    const firestore = this.$firebase.firestore();
+    firestore
+      .collection("snippets")
+      .get()
+      .then((querySnapshot) => {
+        this.texts = querySnapshot.docs.map((doc) => doc.data());
+
+        // add newline symbols
+        for (let t = 0; t < this.texts.length; t++) {
+          for (let l = 0; l < this.texts[t].lines.length; l++) {
+            this.texts[t].lines[l].content = this.texts[t].lines[l].content +=
+              "↵";
+          }
+        }
+
+        this.displayNewSnippet();
+      });
   },
 };
 </script>
@@ -420,18 +418,16 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
-  border-radius: .5em;
-  
+  border-radius: 0.5em;
+
   padding: 1.5em;
   background-color: #111213;
   opacity: 0.9;
   display: flex;
   place-content: center;
   align-items: center;
-  box-shadow:
-    0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 18px 0px rgba(0,0,0,.12);
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 
   span {
     font-size: 1.5rem;

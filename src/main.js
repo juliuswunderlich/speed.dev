@@ -1,29 +1,19 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-const firebase = require("firebase");
-// Required for side-effects
-require("firebase/firestore");
+import { firebase } from '@firebase/app'
+import '@firebase/firestore'
 
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
-    apiKey: "AIzaSyCwjSBgc-3bkrJI09lDo2p1szE4BJ5Qe-I",
-    authDomain: "speeddev-b728a.firebaseapp.com",
-    projectId: "speeddev-b728a",
-  });
-  
-  var db = firebase.firestore();
-
-
-// load the parsed snippets
-var snippetsJson = require('./codes_java.json');
-
-db.collection("snippets").add(snippetsJson[0])
-.then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-})
-.catch((error) => {
-    console.error("Error adding document: ", error);
+  apiKey: "AIzaSyCwjSBgc-3bkrJI09lDo2p1szE4BJ5Qe-I",
+  authDomain: "speeddev-b728a.firebaseapp.com",
+  projectId: "speeddev-b728a",
 });
 
-createApp(App).mount('#app')
+
+const app = createApp(App);
+
+// make firebase accessible in all Vue components
+app.config.globalProperties.$firebase = firebase;
+
+app.mount('#app');
