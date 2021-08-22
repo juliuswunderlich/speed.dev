@@ -1,0 +1,3890 @@
+[
+ {
+  "lines": [
+   {
+    "content": "public static int absMax(int[] numbers) {",
+    "indent": 1
+   },
+   {
+    "content": "int absMaxValue = numbers[0];",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1, length = numbers.length; i < length; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (Math.abs(numbers[i]) > Math.abs(absMaxValue)) {",
+    "indent": 3
+   },
+   {
+    "content": "absMaxValue = numbers[i];",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return absMaxValue;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "absMax",
+  "charCount": 236,
+  "id": 100
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int absMin(int[] numbers) {",
+    "indent": 1
+   },
+   {
+    "content": "int absMinValue = numbers[0];",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1, length = numbers.length; i < length; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (Math.abs(numbers[i]) < Math.abs(absMinValue)) {",
+    "indent": 3
+   },
+   {
+    "content": "absMinValue = numbers[i];",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return absMinValue;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "absMin",
+  "charCount": 236,
+  "id": 101
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int absVal(int value) {",
+    "indent": 1
+   },
+   {
+    "content": "return value < 0 ? -value : value;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "absVal",
+  "charCount": 75,
+  "id": 102
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int aliquotSum(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "int sum = 0;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1, limit = number / 2; i <= limit; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (number % i == 0) {",
+    "indent": 3
+   },
+   {
+    "content": "sum += i;",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return sum;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "aliquotSum",
+  "charCount": 162,
+  "id": 103
+ },
+ {
+  "lines": [
+   {
+    "content": "static void findAllInRange(int startValue, int stopValue) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "/* the 2 for loops are to avoid to double check tuple. For example (200,100) and (100,200) is the same calculation",
+    "indent": 2
+   },
+   {
+    "content": "* also to avoid is to check the number with it self. a number with itself is always a AmicableNumber",
+    "indent": 2
+   },
+   {
+    "content": "* */",
+    "indent": 2
+   },
+   {
+    "content": "StringBuilder res = new StringBuilder();",
+    "indent": 2
+   },
+   {
+    "content": "int countofRes = 0;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = startValue; i < stopValue; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "for (int j = i + 1; j <= stopValue; j++) {",
+    "indent": 3
+   },
+   {
+    "content": "if (isAmicableNumber(i, j)) {",
+    "indent": 4
+   },
+   {
+    "content": "countofRes++;",
+    "indent": 5
+   },
+   {
+    "content": "res.append(\"\" + countofRes + \": = ( \" + i + \",\" + j + \")\" + \"\\t\");",
+    "indent": 5
+   },
+   {
+    "content": "}",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "res.insert(",
+    "indent": 2
+   },
+   {
+    "content": "0,",
+    "indent": 4
+   },
+   {
+    "content": "\"Int Range of \"",
+    "indent": 4
+   },
+   {
+    "content": "+ startValue",
+    "indent": 6
+   },
+   {
+    "content": "+ \" till \"",
+    "indent": 6
+   },
+   {
+    "content": "+ stopValue",
+    "indent": 6
+   },
+   {
+    "content": "+ \" there are \"",
+    "indent": 6
+   },
+   {
+    "content": "+ countofRes",
+    "indent": 6
+   },
+   {
+    "content": "+ \" Amicable_numbers.These are \\n \");",
+    "indent": 6
+   },
+   {
+    "content": "System.out.println(res.toString());",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "findAllInRange",
+  "charCount": 723,
+  "id": 104
+ },
+ {
+  "lines": [
+   {
+    "content": "static boolean isAmicableNumber(int numberOne, int numberTwo) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "return ((recursiveCalcOfDividerSum(numberOne, numberOne) == numberTwo",
+    "indent": 2
+   },
+   {
+    "content": "&& numberOne == recursiveCalcOfDividerSum(numberTwo, numberTwo)));",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isAmicableNumber",
+  "charCount": 204,
+  "id": 105
+ },
+ {
+  "lines": [
+   {
+    "content": "static int recursiveCalcOfDividerSum(int number, int div) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "if (div == 1) {",
+    "indent": 2
+   },
+   {
+    "content": "return 0;",
+    "indent": 3
+   },
+   {
+    "content": "} else if (number % --div == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return recursiveCalcOfDividerSum(number, div) + div;",
+    "indent": 3
+   },
+   {
+    "content": "} else {",
+    "indent": 2
+   },
+   {
+    "content": "return recursiveCalcOfDividerSum(number, div);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "recursiveCalcOfDividerSum",
+  "charCount": 234,
+  "id": 106
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaCube(double sideLength) {",
+    "indent": 1
+   },
+   {
+    "content": "return 6 * sideLength * sideLength;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaCube",
+  "charCount": 97,
+  "id": 107
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaSphere(double radius) {",
+    "indent": 1
+   },
+   {
+    "content": "return 4 * Math.PI * radius * radius;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaSphere",
+  "charCount": 97,
+  "id": 108
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaRectangle(double length, double width) {",
+    "indent": 1
+   },
+   {
+    "content": "return length * width;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaRectangle",
+  "charCount": 99,
+  "id": 109
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaSquare(double sideLength) {",
+    "indent": 1
+   },
+   {
+    "content": "return sideLength * sideLength;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaSquare",
+  "charCount": 95,
+  "id": 110
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaTriangle(double base, double height) {",
+    "indent": 1
+   },
+   {
+    "content": "return base * height / 2;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaTriangle",
+  "charCount": 100,
+  "id": 111
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaParallelogram(double base, double height) {",
+    "indent": 1
+   },
+   {
+    "content": "return base * height;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaParallelogram",
+  "charCount": 101,
+  "id": 112
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaTrapezium(double base1, double base2, double height) {",
+    "indent": 1
+   },
+   {
+    "content": "return (base1 + base2) * height / 2;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaTrapezium",
+  "charCount": 127,
+  "id": 113
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double surfaceAreaCircle(double radius) {",
+    "indent": 1
+   },
+   {
+    "content": "return Math.PI * radius * radius;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "surfaceAreaCircle",
+  "charCount": 93,
+  "id": 114
+ },
+ {
+  "lines": [
+   {
+    "content": "private static boolean isArmStrong(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "int sum = 0;",
+    "indent": 2
+   },
+   {
+    "content": "int temp = number;",
+    "indent": 2
+   },
+   {
+    "content": "int numberOfDigits = 0;",
+    "indent": 2
+   },
+   {
+    "content": "while (temp != 0) {",
+    "indent": 2
+   },
+   {
+    "content": "numberOfDigits++;",
+    "indent": 3
+   },
+   {
+    "content": "temp /= 10;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "temp = number; /* copy number again */",
+    "indent": 2
+   },
+   {
+    "content": "while (number > 0) {",
+    "indent": 2
+   },
+   {
+    "content": "int remainder = number % 10;",
+    "indent": 3
+   },
+   {
+    "content": "int power = 1;",
+    "indent": 3
+   },
+   {
+    "content": "for (int i = 1; i <= numberOfDigits; power *= remainder, ++i)",
+    "indent": 3
+   },
+   {
+    "content": ";",
+    "indent": 4
+   },
+   {
+    "content": "sum = sum + power;",
+    "indent": 3
+   },
+   {
+    "content": "number /= 10;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return sum == temp;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isArmStrong",
+  "charCount": 382,
+  "id": 115
+ },
+ {
+  "lines": [
+   {
+    "content": "private static final double SMALL_VALUE = 0.00001f;",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "public static void main(String[] args) {",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "0.00001f;",
+  "charCount": 94,
+  "id": 116
+ },
+ {
+  "lines": [
+   {
+    "content": "public static double average(double[] numbers) {",
+    "indent": 1
+   },
+   {
+    "content": "double sum = 0;",
+    "indent": 2
+   },
+   {
+    "content": "for (double number : numbers) {",
+    "indent": 2
+   },
+   {
+    "content": "sum += number;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return sum / numbers.length;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "average",
+  "charCount": 145,
+  "id": 117
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int average(int[] array) {",
+    "indent": 1
+   },
+   {
+    "content": "long sum = 0;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < array.length; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "sum += array[i];",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return (int) (sum / array.length);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "average",
+  "charCount": 152,
+  "id": 118
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int binPow(int a, int p) {",
+    "indent": 1
+   },
+   {
+    "content": "int res = 1;",
+    "indent": 2
+   },
+   {
+    "content": "while (p > 0) {",
+    "indent": 2
+   },
+   {
+    "content": "if ((p & 1) == 1) {",
+    "indent": 3
+   },
+   {
+    "content": "res = res * a;",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "a = a * a;",
+    "indent": 3
+   },
+   {
+    "content": "p >>>= 1;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return res;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "binPow",
+  "charCount": 144,
+  "id": 119
+ },
+ {
+  "lines": [
+   {
+    "content": "public static void test(int a, int p) {",
+    "indent": 1
+   },
+   {
+    "content": "int res = binPow(a, p);",
+    "indent": 2
+   },
+   {
+    "content": "assert res == (int) Math.pow(a, p) : \"Incorrect Implementation\";",
+    "indent": 2
+   },
+   {
+    "content": "System.out.println(a + \"^\" + p + \": \" + res);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "test",
+  "charCount": 177,
+  "id": 120
+ },
+ {
+  "lines": [
+   {
+    "content": "public static double ceil(double number) {",
+    "indent": 1
+   },
+   {
+    "content": "if (number - (int) number == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return number;",
+    "indent": 3
+   },
+   {
+    "content": "} else if (number - (int) number > 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return (int) (number + 1);",
+    "indent": 3
+   },
+   {
+    "content": "} else {",
+    "indent": 2
+   },
+   {
+    "content": "return (int) number;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "ceil",
+  "charCount": 193,
+  "id": 121
+ },
+ {
+  "lines": [
+   {
+    "content": "private static void padding(ArrayList<FFT.Complex> x, int newSize) {",
+    "indent": 1
+   },
+   {
+    "content": "if (x.size() < newSize) {",
+    "indent": 2
+   },
+   {
+    "content": "int diff = newSize - x.size();",
+    "indent": 3
+   },
+   {
+    "content": "for (int i = 0; i < diff; i++) x.add(new FFT.Complex());",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "padding",
+  "charCount": 187,
+  "id": 122
+ },
+ {
+  "lines": [
+   {
+    "content": "public static ArrayList<FFT.Complex> fftCircularConvolution(",
+    "indent": 1
+   },
+   {
+    "content": "ArrayList<FFT.Complex> a, ArrayList<FFT.Complex> b) {",
+    "indent": 3
+   },
+   {
+    "content": "int convolvedSize =",
+    "indent": 2
+   },
+   {
+    "content": "Math.max(",
+    "indent": 4
+   },
+   {
+    "content": "a.size(), b.size()); // The two signals must have the same size equal to the bigger one",
+    "indent": 6
+   },
+   {
+    "content": "padding(a, convolvedSize); // Zero padding the smaller signal",
+    "indent": 2
+   },
+   {
+    "content": "padding(b, convolvedSize);",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Find the FFTs of both signal. Here we use the Bluestein algorithm because we want the FFT to have the same length with the signal and not bigger */",
+    "indent": 2
+   },
+   {
+    "content": "FFTBluestein.fftBluestein(a, false);",
+    "indent": 2
+   },
+   {
+    "content": "FFTBluestein.fftBluestein(b, false);",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<FFT.Complex> convolved = new ArrayList<>();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < a.size(); i++) convolved.add(a.get(i).multiply(b.get(i))); // FFT(a)*FFT(b)",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "FFTBluestein.fftBluestein(convolved, true); // IFFT",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "return convolved;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "fftCircularConvolution",
+  "charCount": 773,
+  "id": 123
+ },
+ {
+  "lines": [
+   {
+    "content": "public static long factorial(int n) {",
+    "indent": 1
+   },
+   {
+    "content": "if (n < 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new IllegalArgumentException(\"number is negative\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return n == 0 || n == 1 ? 1 : n * factorial(n - 1);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "factorial",
+  "charCount": 165,
+  "id": 124
+ },
+ {
+  "lines": [
+   {
+    "content": "public static long combinations(int n, int k) {",
+    "indent": 1
+   },
+   {
+    "content": "return factorial(n) / (factorial(k) * factorial(n - k));",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "combinations",
+  "charCount": 107,
+  "id": 125
+ },
+ {
+  "lines": [
+   {
+    "content": "public static double[] convolution(double[] A, double[] B) {",
+    "indent": 1
+   },
+   {
+    "content": "double[] convolved = new double[A.length + B.length - 1];",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/*",
+    "indent": 2
+   },
+   {
+    "content": "The discrete convolution of two signals A and B is defined as:",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "A.length",
+    "indent": 5
+   },
+   {
+    "content": "C[i] = \u00ce\u00a3 (A[k]*B[i-k])",
+    "indent": 2
+   },
+   {
+    "content": "k=0",
+    "indent": 5
+   },
+   {
+    "content": "",
+    "indent": 5
+   },
+   {
+    "content": "It's obvious that:  0 <= k <= A.length , 0 <= i <= A.length + B.length - 2  and  0 <= i-k <= B.length - 1",
+    "indent": 2
+   },
+   {
+    "content": "From the last inequality we get that:  i - B.length + 1 <= k <= i and thus we get the conditions below.",
+    "indent": 2
+   },
+   {
+    "content": "*/",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < convolved.length; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "convolved[i] = 0;",
+    "indent": 3
+   },
+   {
+    "content": "int k = Math.max(i - B.length + 1, 0);",
+    "indent": 3
+   },
+   {
+    "content": "",
+    "indent": 3
+   },
+   {
+    "content": "while (k < i + 1 && k < A.length) {",
+    "indent": 3
+   },
+   {
+    "content": "convolved[i] += A[k] * B[i - k];",
+    "indent": 4
+   },
+   {
+    "content": "k++;",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "return convolved;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "convolution",
+  "charCount": 640,
+  "id": 126
+ },
+ {
+  "lines": [
+   {
+    "content": "private static void padding(ArrayList<FFT.Complex> x, int newSize) {",
+    "indent": 1
+   },
+   {
+    "content": "if (x.size() < newSize) {",
+    "indent": 2
+   },
+   {
+    "content": "int diff = newSize - x.size();",
+    "indent": 3
+   },
+   {
+    "content": "for (int i = 0; i < diff; i++) x.add(new FFT.Complex());",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "padding",
+  "charCount": 187,
+  "id": 127
+ },
+ {
+  "lines": [
+   {
+    "content": "public static ArrayList<FFT.Complex> convolutionFFT(",
+    "indent": 1
+   },
+   {
+    "content": "ArrayList<FFT.Complex> a, ArrayList<FFT.Complex> b) {",
+    "indent": 3
+   },
+   {
+    "content": "int convolvedSize = a.size() + b.size() - 1; // The size of the convolved signal",
+    "indent": 2
+   },
+   {
+    "content": "padding(a, convolvedSize); // Zero padding both signals",
+    "indent": 2
+   },
+   {
+    "content": "padding(b, convolvedSize);",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Find the FFTs of both signals (Note that the size of the FFTs will be bigger than the convolvedSize because of the extra zero padding in FFT algorithm) */",
+    "indent": 2
+   },
+   {
+    "content": "FFT.fft(a, false);",
+    "indent": 2
+   },
+   {
+    "content": "FFT.fft(b, false);",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<FFT.Complex> convolved = new ArrayList<>();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < a.size(); i++) convolved.add(a.get(i).multiply(b.get(i))); // FFT(a)*FFT(b)",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "FFT.fft(convolved, true); // IFFT",
+    "indent": 2
+   },
+   {
+    "content": "convolved",
+    "indent": 2
+   },
+   {
+    "content": ".subList(convolvedSize, convolved.size())",
+    "indent": 4
+   },
+   {
+    "content": ".clear(); // Remove the remaining zeros after the convolvedSize. These extra zeros came from",
+    "indent": 4
+   },
+   {
+    "content": "",
+    "indent": 4
+   },
+   {
+    "content": "return convolved;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "convolutionFFT",
+  "charCount": 820,
+  "id": 128
+ },
+ {
+  "lines": [
+   {
+    "content": "public static double eulerStep(",
+    "indent": 1
+   },
+   {
+    "content": "double xCurrent,",
+    "indent": 3
+   },
+   {
+    "content": "double stepSize,",
+    "indent": 3
+   },
+   {
+    "content": "double yCurrent,",
+    "indent": 3
+   },
+   {
+    "content": "BiFunction<Double, Double, Double> differentialEquation) {",
+    "indent": 3
+   },
+   {
+    "content": "if (stepSize <= 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new IllegalArgumentException(\"stepSize should be greater than zero\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "double yNext = yCurrent + stepSize * differentialEquation.apply(xCurrent, yCurrent);",
+    "indent": 2
+   },
+   {
+    "content": "return yNext;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "eulerStep",
+  "charCount": 342,
+  "id": 129
+ },
+ {
+  "lines": [
+   {
+    "content": "public static ArrayList<double[]> eulerFull(",
+    "indent": 1
+   },
+   {
+    "content": "double xStart,",
+    "indent": 3
+   },
+   {
+    "content": "double xEnd,",
+    "indent": 3
+   },
+   {
+    "content": "double stepSize,",
+    "indent": 3
+   },
+   {
+    "content": "double yStart,",
+    "indent": 3
+   },
+   {
+    "content": "BiFunction<Double, Double, Double> differentialEquation) {",
+    "indent": 3
+   },
+   {
+    "content": "if (xStart >= xEnd) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new IllegalArgumentException(\"xEnd should be greater than xStart\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "if (stepSize <= 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new IllegalArgumentException(\"stepSize should be greater than zero\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<double[]> points = new ArrayList<double[]>();",
+    "indent": 2
+   },
+   {
+    "content": "double[] firstPoint = {xStart, yStart};",
+    "indent": 2
+   },
+   {
+    "content": "points.add(firstPoint);",
+    "indent": 2
+   },
+   {
+    "content": "double yCurrent = yStart;",
+    "indent": 2
+   },
+   {
+    "content": "double xCurrent = xStart;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "while (xCurrent < xEnd) {",
+    "indent": 2
+   },
+   {
+    "content": "yCurrent = eulerStep(xCurrent, stepSize, yCurrent, differentialEquation);",
+    "indent": 3
+   },
+   {
+    "content": "xCurrent += stepSize;",
+    "indent": 3
+   },
+   {
+    "content": "double[] point = {xCurrent, yCurrent};",
+    "indent": 3
+   },
+   {
+    "content": "points.add(point);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "return points;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "eulerFull",
+  "charCount": 735,
+  "id": 130
+ },
+ {
+  "lines": [
+   {
+    "content": "public static long factorial(int n) {",
+    "indent": 1
+   },
+   {
+    "content": "if (n < 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new IllegalArgumentException(\"number is negative\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "long factorial = 1;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1; i <= n; factorial *= i, ++i)",
+    "indent": 2
+   },
+   {
+    "content": ";",
+    "indent": 3
+   },
+   {
+    "content": "return factorial;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "factorial",
+  "charCount": 198,
+  "id": 131
+ },
+ {
+  "lines": [
+   {
+    "content": "public static long factorial(int n) {",
+    "indent": 1
+   },
+   {
+    "content": "if (n < 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new IllegalArgumentException(\"number is negative\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return n == 0 || n == 1 ? 1 : n * factorial(n - 1);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "factorial",
+  "charCount": 165,
+  "id": 132
+ },
+ {
+  "lines": [
+   {
+    "content": "private double real, img;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/** Default Constructor. Creates the complex number 0. */",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "img;",
+  "charCount": 85,
+  "id": 133
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex() {",
+    "indent": 2
+   },
+   {
+    "content": "real = 0;",
+    "indent": 3
+   },
+   {
+    "content": "img = 0;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "Complex",
+  "charCount": 40,
+  "id": 134
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex(double r, double i) {",
+    "indent": 2
+   },
+   {
+    "content": "real = r;",
+    "indent": 3
+   },
+   {
+    "content": "img = i;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "Complex",
+  "charCount": 58,
+  "id": 135
+ },
+ {
+  "lines": [
+   {
+    "content": "public double getReal() {",
+    "indent": 2
+   },
+   {
+    "content": "return real;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "getReal",
+  "charCount": 41,
+  "id": 136
+ },
+ {
+  "lines": [
+   {
+    "content": "public double getImaginary() {",
+    "indent": 2
+   },
+   {
+    "content": "return img;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "getImaginary",
+  "charCount": 45,
+  "id": 137
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex add(Complex z) {",
+    "indent": 2
+   },
+   {
+    "content": "Complex temp = new Complex();",
+    "indent": 3
+   },
+   {
+    "content": "temp.real = this.real + z.real;",
+    "indent": 3
+   },
+   {
+    "content": "temp.img = this.img + z.img;",
+    "indent": 3
+   },
+   {
+    "content": "return temp;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "add",
+  "charCount": 138,
+  "id": 138
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex subtract(Complex z) {",
+    "indent": 2
+   },
+   {
+    "content": "Complex temp = new Complex();",
+    "indent": 3
+   },
+   {
+    "content": "temp.real = this.real - z.real;",
+    "indent": 3
+   },
+   {
+    "content": "temp.img = this.img - z.img;",
+    "indent": 3
+   },
+   {
+    "content": "return temp;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "subtract",
+  "charCount": 143,
+  "id": 139
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex multiply(Complex z) {",
+    "indent": 2
+   },
+   {
+    "content": "Complex temp = new Complex();",
+    "indent": 3
+   },
+   {
+    "content": "temp.real = this.real * z.real - this.img * z.img;",
+    "indent": 3
+   },
+   {
+    "content": "temp.img = this.real * z.img + this.img * z.real;",
+    "indent": 3
+   },
+   {
+    "content": "return temp;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "multiply",
+  "charCount": 183,
+  "id": 140
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex multiply(double n) {",
+    "indent": 2
+   },
+   {
+    "content": "Complex temp = new Complex();",
+    "indent": 3
+   },
+   {
+    "content": "temp.real = this.real * n;",
+    "indent": 3
+   },
+   {
+    "content": "temp.img = this.img * n;",
+    "indent": 3
+   },
+   {
+    "content": "return temp;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "multiply",
+  "charCount": 133,
+  "id": 141
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex conjugate() {",
+    "indent": 2
+   },
+   {
+    "content": "Complex temp = new Complex();",
+    "indent": 3
+   },
+   {
+    "content": "temp.real = this.real;",
+    "indent": 3
+   },
+   {
+    "content": "temp.img = -this.img;",
+    "indent": 3
+   },
+   {
+    "content": "return temp;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "conjugate",
+  "charCount": 119,
+  "id": 142
+ },
+ {
+  "lines": [
+   {
+    "content": "public double abs() {",
+    "indent": 2
+   },
+   {
+    "content": "return Math.hypot(this.real, this.img);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "abs",
+  "charCount": 64,
+  "id": 143
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex divide(Complex z) {",
+    "indent": 2
+   },
+   {
+    "content": "Complex temp = new Complex();",
+    "indent": 3
+   },
+   {
+    "content": "temp.real = (this.real * z.real + this.img * z.img) / (z.abs() * z.abs());",
+    "indent": 3
+   },
+   {
+    "content": "temp.img = (this.img * z.real - this.real * z.img) / (z.abs() * z.abs());",
+    "indent": 3
+   },
+   {
+    "content": "return temp;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "divide",
+  "charCount": 229,
+  "id": 144
+ },
+ {
+  "lines": [
+   {
+    "content": "public Complex divide(double n) {",
+    "indent": 2
+   },
+   {
+    "content": "Complex temp = new Complex();",
+    "indent": 3
+   },
+   {
+    "content": "temp.real = this.real / n;",
+    "indent": 3
+   },
+   {
+    "content": "temp.img = this.img / n;",
+    "indent": 3
+   },
+   {
+    "content": "return temp;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   }
+  ],
+  "fileEnding": "java",
+  "title": "divide",
+  "charCount": 131,
+  "id": 145
+ },
+ {
+  "lines": [
+   {
+    "content": "public static void fft(ArrayList<Complex> x, boolean inverse) {",
+    "indent": 1
+   },
+   {
+    "content": "/* Pad the signal with zeros if necessary */",
+    "indent": 2
+   },
+   {
+    "content": "paddingPowerOfTwo(x);",
+    "indent": 2
+   },
+   {
+    "content": "int N = x.size();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Find the log2(N) */",
+    "indent": 2
+   },
+   {
+    "content": "int log2N = 0;",
+    "indent": 2
+   },
+   {
+    "content": "while ((1 << log2N) < N) log2N++;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Swap the values of the signal with bit-reversal method */",
+    "indent": 2
+   },
+   {
+    "content": "int reverse;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < N; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "reverse = reverseBits(i, log2N);",
+    "indent": 3
+   },
+   {
+    "content": "if (i < reverse) Collections.swap(x, i, reverse);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "int direction = inverse ? -1 : 1;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Main loop of the algorithm */",
+    "indent": 2
+   },
+   {
+    "content": "for (int len = 2; len <= N; len *= 2) {",
+    "indent": 2
+   },
+   {
+    "content": "double angle = -2 * Math.PI / len * direction;",
+    "indent": 3
+   },
+   {
+    "content": "Complex wlen = new Complex(Math.cos(angle), Math.sin(angle));",
+    "indent": 3
+   },
+   {
+    "content": "for (int i = 0; i < N; i += len) {",
+    "indent": 3
+   },
+   {
+    "content": "Complex w = new Complex(1, 0);",
+    "indent": 4
+   },
+   {
+    "content": "for (int j = 0; j < len / 2; j++) {",
+    "indent": 4
+   },
+   {
+    "content": "Complex u = x.get(i + j);",
+    "indent": 5
+   },
+   {
+    "content": "Complex v = w.multiply(x.get(i + j + len / 2));",
+    "indent": 5
+   },
+   {
+    "content": "x.set(i + j, u.add(v));",
+    "indent": 5
+   },
+   {
+    "content": "x.set(i + j + len / 2, u.subtract(v));",
+    "indent": 5
+   },
+   {
+    "content": "w = w.multiply(wlen);",
+    "indent": 5
+   },
+   {
+    "content": "}",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Divide by N if we want the inverse FFT */",
+    "indent": 2
+   },
+   {
+    "content": "if (inverse) {",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < x.size(); i++) {",
+    "indent": 3
+   },
+   {
+    "content": "Complex z = x.get(i);",
+    "indent": 4
+   },
+   {
+    "content": "x.set(i, z.divide(N));",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "fft",
+  "charCount": 1046,
+  "id": 146
+ },
+ {
+  "lines": [
+   {
+    "content": "private static int reverseBits(int num, int log2N) {",
+    "indent": 1
+   },
+   {
+    "content": "int reversed = 0;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < log2N; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "if ((num & (1 << i)) != 0) reversed |= 1 << (log2N - 1 - i);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return reversed;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "reverseBits",
+  "charCount": 187,
+  "id": 147
+ },
+ {
+  "lines": [
+   {
+    "content": "private static void paddingPowerOfTwo(ArrayList<Complex> x) {",
+    "indent": 1
+   },
+   {
+    "content": "int n = 1;",
+    "indent": 2
+   },
+   {
+    "content": "int oldSize = x.size();",
+    "indent": 2
+   },
+   {
+    "content": "while (n < oldSize) n *= 2;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < n - oldSize; i++) x.add(new Complex());",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "paddingPowerOfTwo",
+  "charCount": 187,
+  "id": 148
+ },
+ {
+  "lines": [
+   {
+    "content": "public static void fftBluestein(ArrayList<FFT.Complex> x, boolean inverse) {",
+    "indent": 1
+   },
+   {
+    "content": "int N = x.size();",
+    "indent": 2
+   },
+   {
+    "content": "int bnSize = 2 * N - 1;",
+    "indent": 2
+   },
+   {
+    "content": "int direction = inverse ? -1 : 1;",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<FFT.Complex> an = new ArrayList<>();",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<FFT.Complex> bn = new ArrayList<>();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Initialization of the b(n) sequence (see Wikipedia's article above for the symbols used)*/",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < bnSize; i++) bn.add(new FFT.Complex());",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < N; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "double angle = (i - N + 1) * (i - N + 1) * Math.PI / N * direction;",
+    "indent": 3
+   },
+   {
+    "content": "bn.set(i, new FFT.Complex(Math.cos(angle), Math.sin(angle)));",
+    "indent": 3
+   },
+   {
+    "content": "bn.set(bnSize - i - 1, new FFT.Complex(Math.cos(angle), Math.sin(angle)));",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Initialization of the a(n) sequence */",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < N; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "double angle = -i * i * Math.PI / N * direction;",
+    "indent": 3
+   },
+   {
+    "content": "an.add(x.get(i).multiply(new FFT.Complex(Math.cos(angle), Math.sin(angle))));",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<FFT.Complex> convolution = ConvolutionFFT.convolutionFFT(an, bn);",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* The final multiplication of the convolution with the b*(k) factor  */",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < N; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "double angle = -1 * i * i * Math.PI / N * direction;",
+    "indent": 3
+   },
+   {
+    "content": "FFT.Complex bk = new FFT.Complex(Math.cos(angle), Math.sin(angle));",
+    "indent": 3
+   },
+   {
+    "content": "x.set(i, bk.multiply(convolution.get(i + N - 1)));",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "/* Divide by N if we want the inverse FFT */",
+    "indent": 2
+   },
+   {
+    "content": "if (inverse) {",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < N; i++) {",
+    "indent": 3
+   },
+   {
+    "content": "FFT.Complex z = x.get(i);",
+    "indent": 4
+   },
+   {
+    "content": "x.set(i, z.divide(N));",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "fftBluestein",
+  "charCount": 1343,
+  "id": 149
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isPerfectSquare(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "int sqrt = (int) Math.sqrt(number);",
+    "indent": 2
+   },
+   {
+    "content": "return sqrt * sqrt == number;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isPerfectSquare",
+  "charCount": 120,
+  "id": 150
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isFibonacciNumber(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "return isPerfectSquare(5 * number * number + 4) || isPerfectSquare(5 * number * number - 4);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isFibonacciNumber",
+  "charCount": 149,
+  "id": 151
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int findMax(int[] array) {",
+    "indent": 1
+   },
+   {
+    "content": "int max = array[0];",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1; i < array.length; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (array[i] > max) {",
+    "indent": 3
+   },
+   {
+    "content": "max = array[i];",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return max;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "findMax",
+  "charCount": 158,
+  "id": 152
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int max(int[] array, int low, int high) {",
+    "indent": 1
+   },
+   {
+    "content": "if (low == high) {",
+    "indent": 2
+   },
+   {
+    "content": "return array[low]; // or array[high]",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "int mid = (low + high) >>> 1;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "int leftMax = max(array, low, mid); // get max in [low, mid]",
+    "indent": 2
+   },
+   {
+    "content": "int rightMax = max(array, mid + 1, high); // get max in [mid+1, high]",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "return Math.max(leftMax, rightMax);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "max",
+  "charCount": 316,
+  "id": 153
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int max(int[] array, int len) {",
+    "indent": 1
+   },
+   {
+    "content": "return len == 1 ? array[0] : Math.max(max(array, len - 1), array[len - 1]);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "max",
+  "charCount": 124,
+  "id": 154
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int findMin(int[] array) {",
+    "indent": 1
+   },
+   {
+    "content": "int min = array[0];",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1; i < array.length; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (array[i] < min) {",
+    "indent": 3
+   },
+   {
+    "content": "min = array[i];",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return min;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "findMin",
+  "charCount": 158,
+  "id": 155
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int min(int[] array, int low, int high) {",
+    "indent": 1
+   },
+   {
+    "content": "if (low == high) {",
+    "indent": 2
+   },
+   {
+    "content": "return array[low]; // or array[high]",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "int mid = (low + high) >>> 1;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "int leftMin = min(array, low, mid); // get min in [low, mid]",
+    "indent": 2
+   },
+   {
+    "content": "int rightMin = min(array, mid + 1, high); // get min in [mid+1, high]",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "return Math.min(leftMin, rightMin);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "min",
+  "charCount": 316,
+  "id": 156
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int min(int[] array, int len) {",
+    "indent": 1
+   },
+   {
+    "content": "return len == 1 ? array[0] : Math.min(min(array, len - 1), array[len - 1]);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "min",
+  "charCount": 124,
+  "id": 157
+ },
+ {
+  "lines": [
+   {
+    "content": "public static double floor(double number) {",
+    "indent": 1
+   },
+   {
+    "content": "if (number - (int) number == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return number;",
+    "indent": 3
+   },
+   {
+    "content": "} else if (number - (int) number > 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return (int) number;",
+    "indent": 3
+   },
+   {
+    "content": "} else {",
+    "indent": 2
+   },
+   {
+    "content": "return (int) number - 1;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "floor",
+  "charCount": 192,
+  "id": 158
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int gcd(int num1, int num2) {",
+    "indent": 1
+   },
+   {
+    "content": "if (num1 < 0 || num2 < 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new ArithmeticException();",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "if (num1 == 0 || num2 == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return Math.abs(num1 - num2);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "while (num1 % num2 != 0) {",
+    "indent": 2
+   },
+   {
+    "content": "int remainder = num1 % num2;",
+    "indent": 3
+   },
+   {
+    "content": "num1 = num2;",
+    "indent": 3
+   },
+   {
+    "content": "num2 = remainder;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return num2;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "gcd",
+  "charCount": 275,
+  "id": 159
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int gcd(int[] number) {",
+    "indent": 1
+   },
+   {
+    "content": "int result = number[0];",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1; i < number.length; i++)",
+    "indent": 2
+   },
+   {
+    "content": "result = gcd(result, number[i]);",
+    "indent": 3
+   },
+   {
+    "content": "",
+    "indent": 3
+   },
+   {
+    "content": "return result;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "gcd",
+  "charCount": 153,
+  "id": 160
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int gcd(int a, int b) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "if (a < 0 || b < 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new ArithmeticException();",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "if (a == 0 || b == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return Math.abs(a - b);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "if (a % b == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return b;",
+    "indent": 3
+   },
+   {
+    "content": "} else {",
+    "indent": 2
+   },
+   {
+    "content": "return gcd(b, a % b);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "gcd",
+  "charCount": 211,
+  "id": 161
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int lucasSeries(int n) {",
+    "indent": 1
+   },
+   {
+    "content": "return n == 1 ? 2 : n == 2 ? 1 : lucasSeries(n - 1) + lucasSeries(n - 2);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "lucasSeries",
+  "charCount": 115,
+  "id": 162
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int lucasSeriesIteration(int n) {",
+    "indent": 1
+   },
+   {
+    "content": "int previous = 2;",
+    "indent": 2
+   },
+   {
+    "content": "int current = 1;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1; i < n; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "int next = previous + current;",
+    "indent": 3
+   },
+   {
+    "content": "previous = current;",
+    "indent": 3
+   },
+   {
+    "content": "current = next;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return previous;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "lucasSeriesIteration",
+  "charCount": 201,
+  "id": 163
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int max(int a, int b) {",
+    "indent": 1
+   },
+   {
+    "content": "return a >= b ? a : b;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "max",
+  "charCount": 63,
+  "id": 164
+ },
+ {
+  "lines": [
+   {
+    "content": "public static double median(int[] values) {",
+    "indent": 1
+   },
+   {
+    "content": "Arrays.sort(values);",
+    "indent": 2
+   },
+   {
+    "content": "int length = values.length;",
+    "indent": 2
+   },
+   {
+    "content": "return length % 2 == 0",
+    "indent": 2
+   },
+   {
+    "content": "? (values[length / 2] + values[length / 2 - 1]) / 2.0",
+    "indent": 4
+   },
+   {
+    "content": ": values[length / 2];",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "median",
+  "charCount": 194,
+  "id": 165
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int min(int a, int b) {",
+    "indent": 1
+   },
+   {
+    "content": "return a <= b ? a : b;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "min",
+  "charCount": 63,
+  "id": 166
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int[] mode(int[] numbers) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "if (numbers.length == 0) return null;",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "HashMap<Integer, Integer> count = new HashMap<>();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int num : numbers) {",
+    "indent": 2
+   },
+   {
+    "content": "if (count.containsKey(num)) {",
+    "indent": 3
+   },
+   {
+    "content": "",
+    "indent": 3
+   },
+   {
+    "content": "count.put(num, count.get(num) + 1);",
+    "indent": 4
+   },
+   {
+    "content": "",
+    "indent": 4
+   },
+   {
+    "content": "} else {",
+    "indent": 3
+   },
+   {
+    "content": "",
+    "indent": 3
+   },
+   {
+    "content": "count.put(num, 1);",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "int max = Collections.max(count.values());",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<Integer> modes = new ArrayList<>();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int num : count.keySet()) {",
+    "indent": 2
+   },
+   {
+    "content": "if (count.get(num) == max) {",
+    "indent": 3
+   },
+   {
+    "content": "modes.add(num);",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return modes.stream().mapToInt(n -> n).toArray();",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "mode",
+  "charCount": 486,
+  "id": 167
+ },
+ {
+  "lines": [
+   {
+    "content": "private static int numberOfDigits(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "int digits = 0;",
+    "indent": 2
+   },
+   {
+    "content": "do {",
+    "indent": 2
+   },
+   {
+    "content": "digits++;",
+    "indent": 3
+   },
+   {
+    "content": "number /= 10;",
+    "indent": 3
+   },
+   {
+    "content": "} while (number != 0);",
+    "indent": 2
+   },
+   {
+    "content": "return digits;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "numberOfDigits",
+  "charCount": 133,
+  "id": 168
+ },
+ {
+  "lines": [
+   {
+    "content": "private static int numberOfDigitsFast(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "return number == 0 ? 1 : (int) Math.floor(Math.log10(Math.abs(number)) + 1);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "numberOfDigitsFast",
+  "charCount": 131,
+  "id": 169
+ },
+ {
+  "lines": [
+   {
+    "content": "private static int numberOfDigitsFaster(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "return number < 0 ? (-number + \"\").length() : (number + \"\").length();",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "numberOfDigitsFaster",
+  "charCount": 126,
+  "id": 170
+ },
+ {
+  "lines": [
+   {
+    "content": "private static int numberOfDigitsRecursion(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "return number / 10 == 0 ? 1 : 1 + numberOfDigitsRecursion(number / 10);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "numberOfDigitsRecursion",
+  "charCount": 131,
+  "id": 171
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isPalindrome(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "if (number < 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new IllegalArgumentException(number + \"\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "int numberCopy = number;",
+    "indent": 2
+   },
+   {
+    "content": "int reverseNumber = 0;",
+    "indent": 2
+   },
+   {
+    "content": "while (numberCopy != 0) {",
+    "indent": 2
+   },
+   {
+    "content": "int remainder = numberCopy % 10;",
+    "indent": 3
+   },
+   {
+    "content": "reverseNumber = reverseNumber * 10 + remainder;",
+    "indent": 3
+   },
+   {
+    "content": "numberCopy /= 10;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return number == reverseNumber;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isPalindrome",
+  "charCount": 327,
+  "id": 172
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int parseInt(String s) {",
+    "indent": 1
+   },
+   {
+    "content": "if (s == null || s.length() == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "throw new NumberFormatException(\"null\");",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "boolean isNegative = s.charAt(0) == '-';",
+    "indent": 2
+   },
+   {
+    "content": "boolean isPositive = s.charAt(0) == '+';",
+    "indent": 2
+   },
+   {
+    "content": "int number = 0;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = isNegative ? 1 : isPositive ? 1 : 0, length = s.length(); i < length; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (!Character.isDigit(s.charAt(i))) {",
+    "indent": 3
+   },
+   {
+    "content": "throw new NumberFormatException(\"s=\" + s);",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "number = number * 10 + s.charAt(i) - '0';",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return isNegative ? -number : number;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "parseInt",
+  "charCount": 474,
+  "id": 173
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isPerfectCube(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "int a = (int) Math.pow(number, 1.0 / 3);",
+    "indent": 2
+   },
+   {
+    "content": "return a * a * a == number;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isPerfectCube",
+  "charCount": 121,
+  "id": 174
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isPerfectNumber(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "int sum = 0; /* sum of its positive divisors */",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1; i < number; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "if (number % i == 0) {",
+    "indent": 3
+   },
+   {
+    "content": "sum += i;",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return sum == number;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isPerfectNumber",
+  "charCount": 196,
+  "id": 175
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isPerfectSquare(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "int sqrt = (int) Math.sqrt(number);",
+    "indent": 2
+   },
+   {
+    "content": "return sqrt * sqrt == number;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isPerfectSquare",
+  "charCount": 120,
+  "id": 176
+ },
+ {
+  "lines": [
+   {
+    "content": "public static long pow(int a, int b) {",
+    "indent": 1
+   },
+   {
+    "content": "long result = 1;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 1; i <= b; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "result *= a;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return result;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "pow",
+  "charCount": 119,
+  "id": 177
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean checkIfPowerOfTwoOrNot(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "return number != 0 && ((number & (number - 1)) == 0);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "checkIfPowerOfTwoOrNot",
+  "charCount": 115,
+  "id": 178
+ },
+ {
+  "lines": [
+   {
+    "content": "public static long pow(int a, int b) {",
+    "indent": 1
+   },
+   {
+    "content": "return b == 0 ? 1 : a * pow(a, b - 1);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "pow",
+  "charCount": 80,
+  "id": 179
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isPrime(int n) {",
+    "indent": 1
+   },
+   {
+    "content": "if (n == 2) {",
+    "indent": 2
+   },
+   {
+    "content": "return true;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "if (n < 2 || n % 2 == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return false;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 3, limit = (int) Math.sqrt(n); i <= limit; i += 2) {",
+    "indent": 2
+   },
+   {
+    "content": "if (n % i == 0) {",
+    "indent": 3
+   },
+   {
+    "content": "return false;",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return true;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isPrime",
+  "charCount": 228,
+  "id": 180
+ },
+ {
+  "lines": [
+   {
+    "content": "public static void pfactors(int n) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "while (n % 2 == 0) {",
+    "indent": 2
+   },
+   {
+    "content": "System.out.print(2 + \" \");",
+    "indent": 3
+   },
+   {
+    "content": "n /= 2;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 3; i <= Math.sqrt(n); i += 2) {",
+    "indent": 2
+   },
+   {
+    "content": "while (n % i == 0) {",
+    "indent": 3
+   },
+   {
+    "content": "System.out.print(i + \" \");",
+    "indent": 4
+   },
+   {
+    "content": "n /= i;",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "if (n > 2) System.out.print(n);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "pfactors",
+  "charCount": 237,
+  "id": 181
+ },
+ {
+  "lines": [
+   {
+    "content": "public static boolean isPythagTriple(int a, int b, int c) {",
+    "indent": 1
+   },
+   {
+    "content": "if (a <= 0 || b <= 0 || c <= 0) {",
+    "indent": 2
+   },
+   {
+    "content": "return false;",
+    "indent": 3
+   },
+   {
+    "content": "} else {",
+    "indent": 2
+   },
+   {
+    "content": "return (a * a) + (b * b) == (c * c);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isPythagTriple",
+  "charCount": 158,
+  "id": 182
+ },
+ {
+  "lines": [
+   {
+    "content": "private static double sumOfSeries(double firstTerm, double commonDiff, int numOfTerms) {",
+    "indent": 1
+   },
+   {
+    "content": "return numOfTerms / 2.0 * (2 * firstTerm + (numOfTerms - 1) * commonDiff);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "sumOfSeries",
+  "charCount": 166,
+  "id": 183
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int sumOfDigits(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "number = number < 0 ? -number : number; /* calculate abs value */",
+    "indent": 2
+   },
+   {
+    "content": "int sum = 0;",
+    "indent": 2
+   },
+   {
+    "content": "while (number != 0) {",
+    "indent": 2
+   },
+   {
+    "content": "sum += number % 10;",
+    "indent": 3
+   },
+   {
+    "content": "number /= 10;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return sum;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "sumOfDigits",
+  "charCount": 195,
+  "id": 184
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int sumOfDigitsRecursion(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "number = number < 0 ? -number : number; /* calculate abs value */",
+    "indent": 2
+   },
+   {
+    "content": "return number < 10 ? number : number % 10 + sumOfDigitsRecursion(number / 10);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "sumOfDigitsRecursion",
+  "charCount": 200,
+  "id": 185
+ },
+ {
+  "lines": [
+   {
+    "content": "public static int sumOfDigitsFast(int number) {",
+    "indent": 1
+   },
+   {
+    "content": "number = number < 0 ? -number : number; /* calculate abs value */",
+    "indent": 2
+   },
+   {
+    "content": "char[] digits = (number + \"\").toCharArray();",
+    "indent": 2
+   },
+   {
+    "content": "int sum = 0;",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = 0; i < digits.length; ++i) {",
+    "indent": 2
+   },
+   {
+    "content": "sum += digits[i] - '0';",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "return sum;",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "sumOfDigitsFast",
+  "charCount": 254,
+  "id": 186
+ },
+ {
+  "lines": [
+   {
+    "content": "static void test(int startValue, int stopValue) {",
+    "indent": 1
+   },
+   {
+    "content": "int countofRes = 1;",
+    "indent": 2
+   },
+   {
+    "content": "StringBuilder res = new StringBuilder();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "for (int i = startValue; i <= stopValue; i++) {",
+    "indent": 2
+   },
+   {
+    "content": "for (int j = i; j <= stopValue; j++) {",
+    "indent": 3
+   },
+   {
+    "content": "if (isVampireNumber(i, j, true)) {",
+    "indent": 4
+   },
+   {
+    "content": "countofRes++;",
+    "indent": 5
+   },
+   {
+    "content": "res.append(\"\" + countofRes + \": = ( \" + i + \",\" + j + \" = \" + i * j + \")\" + \"\\n\");",
+    "indent": 5
+   },
+   {
+    "content": "}",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "System.out.println(res);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "test",
+  "charCount": 364,
+  "id": 187
+ },
+ {
+  "lines": [
+   {
+    "content": "static boolean isVampireNumber(int a, int b, boolean noPseudoVamireNumbers) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "if (noPseudoVamireNumbers) {",
+    "indent": 2
+   },
+   {
+    "content": "if (a * 10 <= b || b * 10 <= a) {",
+    "indent": 3
+   },
+   {
+    "content": "return false;",
+    "indent": 4
+   },
+   {
+    "content": "}",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "String mulDigits = splitIntoDigits(a * b, 0);",
+    "indent": 2
+   },
+   {
+    "content": "String faktorDigits = splitIntoDigits(a, b);",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "return mulDigits.equals(faktorDigits);",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "isVampireNumber",
+  "charCount": 294,
+  "id": 188
+ },
+ {
+  "lines": [
+   {
+    "content": "static String splitIntoDigits(int num, int num2) {",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "StringBuilder res = new StringBuilder();",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "ArrayList<Integer> digits = new ArrayList<>();",
+    "indent": 2
+   },
+   {
+    "content": "while (num > 0) {",
+    "indent": 2
+   },
+   {
+    "content": "digits.add(num % 10);",
+    "indent": 3
+   },
+   {
+    "content": "num /= 10;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "while (num2 > 0) {",
+    "indent": 2
+   },
+   {
+    "content": "digits.add(num2 % 10);",
+    "indent": 3
+   },
+   {
+    "content": "num2 /= 10;",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "Collections.sort(digits);",
+    "indent": 2
+   },
+   {
+    "content": "for (int i : digits) {",
+    "indent": 2
+   },
+   {
+    "content": "res.append(i);",
+    "indent": 3
+   },
+   {
+    "content": "}",
+    "indent": 2
+   },
+   {
+    "content": "",
+    "indent": 2
+   },
+   {
+    "content": "return res.toString();",
+    "indent": 2
+   },
+   {
+    "content": "}",
+    "indent": 1
+   }
+  ],
+  "fileEnding": "java",
+  "title": "splitIntoDigits",
+  "charCount": 342,
+  "id": 189
+ }
+]

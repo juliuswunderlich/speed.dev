@@ -8,7 +8,9 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-with open ('./Codes/codes_java.json', 'r') as file:
+with open ('./Codes/codes_java_math.json', 'r') as file:
     snippets = json.load(file)
     for snippet in snippets:
-        db.collection(u'snippets').document(snippet['title']).set(snippet)
+        title = snippet['title'] + str(snippet['id'])
+        db.collection(u'snippets').document(title).set(snippet)
+        print(snippet)
