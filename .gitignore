@@ -1,5 +1,6 @@
 workspace.xml
 *.swp
+/backend/utils/speeddev_creds.json
 
 # Binaries for programs and plugins
 *.exe
