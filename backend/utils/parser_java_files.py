@@ -2,7 +2,8 @@ from os import listdir
 import re
 import json
 
-PATH = 'Codes/files_java/'
+INPUT = 'C:/Users/Niklas/code/Java/Maths/'
+OUTPUT = 'Codes/codes_java_math.json'
 TAB_SIZE = 2
 
 def extractFunctions(filepath):
@@ -18,7 +19,8 @@ def extractFunctions(filepath):
                 if getIndent(line) == indent:
                     method = method.rstrip()
                     inMethod = False
-                    functions.append(method)
+                    if len(method.split('\n')) >= 5:
+                        functions.append(method)
             if not inMethod:
                 if line.strip().startswith(keywords) and line.rstrip()[-1] == "{" and not any(s in line for s in ('main', 'class')) and len(line.split("(")[0].split()) > 2:
                     method = line.lstrip()
@@ -30,7 +32,7 @@ def extractFunctions(filepath):
 
 def parseFiles(path):
     Codes = []
-    code_id = 100
+    code_id = 200
     for filename in listdir(path):
         functions = extractFunctions(path + filename)
         for f in functions:
@@ -39,7 +41,7 @@ def parseFiles(path):
             Codes.append(Code)
             code_id += 1
 
-    with open('Codes/codes_java_math.json', 'w') as outfile:
+    with open(OUTPUT, 'w') as outfile:
         json.dump(Codes, outfile, indent=1)
 
 def getIndent(line):
@@ -83,4 +85,4 @@ def function_to_JSON(function_text):
     
     
 if __name__ == '__main__':    
-    parseFiles('C:/Users/Niklas/code/Java/Maths/')
+    parseFiles(INPUT)

@@ -41,7 +41,7 @@
   "fileEnding": "java",
   "title": "absMax",
   "charCount": 236,
-  "id": 100
+  "id": 200
  },
  {
   "lines": [
@@ -85,27 +85,7 @@
   "fileEnding": "java",
   "title": "absMin",
   "charCount": 236,
-  "id": 101
- },
- {
-  "lines": [
-   {
-    "content": "public static int absVal(int value) {",
-    "indent": 0
-   },
-   {
-    "content": "return value < 0 ? -value : value;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "absVal",
-  "charCount": 75,
-  "id": 102
+  "id": 201
  },
  {
   "lines": [
@@ -149,7 +129,7 @@
   "fileEnding": "java",
   "title": "aliquotSum",
   "charCount": 162,
-  "id": 103
+  "id": 202
  },
  {
   "lines": [
@@ -245,31 +225,7 @@
   "fileEnding": "java",
   "title": "findAllInRange",
   "charCount": 500,
-  "id": 104
- },
- {
-  "lines": [
-   {
-    "content": "static boolean isAmicableNumber(int numberOne, int numberTwo) {",
-    "indent": 0
-   },
-   {
-    "content": "return ((recursiveCalcOfDividerSum(numberOne, numberOne) == numberTwo",
-    "indent": 1
-   },
-   {
-    "content": "&& numberOne == recursiveCalcOfDividerSum(numberTwo, numberTwo)));",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "isAmicableNumber",
-  "charCount": 203,
-  "id": 105
+  "id": 203
  },
  {
   "lines": [
@@ -313,7 +269,7 @@
   "fileEnding": "java",
   "title": "recursiveCalcOfDividerSum",
   "charCount": 233,
-  "id": 106
+  "id": 204
  },
  {
   "lines": [
@@ -349,7 +305,7 @@
   "fileEnding": "java",
   "title": "average",
   "charCount": 145,
-  "id": 107
+  "id": 205
  },
  {
   "lines": [
@@ -385,7 +341,7 @@
   "fileEnding": "java",
   "title": "average",
   "charCount": 152,
-  "id": 108
+  "id": 206
  },
  {
   "lines": [
@@ -437,7 +393,7 @@
   "fileEnding": "java",
   "title": "binPow",
   "charCount": 144,
-  "id": 109
+  "id": 207
  },
  {
   "lines": [
@@ -465,7 +421,7 @@
   "fileEnding": "java",
   "title": "test",
   "charCount": 177,
-  "id": 110
+  "id": 208
  },
  {
   "lines": [
@@ -509,7 +465,7 @@
   "fileEnding": "java",
   "title": "ceil",
   "charCount": 193,
-  "id": 111
+  "id": 209
  },
  {
   "lines": [
@@ -541,27 +497,7 @@
   "fileEnding": "java",
   "title": "factorial",
   "charCount": 165,
-  "id": 112
- },
- {
-  "lines": [
-   {
-    "content": "public static long combinations(int n, int k) {",
-    "indent": 0
-   },
-   {
-    "content": "return factorial(n) / (factorial(k) * factorial(n - k));",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "combinations",
-  "charCount": 107,
-  "id": 113
+  "id": 210
  },
  {
   "lines": [
@@ -641,7 +577,7 @@
   "fileEnding": "java",
   "title": "convolution",
   "charCount": 629,
-  "id": 114
+  "id": 211
  },
  {
   "lines": [
@@ -685,7 +621,7 @@
   "fileEnding": "java",
   "title": "factorial",
   "charCount": 198,
-  "id": 115
+  "id": 212
  },
  {
   "lines": [
@@ -717,47 +653,7 @@
   "fileEnding": "java",
   "title": "factorial",
   "charCount": 165,
-  "id": 116
- },
- {
-  "lines": [
-   {
-    "content": "public double getReal() {",
-    "indent": 0
-   },
-   {
-    "content": "return real;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "getReal",
-  "charCount": 41,
-  "id": 117
- },
- {
-  "lines": [
-   {
-    "content": "public double getImaginary() {",
-    "indent": 0
-   },
-   {
-    "content": "return img;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "getImaginary",
-  "charCount": 45,
-  "id": 118
+  "id": 213
  },
  {
   "lines": [
@@ -789,7 +685,7 @@
   "fileEnding": "java",
   "title": "add",
   "charCount": 138,
-  "id": 119
+  "id": 214
  },
  {
   "lines": [
@@ -821,7 +717,7 @@
   "fileEnding": "java",
   "title": "subtract",
   "charCount": 143,
-  "id": 120
+  "id": 215
  },
  {
   "lines": [
@@ -853,7 +749,7 @@
   "fileEnding": "java",
   "title": "multiply",
   "charCount": 183,
-  "id": 121
+  "id": 216
  },
  {
   "lines": [
@@ -885,7 +781,7 @@
   "fileEnding": "java",
   "title": "multiply",
   "charCount": 133,
-  "id": 122
+  "id": 217
  },
  {
   "lines": [
@@ -917,27 +813,7 @@
   "fileEnding": "java",
   "title": "conjugate",
   "charCount": 119,
-  "id": 123
- },
- {
-  "lines": [
-   {
-    "content": "public double abs() {",
-    "indent": 0
-   },
-   {
-    "content": "return Math.hypot(this.real, this.img);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "abs",
-  "charCount": 64,
-  "id": 124
+  "id": 218
  },
  {
   "lines": [
@@ -969,7 +845,7 @@
   "fileEnding": "java",
   "title": "divide",
   "charCount": 229,
-  "id": 125
+  "id": 219
  },
  {
   "lines": [
@@ -1001,7 +877,7 @@
   "fileEnding": "java",
   "title": "divide",
   "charCount": 131,
-  "id": 126
+  "id": 220
  },
  {
   "lines": [
@@ -1137,7 +1013,7 @@
   "fileEnding": "java",
   "title": "fft",
   "charCount": 834,
-  "id": 127
+  "id": 221
  },
  {
   "lines": [
@@ -1261,51 +1137,7 @@
   "fileEnding": "java",
   "title": "fftBluestein",
   "charCount": 1083,
-  "id": 128
- },
- {
-  "lines": [
-   {
-    "content": "public static boolean isPerfectSquare(int number) {",
-    "indent": 0
-   },
-   {
-    "content": "int sqrt = (int) Math.sqrt(number);",
-    "indent": 1
-   },
-   {
-    "content": "return sqrt * sqrt == number;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "isPerfectSquare",
-  "charCount": 120,
-  "id": 129
- },
- {
-  "lines": [
-   {
-    "content": "public static boolean isFibonacciNumber(int number) {",
-    "indent": 0
-   },
-   {
-    "content": "return isPerfectSquare(5 * number * number + 4) || isPerfectSquare(5 * number * number - 4);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "isFibonacciNumber",
-  "charCount": 149,
-  "id": 130
+  "id": 222
  },
  {
   "lines": [
@@ -1349,7 +1181,7 @@
   "fileEnding": "java",
   "title": "findMax",
   "charCount": 158,
-  "id": 131
+  "id": 223
  },
  {
   "lines": [
@@ -1393,27 +1225,7 @@
   "fileEnding": "java",
   "title": "max",
   "charCount": 313,
-  "id": 132
- },
- {
-  "lines": [
-   {
-    "content": "public static int max(int[] array, int len) {",
-    "indent": 0
-   },
-   {
-    "content": "return len == 1 ? array[0] : Math.max(max(array, len - 1), array[len - 1]);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "max",
-  "charCount": 124,
-  "id": 133
+  "id": 224
  },
  {
   "lines": [
@@ -1457,7 +1269,7 @@
   "fileEnding": "java",
   "title": "findMin",
   "charCount": 158,
-  "id": 134
+  "id": 225
  },
  {
   "lines": [
@@ -1501,27 +1313,7 @@
   "fileEnding": "java",
   "title": "min",
   "charCount": 313,
-  "id": 135
- },
- {
-  "lines": [
-   {
-    "content": "public static int min(int[] array, int len) {",
-    "indent": 0
-   },
-   {
-    "content": "return len == 1 ? array[0] : Math.min(min(array, len - 1), array[len - 1]);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "min",
-  "charCount": 124,
-  "id": 136
+  "id": 226
  },
  {
   "lines": [
@@ -1565,7 +1357,7 @@
   "fileEnding": "java",
   "title": "floor",
   "charCount": 192,
-  "id": 137
+  "id": 227
  },
  {
   "lines": [
@@ -1629,7 +1421,7 @@
   "fileEnding": "java",
   "title": "gcd",
   "charCount": 273,
-  "id": 138
+  "id": 228
  },
  {
   "lines": [
@@ -1661,7 +1453,7 @@
   "fileEnding": "java",
   "title": "gcd",
   "charCount": 152,
-  "id": 139
+  "id": 229
  },
  {
   "lines": [
@@ -1721,27 +1513,7 @@
   "fileEnding": "java",
   "title": "gcd",
   "charCount": 208,
-  "id": 140
- },
- {
-  "lines": [
-   {
-    "content": "public static int lucasSeries(int n) {",
-    "indent": 0
-   },
-   {
-    "content": "return n == 1 ? 2 : n == 2 ? 1 : lucasSeries(n - 1) + lucasSeries(n - 2);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "lucasSeries",
-  "charCount": 115,
-  "id": 141
+  "id": 230
  },
  {
   "lines": [
@@ -1789,27 +1561,7 @@
   "fileEnding": "java",
   "title": "lucasSeriesIteration",
   "charCount": 201,
-  "id": 142
- },
- {
-  "lines": [
-   {
-    "content": "public static int max(int a, int b) {",
-    "indent": 0
-   },
-   {
-    "content": "return a >= b ? a : b;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "max",
-  "charCount": 63,
-  "id": 143
+  "id": 231
  },
  {
   "lines": [
@@ -1845,27 +1597,7 @@
   "fileEnding": "java",
   "title": "median",
   "charCount": 194,
-  "id": 144
- },
- {
-  "lines": [
-   {
-    "content": "public static int min(int a, int b) {",
-    "indent": 0
-   },
-   {
-    "content": "return a <= b ? a : b;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "min",
-  "charCount": 63,
-  "id": 145
+  "id": 232
  },
  {
   "lines": [
@@ -1949,7 +1681,7 @@
   "fileEnding": "java",
   "title": "mode",
   "charCount": 478,
-  "id": 146
+  "id": 233
  },
  {
   "lines": [
@@ -2009,7 +1741,7 @@
   "fileEnding": "java",
   "title": "isPalindrome",
   "charCount": 327,
-  "id": 147
+  "id": 234
  },
  {
   "lines": [
@@ -2077,31 +1809,7 @@
   "fileEnding": "java",
   "title": "parseInt",
   "charCount": 474,
-  "id": 148
- },
- {
-  "lines": [
-   {
-    "content": "public static boolean isPerfectCube(int number) {",
-    "indent": 0
-   },
-   {
-    "content": "int a = (int) Math.pow(number, 1.0 / 3);",
-    "indent": 1
-   },
-   {
-    "content": "return a * a * a == number;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "isPerfectCube",
-  "charCount": 121,
-  "id": 149
+  "id": 235
  },
  {
   "lines": [
@@ -2145,31 +1853,7 @@
   "fileEnding": "java",
   "title": "isPerfectNumber",
   "charCount": 196,
-  "id": 150
- },
- {
-  "lines": [
-   {
-    "content": "public static boolean isPerfectSquare(int number) {",
-    "indent": 0
-   },
-   {
-    "content": "int sqrt = (int) Math.sqrt(number);",
-    "indent": 1
-   },
-   {
-    "content": "return sqrt * sqrt == number;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "isPerfectSquare",
-  "charCount": 120,
-  "id": 151
+  "id": 236
  },
  {
   "lines": [
@@ -2205,47 +1889,7 @@
   "fileEnding": "java",
   "title": "pow",
   "charCount": 119,
-  "id": 152
- },
- {
-  "lines": [
-   {
-    "content": "public static boolean checkIfPowerOfTwoOrNot(int number) {",
-    "indent": 0
-   },
-   {
-    "content": "return number != 0 && ((number & (number - 1)) == 0);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "checkIfPowerOfTwoOrNot",
-  "charCount": 115,
-  "id": 153
- },
- {
-  "lines": [
-   {
-    "content": "public static long pow(int a, int b) {",
-    "indent": 0
-   },
-   {
-    "content": "return b == 0 ? 1 : a * pow(a, b - 1);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "pow",
-  "charCount": 80,
-  "id": 154
+  "id": 237
  },
  {
   "lines": [
@@ -2309,7 +1953,7 @@
   "fileEnding": "java",
   "title": "isPrime",
   "charCount": 228,
-  "id": 155
+  "id": 238
  },
  {
   "lines": [
@@ -2369,7 +2013,7 @@
   "fileEnding": "java",
   "title": "pfactors",
   "charCount": 234,
-  "id": 156
+  "id": 239
  },
  {
   "lines": [
@@ -2405,7 +2049,7 @@
   "fileEnding": "java",
   "title": "isPythagTriple",
   "charCount": 158,
-  "id": 157
+  "id": 240
  },
  {
   "lines": [
@@ -2449,31 +2093,7 @@
   "fileEnding": "java",
   "title": "sumOfDigits",
   "charCount": 195,
-  "id": 158
- },
- {
-  "lines": [
-   {
-    "content": "public static int sumOfDigitsRecursion(int number) {",
-    "indent": 0
-   },
-   {
-    "content": "number = number < 0 ? -number : number; /* calculate abs value */",
-    "indent": 1
-   },
-   {
-    "content": "return number < 10 ? number : number % 10 + sumOfDigitsRecursion(number / 10);",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "sumOfDigitsRecursion",
-  "charCount": 200,
-  "id": 159
+  "id": 241
  },
  {
   "lines": [
@@ -2517,7 +2137,7 @@
   "fileEnding": "java",
   "title": "sumOfDigitsFast",
   "charCount": 254,
-  "id": 160
+  "id": 242
  },
  {
   "lines": [
@@ -2577,7 +2197,7 @@
   "fileEnding": "java",
   "title": "test",
   "charCount": 363,
-  "id": 161
+  "id": 243
  },
  {
   "lines": [
@@ -2625,7 +2245,7 @@
   "fileEnding": "java",
   "title": "isVampireNumber",
   "charCount": 291,
-  "id": 162
+  "id": 244
  },
  {
   "lines": [
@@ -2701,6 +2321,6 @@
   "fileEnding": "java",
   "title": "splitIntoDigits",
   "charCount": 339,
-  "id": 163
+  "id": 245
  }
 ]
