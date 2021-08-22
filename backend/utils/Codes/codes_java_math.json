@@ -722,54 +722,6 @@
  {
   "lines": [
    {
-    "content": "public Complex() {",
-    "indent": 0
-   },
-   {
-    "content": "real = 0;",
-    "indent": 1
-   },
-   {
-    "content": "img = 0;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "Complex",
-  "charCount": 40,
-  "id": 117
- },
- {
-  "lines": [
-   {
-    "content": "public Complex(double r, double i) {",
-    "indent": 0
-   },
-   {
-    "content": "real = r;",
-    "indent": 1
-   },
-   {
-    "content": "img = i;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "Complex",
-  "charCount": 58,
-  "id": 118
- },
- {
-  "lines": [
-   {
     "content": "public double getReal() {",
     "indent": 0
    },
@@ -785,7 +737,7 @@
   "fileEnding": "java",
   "title": "getReal",
   "charCount": 41,
-  "id": 119
+  "id": 117
  },
  {
   "lines": [
@@ -805,7 +757,7 @@
   "fileEnding": "java",
   "title": "getImaginary",
   "charCount": 45,
-  "id": 120
+  "id": 118
  },
  {
   "lines": [
@@ -837,7 +789,7 @@
   "fileEnding": "java",
   "title": "add",
   "charCount": 138,
-  "id": 121
+  "id": 119
  },
  {
   "lines": [
@@ -869,7 +821,7 @@
   "fileEnding": "java",
   "title": "subtract",
   "charCount": 143,
-  "id": 122
+  "id": 120
  },
  {
   "lines": [
@@ -901,7 +853,7 @@
   "fileEnding": "java",
   "title": "multiply",
   "charCount": 183,
-  "id": 123
+  "id": 121
  },
  {
   "lines": [
@@ -933,7 +885,7 @@
   "fileEnding": "java",
   "title": "multiply",
   "charCount": 133,
-  "id": 124
+  "id": 122
  },
  {
   "lines": [
@@ -965,7 +917,7 @@
   "fileEnding": "java",
   "title": "conjugate",
   "charCount": 119,
-  "id": 125
+  "id": 123
  },
  {
   "lines": [
@@ -985,7 +937,7 @@
   "fileEnding": "java",
   "title": "abs",
   "charCount": 64,
-  "id": 126
+  "id": 124
  },
  {
   "lines": [
@@ -1017,7 +969,7 @@
   "fileEnding": "java",
   "title": "divide",
   "charCount": 229,
-  "id": 127
+  "id": 125
  },
  {
   "lines": [
@@ -1049,7 +1001,7 @@
   "fileEnding": "java",
   "title": "divide",
   "charCount": 131,
-  "id": 128
+  "id": 126
  },
  {
   "lines": [
@@ -1185,7 +1137,7 @@
   "fileEnding": "java",
   "title": "fft",
   "charCount": 834,
-  "id": 129
+  "id": 127
  },
  {
   "lines": [
@@ -1309,7 +1261,7 @@
   "fileEnding": "java",
   "title": "fftBluestein",
   "charCount": 1083,
-  "id": 130
+  "id": 128
  },
  {
   "lines": [
@@ -1333,7 +1285,7 @@
   "fileEnding": "java",
   "title": "isPerfectSquare",
   "charCount": 120,
-  "id": 131
+  "id": 129
  },
  {
   "lines": [
@@ -1353,7 +1305,7 @@
   "fileEnding": "java",
   "title": "isFibonacciNumber",
   "charCount": 149,
-  "id": 132
+  "id": 130
  },
  {
   "lines": [
@@ -1397,7 +1349,7 @@
   "fileEnding": "java",
   "title": "findMax",
   "charCount": 158,
-  "id": 133
+  "id": 131
  },
  {
   "lines": [
@@ -1441,7 +1393,7 @@
   "fileEnding": "java",
   "title": "max",
   "charCount": 313,
-  "id": 134
+  "id": 132
  },
  {
   "lines": [
@@ -1461,7 +1413,7 @@
   "fileEnding": "java",
   "title": "max",
   "charCount": 124,
-  "id": 135
+  "id": 133
  },
  {
   "lines": [
@@ -1505,7 +1457,7 @@
   "fileEnding": "java",
   "title": "findMin",
   "charCount": 158,
-  "id": 136
+  "id": 134
  },
  {
   "lines": [
@@ -1549,7 +1501,7 @@
   "fileEnding": "java",
   "title": "min",
   "charCount": 313,
-  "id": 137
+  "id": 135
  },
  {
   "lines": [
@@ -1569,7 +1521,7 @@
   "fileEnding": "java",
   "title": "min",
   "charCount": 124,
-  "id": 138
+  "id": 136
  },
  {
   "lines": [
@@ -1613,7 +1565,7 @@
   "fileEnding": "java",
   "title": "floor",
   "charCount": 192,
-  "id": 139
+  "id": 137
  },
  {
   "lines": [
@@ -1677,7 +1629,7 @@
   "fileEnding": "java",
   "title": "gcd",
   "charCount": 273,
-  "id": 140
+  "id": 138
  },
  {
   "lines": [
@@ -1709,7 +1661,7 @@
   "fileEnding": "java",
   "title": "gcd",
   "charCount": 152,
-  "id": 141
+  "id": 139
  },
  {
   "lines": [
@@ -1769,7 +1721,7 @@
   "fileEnding": "java",
   "title": "gcd",
   "charCount": 208,
-  "id": 142
+  "id": 140
  },
  {
   "lines": [
@@ -1789,7 +1741,7 @@
   "fileEnding": "java",
   "title": "lucasSeries",
   "charCount": 115,
-  "id": 143
+  "id": 141
  },
  {
   "lines": [
@@ -1837,7 +1789,7 @@
   "fileEnding": "java",
   "title": "lucasSeriesIteration",
   "charCount": 201,
-  "id": 144
+  "id": 142
  },
  {
   "lines": [
@@ -1857,7 +1809,7 @@
   "fileEnding": "java",
   "title": "max",
   "charCount": 63,
-  "id": 145
+  "id": 143
  },
  {
   "lines": [
@@ -1893,7 +1845,7 @@
   "fileEnding": "java",
   "title": "median",
   "charCount": 194,
-  "id": 146
+  "id": 144
  },
  {
   "lines": [
@@ -1913,7 +1865,7 @@
   "fileEnding": "java",
   "title": "min",
   "charCount": 63,
-  "id": 147
+  "id": 145
  },
  {
   "lines": [
@@ -1997,7 +1949,7 @@
   "fileEnding": "java",
   "title": "mode",
   "charCount": 478,
-  "id": 148
+  "id": 146
  },
  {
   "lines": [
@@ -2057,7 +2009,7 @@
   "fileEnding": "java",
   "title": "isPalindrome",
   "charCount": 327,
-  "id": 149
+  "id": 147
  },
  {
   "lines": [
@@ -2125,7 +2077,7 @@
   "fileEnding": "java",
   "title": "parseInt",
   "charCount": 474,
-  "id": 150
+  "id": 148
  },
  {
   "lines": [
@@ -2149,7 +2101,7 @@
   "fileEnding": "java",
   "title": "isPerfectCube",
   "charCount": 121,
-  "id": 151
+  "id": 149
  },
  {
   "lines": [
@@ -2193,7 +2145,7 @@
   "fileEnding": "java",
   "title": "isPerfectNumber",
   "charCount": 196,
-  "id": 152
+  "id": 150
  },
  {
   "lines": [
@@ -2217,7 +2169,7 @@
   "fileEnding": "java",
   "title": "isPerfectSquare",
   "charCount": 120,
-  "id": 153
+  "id": 151
  },
  {
   "lines": [
@@ -2253,7 +2205,7 @@
   "fileEnding": "java",
   "title": "pow",
   "charCount": 119,
-  "id": 154
+  "id": 152
  },
  {
   "lines": [
@@ -2273,7 +2225,7 @@
   "fileEnding": "java",
   "title": "checkIfPowerOfTwoOrNot",
   "charCount": 115,
-  "id": 155
+  "id": 153
  },
  {
   "lines": [
@@ -2293,7 +2245,7 @@
   "fileEnding": "java",
   "title": "pow",
   "charCount": 80,
-  "id": 156
+  "id": 154
  },
  {
   "lines": [
@@ -2357,7 +2309,7 @@
   "fileEnding": "java",
   "title": "isPrime",
   "charCount": 228,
-  "id": 157
+  "id": 155
  },
  {
   "lines": [
@@ -2417,7 +2369,7 @@
   "fileEnding": "java",
   "title": "pfactors",
   "charCount": 234,
-  "id": 158
+  "id": 156
  },
  {
   "lines": [
@@ -2453,7 +2405,7 @@
   "fileEnding": "java",
   "title": "isPythagTriple",
   "charCount": 158,
-  "id": 159
+  "id": 157
  },
  {
   "lines": [
@@ -2497,7 +2449,7 @@
   "fileEnding": "java",
   "title": "sumOfDigits",
   "charCount": 195,
-  "id": 160
+  "id": 158
  },
  {
   "lines": [
@@ -2521,7 +2473,7 @@
   "fileEnding": "java",
   "title": "sumOfDigitsRecursion",
   "charCount": 200,
-  "id": 161
+  "id": 159
  },
  {
   "lines": [
@@ -2565,7 +2517,7 @@
   "fileEnding": "java",
   "title": "sumOfDigitsFast",
   "charCount": 254,
-  "id": 162
+  "id": 160
  },
  {
   "lines": [
@@ -2625,7 +2577,7 @@
   "fileEnding": "java",
   "title": "test",
   "charCount": 363,
-  "id": 163
+  "id": 161
  },
  {
   "lines": [
@@ -2673,7 +2625,7 @@
   "fileEnding": "java",
   "title": "isVampireNumber",
   "charCount": 291,
-  "id": 164
+  "id": 162
  },
  {
   "lines": [
@@ -2749,6 +2701,6 @@
   "fileEnding": "java",
   "title": "splitIntoDigits",
   "charCount": 339,
-  "id": 165
+  "id": 163
  }
 ]

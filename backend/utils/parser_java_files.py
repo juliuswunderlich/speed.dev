@@ -20,7 +20,7 @@ def extractFunctions(filepath):
                     inMethod = False
                     functions.append(method)
             if not inMethod:
-                if line.strip().startswith(keywords) and line.rstrip()[-1] == "{" and not any(s in line for s in ('main', 'class')):
+                if line.strip().startswith(keywords) and line.rstrip()[-1] == "{" and not any(s in line for s in ('main', 'class')) and len(line.split("(")[0].split()) > 2:
                     method = line.lstrip()
                     indent = getIndent(line)
                     inMethod = True
