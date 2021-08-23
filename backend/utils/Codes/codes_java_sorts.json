@@ -2,34 +2,6 @@
  {
   "lines": [
    {
-    "content": "static void printArray(int arr[]) {",
-    "indent": 0
-   },
-   {
-    "content": "int n = arr.length;",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < n; ++i) System.out.print(arr[i] + \" \");",
-    "indent": 1
-   },
-   {
-    "content": "System.out.println();",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "printArray",
-  "charCount": 140,
-  "id": 100
- },
- {
-  "lines": [
-   {
     "content": "public <T extends Comparable<T>> T[] sort(T[] array) {",
     "indent": 0
    },
@@ -57,7 +29,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 124,
-  "id": 101
+  "id": 200
  },
  {
   "lines": [
@@ -125,7 +97,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 304,
-  "id": 102
+  "id": 201
  },
  {
   "lines": [
@@ -169,7 +141,7 @@
   "fileEnding": "java",
   "title": "max",
   "charCount": 127,
-  "id": 103
+  "id": 202
  },
  {
   "lines": [
@@ -213,12 +185,16 @@
   "fileEnding": "java",
   "title": "min",
   "charCount": 127,
-  "id": 104
+  "id": 203
  },
  {
   "lines": [
    {
     "content": "public <T extends Comparable<T>> T[] sort(T[] array) {",
+    "indent": 0
+   },
+   {
+    "content": "",
     "indent": 0
    },
    {
@@ -320,8 +296,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 553,
-  "id": 105
+  "charCount": 554,
+  "id": 204
  },
  {
   "lines": [
@@ -334,11 +310,23 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "int gap = size;",
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "boolean swapped = true;",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -350,7 +338,15 @@
     "indent": 2
    },
    {
+    "content": "",
+    "indent": 2
+   },
+   {
     "content": "swapped = false;",
+    "indent": 2
+   },
+   {
+    "content": "",
     "indent": 2
    },
    {
@@ -388,13 +384,17 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 309,
-  "id": 106
+  "charCount": 314,
+  "id": 205
  },
  {
   "lines": [
    {
     "content": "public <T extends Comparable<T>> List<T> sort(List<T> list) {",
+    "indent": 0
+   },
+   {
+    "content": "",
     "indent": 0
    },
    {
@@ -406,7 +406,15 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "list.forEach(v -> frequency.put(v, frequency.getOrDefault(v, 0) + 1));",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -430,6 +438,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "return sortedArray;",
     "indent": 1
    },
@@ -440,116 +452,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 399,
-  "id": 107
- },
- {
-  "lines": [
-   {
-    "content": "public <T extends Comparable<T>> T[] sort(T[] arr) {",
-    "indent": 0
-   },
-   {
-    "content": "int n = arr.length;",
-    "indent": 1
-   },
-   {
-    "content": "for (int j = 0; j <= n - 2; j++) {",
-    "indent": 1
-   },
-   {
-    "content": "T item = arr[j];",
-    "indent": 2
-   },
-   {
-    "content": "int pos = j;",
-    "indent": 2
-   },
-   {
-    "content": "for (int i = j + 1; i < n; i++) if (less(arr[i], item)) pos++;",
-    "indent": 2
-   },
-   {
-    "content": "if (pos == j) continue;",
-    "indent": 2
-   },
-   {
-    "content": "while (item.compareTo(arr[pos]) == 0) pos += 1;",
-    "indent": 2
-   },
-   {
-    "content": "if (pos != j) {",
-    "indent": 2
-   },
-   {
-    "content": "item = replace(arr, pos, item);",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "while (pos != j) {",
-    "indent": 2
-   },
-   {
-    "content": "pos = j;",
-    "indent": 3
-   },
-   {
-    "content": "for (int i = j + 1; i < n; i++)",
-    "indent": 3
-   },
-   {
-    "content": "if (less(arr[i], item)) {",
-    "indent": 4
-   },
-   {
-    "content": "pos += 1;",
-    "indent": 5
-   },
-   {
-    "content": "}",
-    "indent": 4
-   },
-   {
-    "content": "while (item.compareTo(arr[pos]) == 0) pos += 1;",
-    "indent": 3
-   },
-   {
-    "content": "if (item != arr[pos]) {",
-    "indent": 3
-   },
-   {
-    "content": "item = replace(arr, pos, item);",
-    "indent": 4
-   },
-   {
-    "content": "}",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "return arr;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "sort",
-  "charCount": 545,
-  "id": 108
+  "charCount": 403,
+  "id": 206
  },
  {
   "lines": [
@@ -602,6 +506,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "return null;",
     "indent": 1
    },
@@ -612,8 +520,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 213,
-  "id": 109
+  "charCount": 214,
+  "id": 207
  },
  {
   "lines": [
@@ -626,11 +534,19 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "@SuppressWarnings(\"unchecked\")",
     "indent": 1
    },
    {
     "content": "Heap<T> heap = new Heap<>(unsorted.toArray((T[]) new Comparable[unsorted.size()]));",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -658,6 +574,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "return sorted;",
     "indent": 1
    },
@@ -668,8 +588,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 395,
-  "id": 110
+  "charCount": 398,
+  "id": 208
  },
  {
   "lines": [
@@ -729,7 +649,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 284,
-  "id": 111
+  "id": 209
  },
  {
   "lines": [
@@ -739,6 +659,10 @@
    },
    {
     "content": "int size = array.length;",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -796,8 +720,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 301,
-  "id": 112
+  "charCount": 302,
+  "id": 210
  },
  {
   "lines": [
@@ -873,131 +797,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 322,
-  "id": 113
- },
- {
-  "lines": [
-   {
-    "content": "public <T extends Comparable<T>> T[] sort(T[] array) {",
-    "indent": 0
-   },
-   {
-    "content": "int length = array.length;",
-    "indent": 1
-   },
-   {
-    "content": "int gap = 1;",
-    "indent": 1
-   },
-   {
-    "content": "while (gap < length / 3) {",
-    "indent": 1
-   },
-   {
-    "content": "gap = 3 * gap + 1;",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "for (; gap > 0; gap /= 3) {",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = gap; i < length; i++) {",
-    "indent": 2
-   },
-   {
-    "content": "int j;",
-    "indent": 3
-   },
-   {
-    "content": "T temp = array[i];",
-    "indent": 3
-   },
-   {
-    "content": "for (j = i; j >= gap && less(temp, array[j - gap]); j -= gap) {",
-    "indent": 3
-   },
-   {
-    "content": "array[j] = array[j - gap];",
-    "indent": 4
-   },
-   {
-    "content": "}",
-    "indent": 3
-   },
-   {
-    "content": "array[j] = temp;",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "return array;",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "sort",
-  "charCount": 364,
-  "id": 114
- },
- {
-  "lines": [
-   {
-    "content": "public interface SortAlgorithm {",
-    "indent": 0
-   },
-   {
-    "content": "",
-    "indent": 0
-   },
-   {
-    "content": "<T extends Comparable<T>> T[] sort(T[] unsorted);",
-    "indent": 1
-   },
-   {
-    "content": "",
-    "indent": 1
-   },
-   {
-    "content": "@SuppressWarnings(\"unchecked\")",
-    "indent": 1
-   },
-   {
-    "content": "default <T extends Comparable<T>> List<T> sort(List<T> unsorted) {",
-    "indent": 1
-   },
-   {
-    "content": "return Arrays.asList(sort(unsorted.toArray((T[]) new Comparable[unsorted.size()])));",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "{",
-  "charCount": 272,
-  "id": 115
+  "id": 211
  },
  {
   "lines": [
@@ -1029,7 +829,35 @@
   "fileEnding": "java",
   "title": "swap",
   "charCount": 135,
-  "id": 116
+  "id": 212
+ },
+ {
+  "lines": [
+   {
+    "content": "static void print(List<?> toPrint) {",
+    "indent": 0
+   },
+   {
+    "content": "toPrint.stream().map(Object::toString).map(str -> str + \" \").forEach(System.out::print);",
+    "indent": 1
+   },
+   {
+    "content": "",
+    "indent": 1
+   },
+   {
+    "content": "System.out.println();",
+    "indent": 1
+   },
+   {
+    "content": "}",
+    "indent": 0
+   }
+  ],
+  "fileEnding": "java",
+  "title": "print",
+  "charCount": 151,
+  "id": 213
  },
  {
   "lines": [
@@ -1057,7 +885,7 @@
   "fileEnding": "java",
   "title": "flip",
   "charCount": 135,
-  "id": 117
+  "id": 214
  },
  {
   "lines": [
@@ -1109,12 +937,16 @@
   "fileEnding": "java",
   "title": "insertion_sort",
   "charCount": 273,
-  "id": 118
+  "id": 215
  },
  {
   "lines": [
    {
     "content": "public void merge_runs(int array[], int start, int mid, int end) {",
+    "indent": 0
+   },
+   {
+    "content": "",
     "indent": 0
    },
    {
@@ -1130,11 +962,19 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "for (i = 0; i < first_array_size; i++) array1[i] = array[start + i];",
     "indent": 1
    },
    {
     "content": "for (i = 0; i < second_array_size; i++) array2[i] = array[mid + 1 + i];",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1147,6 +987,10 @@
    },
    {
     "content": "k = start;",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1190,6 +1034,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "while (i < first_array_size) {",
     "indent": 1
    },
@@ -1207,6 +1055,10 @@
    },
    {
     "content": "}",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1236,195 +1088,7 @@
   ],
   "fileEnding": "java",
   "title": "merge_runs",
-  "charCount": 701,
-  "id": 119
- },
- {
-  "lines": [
-   {
-    "content": "public void algorithm() {",
-    "indent": 0
-   },
-   {
-    "content": "System.out.println(\"Before sorting the array: \");",
-    "indent": 1
-   },
-   {
-    "content": "this.showArrayElements();",
-    "indent": 1
-   },
-   {
-    "content": "System.out.println();",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < this.array_length; i += this.RUN)",
-    "indent": 1
-   },
-   {
-    "content": "this.insertion_sort(this.array, i, Math.min(i + this.RUN, (this.array_length - 1)));",
-    "indent": 2
-   },
-   {
-    "content": "for (int split = this.RUN; split < this.array_length; split = 2 * split) {",
-    "indent": 1
-   },
-   {
-    "content": "for (int start_idx = 0; start_idx < this.array_length; start_idx += 2 * split) {",
-    "indent": 2
-   },
-   {
-    "content": "int mid = start_idx + split - 1;",
-    "indent": 3
-   },
-   {
-    "content": "int end_idx = Math.min((start_idx + 2 * split - 1), (this.array_length - 1));",
-    "indent": 3
-   },
-   {
-    "content": "this.merge_runs(this.array, start_idx, mid, end_idx);",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "System.out.println(\"After sorting the array: \");",
-    "indent": 1
-   },
-   {
-    "content": "this.showArrayElements();",
-    "indent": 1
-   },
-   {
-    "content": "System.out.println();",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "algorithm",
-  "charCount": 687,
-  "id": 120
- },
- {
-  "lines": [
-   {
-    "content": "public void showArrayElements() {",
-    "indent": 0
-   },
-   {
-    "content": "for (int i = 0; i < this.array.length; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "System.out.print(this.array[i] + \" \");",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "System.out.println();",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "showArrayElements",
-  "charCount": 145,
-  "id": 121
- },
- {
-  "lines": [
-   {
-    "content": "static void test() {",
-    "indent": 0
-   },
-   {
-    "content": "int[] array = {4, 1, 3, 17, 12, 11, 8};",
-    "indent": 1
-   },
-   {
-    "content": "TimSort sorterObj1 = new TimSort();",
-    "indent": 1
-   },
-   {
-    "content": "TimSort sorterObj2 = new TimSort(50);",
-    "indent": 1
-   },
-   {
-    "content": "TimSort sorterObj3 = new TimSort(array);",
-    "indent": 1
-   },
-   {
-    "content": "sorterObj1.algorithm();",
-    "indent": 1
-   },
-   {
-    "content": "sorterObj2.algorithm();",
-    "indent": 1
-   },
-   {
-    "content": "sorterObj3.algorithm();",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < sorterObj1.array_length - 1; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "assert ((sorterObj1.array[i] <= sorterObj1.array[i + 1])) : \"Array is not sorted\";",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < sorterObj2.array_length - 1; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "assert ((sorterObj2.array[i] <= sorterObj2.array[i + 1])) : \"Array is not sorted\";",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < sorterObj3.array_length - 1; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "assert ((sorterObj3.array[i] <= sorterObj3.array[i + 1])) : \"Array is not sorted\";",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "test",
-  "charCount": 673,
-  "id": 122
+  "charCount": 707,
+  "id": 216
  }
 ]

@@ -1,9 +1,9 @@
 from os import listdir
-import re
 import json
 
-INPUT = 'C:/Users/Niklas/code/Java/Maths/'
-OUTPUT = 'Codes/codes_java_math.json'
+INPUT = 'C:/Users/Niklas/code/Java/Sorts/'
+OUTPUT = 'Codes/codes_java_sorts.json'
+START_ID = 200
 TAB_SIZE = 2
 
 def extractFunctions(filepath):
@@ -11,28 +11,45 @@ def extractFunctions(filepath):
     functions = []
     with open(filepath, 'r') as file:
         
-        inMethod = False
+        function = ""
+        inFunction = False
+        inBlockComment = False
         indent = 0
         for line in file:
-            if inMethod:
-                method += line[indent:]
+            #ignore block comments
+            if line.lstrip().startswith('/*'):
+                inBlockComment = True
+                continue
+            if inBlockComment:
+                if line.lstrip().startswith('*/'):
+                    inBlockComment = False
+                continue
+
+            if inFunction:
+                #non-empty line
+                if line.strip():
+                    function += line[indent:]                    
+                else:
+                    function += "\n"
+
+                #end of function is reached if indent is equal to beginning
                 if getIndent(line) == indent:
-                    method = method.rstrip()
-                    inMethod = False
-                    if len(method.split('\n')) >= 5:
-                        functions.append(method)
-            if not inMethod:
-                if line.strip().startswith(keywords) and line.rstrip()[-1] == "{" and not any(s in line for s in ('main', 'class')) and len(line.split("(")[0].split()) > 2:
-                    method = line.lstrip()
+                    function = function.rstrip()
+                    inFunction = False
+                    if len(function.split('\n')) >= 5:
+                        functions.append(function)
+            if not inFunction:
+                if line.strip().startswith(keywords) and line.rstrip()[-1] == "{" and not any(s in line for s in ('main', 'class', 'interface')) and len(line.split("(")[0].split()) > 2:
+                    function = line.lstrip()
                     indent = getIndent(line)
-                    inMethod = True
-    
+                    inFunction = True
+
     return functions
 
 
 def parseFiles(path):
     Codes = []
-    code_id = 200
+    code_id = START_ID
     for filename in listdir(path):
         functions = extractFunctions(path + filename)
         for f in functions:

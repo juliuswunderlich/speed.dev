@@ -41,7 +41,7 @@
   "fileEnding": "java",
   "title": "absMax",
   "charCount": 236,
-  "id": 200
+  "id": 100
  },
  {
   "lines": [
@@ -85,7 +85,7 @@
   "fileEnding": "java",
   "title": "absMin",
   "charCount": 236,
-  "id": 201
+  "id": 101
  },
  {
   "lines": [
@@ -129,93 +129,25 @@
   "fileEnding": "java",
   "title": "aliquotSum",
   "charCount": 162,
-  "id": 202
+  "id": 102
  },
  {
   "lines": [
    {
-    "content": "static void findAllInRange(int startValue, int stopValue) {",
+    "content": "static boolean isAmicableNumber(int numberOne, int numberTwo) {",
     "indent": 0
    },
    {
-    "content": "StringBuilder res = new StringBuilder();",
+    "content": "",
+    "indent": 0
+   },
+   {
+    "content": "return ((recursiveCalcOfDividerSum(numberOne, numberOne) == numberTwo",
     "indent": 1
    },
    {
-    "content": "int countofRes = 0;",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = startValue; i < stopValue; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "for (int j = i + 1; j <= stopValue; j++) {",
-    "indent": 2
-   },
-   {
-    "content": "if (isAmicableNumber(i, j)) {",
+    "content": "&& numberOne == recursiveCalcOfDividerSum(numberTwo, numberTwo)));",
     "indent": 3
-   },
-   {
-    "content": "countofRes++;",
-    "indent": 4
-   },
-   {
-    "content": "res.append(\"\" + countofRes + \": = ( \" + i + \",\" + j + \")\" + \"\\t\");",
-    "indent": 4
-   },
-   {
-    "content": "}",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "res.insert(",
-    "indent": 1
-   },
-   {
-    "content": "0,",
-    "indent": 3
-   },
-   {
-    "content": "\"Int Range of \"",
-    "indent": 3
-   },
-   {
-    "content": "+ startValue",
-    "indent": 5
-   },
-   {
-    "content": "+ \" till \"",
-    "indent": 5
-   },
-   {
-    "content": "+ stopValue",
-    "indent": 5
-   },
-   {
-    "content": "+ \" there are \"",
-    "indent": 5
-   },
-   {
-    "content": "+ countofRes",
-    "indent": 5
-   },
-   {
-    "content": "+ \" Amicable_numbers.These are \\n \");",
-    "indent": 5
-   },
-   {
-    "content": "System.out.println(res.toString());",
-    "indent": 1
    },
    {
     "content": "}",
@@ -223,14 +155,18 @@
    }
   ],
   "fileEnding": "java",
-  "title": "findAllInRange",
-  "charCount": 500,
-  "id": 203
+  "title": "isAmicableNumber",
+  "charCount": 204,
+  "id": 103
  },
  {
   "lines": [
    {
     "content": "static int recursiveCalcOfDividerSum(int number, int div) {",
+    "indent": 0
+   },
+   {
+    "content": "",
     "indent": 0
    },
    {
@@ -268,8 +204,8 @@
   ],
   "fileEnding": "java",
   "title": "recursiveCalcOfDividerSum",
-  "charCount": 233,
-  "id": 204
+  "charCount": 234,
+  "id": 104
  },
  {
   "lines": [
@@ -305,7 +241,7 @@
   "fileEnding": "java",
   "title": "average",
   "charCount": 145,
-  "id": 205
+  "id": 105
  },
  {
   "lines": [
@@ -341,7 +277,7 @@
   "fileEnding": "java",
   "title": "average",
   "charCount": 152,
-  "id": 206
+  "id": 106
  },
  {
   "lines": [
@@ -393,7 +329,7 @@
   "fileEnding": "java",
   "title": "binPow",
   "charCount": 144,
-  "id": 207
+  "id": 107
  },
  {
   "lines": [
@@ -421,7 +357,7 @@
   "fileEnding": "java",
   "title": "test",
   "charCount": 177,
-  "id": 208
+  "id": 108
  },
  {
   "lines": [
@@ -465,7 +401,7 @@
   "fileEnding": "java",
   "title": "ceil",
   "charCount": 193,
-  "id": 209
+  "id": 109
  },
  {
   "lines": [
@@ -497,7 +433,7 @@
   "fileEnding": "java",
   "title": "factorial",
   "charCount": 165,
-  "id": 210
+  "id": 110
  },
  {
   "lines": [
@@ -510,27 +446,7 @@
     "indent": 1
    },
    {
-    "content": "The discrete convolution of two signals A and B is defined as:",
-    "indent": 1
-   },
-   {
-    "content": "A.length",
-    "indent": 4
-   },
-   {
-    "content": "C[i] = \u00ce\u00a3 (A[k]*B[i-k])",
-    "indent": 1
-   },
-   {
-    "content": "k=0",
-    "indent": 4
-   },
-   {
-    "content": "It's obvious that:  0 <= k <= A.length , 0 <= i <= A.length + B.length - 2  and  0 <= i-k <= B.length - 1",
-    "indent": 1
-   },
-   {
-    "content": "From the last inequality we get that:  i - B.length + 1 <= k <= i and thus we get the conditions below.",
+    "content": "",
     "indent": 1
    },
    {
@@ -543,6 +459,10 @@
    },
    {
     "content": "int k = Math.max(i - B.length + 1, 0);",
+    "indent": 2
+   },
+   {
+    "content": "",
     "indent": 2
    },
    {
@@ -566,6 +486,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "return convolved;",
     "indent": 1
    },
@@ -576,8 +500,8 @@
   ],
   "fileEnding": "java",
   "title": "convolution",
-  "charCount": 629,
-  "id": 211
+  "charCount": 322,
+  "id": 111
  },
  {
   "lines": [
@@ -621,7 +545,7 @@
   "fileEnding": "java",
   "title": "factorial",
   "charCount": 198,
-  "id": 212
+  "id": 112
  },
  {
   "lines": [
@@ -653,7 +577,7 @@
   "fileEnding": "java",
   "title": "factorial",
   "charCount": 165,
-  "id": 213
+  "id": 113
  },
  {
   "lines": [
@@ -685,7 +609,7 @@
   "fileEnding": "java",
   "title": "add",
   "charCount": 138,
-  "id": 214
+  "id": 114
  },
  {
   "lines": [
@@ -717,7 +641,7 @@
   "fileEnding": "java",
   "title": "subtract",
   "charCount": 143,
-  "id": 215
+  "id": 115
  },
  {
   "lines": [
@@ -749,7 +673,7 @@
   "fileEnding": "java",
   "title": "multiply",
   "charCount": 183,
-  "id": 216
+  "id": 116
  },
  {
   "lines": [
@@ -781,7 +705,7 @@
   "fileEnding": "java",
   "title": "multiply",
   "charCount": 133,
-  "id": 217
+  "id": 117
  },
  {
   "lines": [
@@ -813,7 +737,7 @@
   "fileEnding": "java",
   "title": "conjugate",
   "charCount": 119,
-  "id": 218
+  "id": 118
  },
  {
   "lines": [
@@ -845,7 +769,7 @@
   "fileEnding": "java",
   "title": "divide",
   "charCount": 229,
-  "id": 219
+  "id": 119
  },
  {
   "lines": [
@@ -877,267 +801,7 @@
   "fileEnding": "java",
   "title": "divide",
   "charCount": 131,
-  "id": 220
- },
- {
-  "lines": [
-   {
-    "content": "public static void fft(ArrayList<Complex> x, boolean inverse) {",
-    "indent": 0
-   },
-   {
-    "content": "paddingPowerOfTwo(x);",
-    "indent": 1
-   },
-   {
-    "content": "int N = x.size();",
-    "indent": 1
-   },
-   {
-    "content": "int log2N = 0;",
-    "indent": 1
-   },
-   {
-    "content": "while ((1 << log2N) < N) log2N++;",
-    "indent": 1
-   },
-   {
-    "content": "int reverse;",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < N; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "reverse = reverseBits(i, log2N);",
-    "indent": 2
-   },
-   {
-    "content": "if (i < reverse) Collections.swap(x, i, reverse);",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "int direction = inverse ? -1 : 1;",
-    "indent": 1
-   },
-   {
-    "content": "for (int len = 2; len <= N; len *= 2) {",
-    "indent": 1
-   },
-   {
-    "content": "double angle = -2 * Math.PI / len * direction;",
-    "indent": 2
-   },
-   {
-    "content": "Complex wlen = new Complex(Math.cos(angle), Math.sin(angle));",
-    "indent": 2
-   },
-   {
-    "content": "for (int i = 0; i < N; i += len) {",
-    "indent": 2
-   },
-   {
-    "content": "Complex w = new Complex(1, 0);",
-    "indent": 3
-   },
-   {
-    "content": "for (int j = 0; j < len / 2; j++) {",
-    "indent": 3
-   },
-   {
-    "content": "Complex u = x.get(i + j);",
-    "indent": 4
-   },
-   {
-    "content": "Complex v = w.multiply(x.get(i + j + len / 2));",
-    "indent": 4
-   },
-   {
-    "content": "x.set(i + j, u.add(v));",
-    "indent": 4
-   },
-   {
-    "content": "x.set(i + j + len / 2, u.subtract(v));",
-    "indent": 4
-   },
-   {
-    "content": "w = w.multiply(wlen);",
-    "indent": 4
-   },
-   {
-    "content": "}",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "if (inverse) {",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < x.size(); i++) {",
-    "indent": 2
-   },
-   {
-    "content": "Complex z = x.get(i);",
-    "indent": 3
-   },
-   {
-    "content": "x.set(i, z.divide(N));",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "fft",
-  "charCount": 834,
-  "id": 221
- },
- {
-  "lines": [
-   {
-    "content": "public static void fftBluestein(ArrayList<FFT.Complex> x, boolean inverse) {",
-    "indent": 0
-   },
-   {
-    "content": "int N = x.size();",
-    "indent": 1
-   },
-   {
-    "content": "int bnSize = 2 * N - 1;",
-    "indent": 1
-   },
-   {
-    "content": "int direction = inverse ? -1 : 1;",
-    "indent": 1
-   },
-   {
-    "content": "ArrayList<FFT.Complex> an = new ArrayList<>();",
-    "indent": 1
-   },
-   {
-    "content": "ArrayList<FFT.Complex> bn = new ArrayList<>();",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < bnSize; i++) bn.add(new FFT.Complex());",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < N; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "double angle = (i - N + 1) * (i - N + 1) * Math.PI / N * direction;",
-    "indent": 2
-   },
-   {
-    "content": "bn.set(i, new FFT.Complex(Math.cos(angle), Math.sin(angle)));",
-    "indent": 2
-   },
-   {
-    "content": "bn.set(bnSize - i - 1, new FFT.Complex(Math.cos(angle), Math.sin(angle)));",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < N; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "double angle = -i * i * Math.PI / N * direction;",
-    "indent": 2
-   },
-   {
-    "content": "an.add(x.get(i).multiply(new FFT.Complex(Math.cos(angle), Math.sin(angle))));",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "ArrayList<FFT.Complex> convolution = ConvolutionFFT.convolutionFFT(an, bn);",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < N; i++) {",
-    "indent": 1
-   },
-   {
-    "content": "double angle = -1 * i * i * Math.PI / N * direction;",
-    "indent": 2
-   },
-   {
-    "content": "FFT.Complex bk = new FFT.Complex(Math.cos(angle), Math.sin(angle));",
-    "indent": 2
-   },
-   {
-    "content": "x.set(i, bk.multiply(convolution.get(i + N - 1)));",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "if (inverse) {",
-    "indent": 1
-   },
-   {
-    "content": "for (int i = 0; i < N; i++) {",
-    "indent": 2
-   },
-   {
-    "content": "FFT.Complex z = x.get(i);",
-    "indent": 3
-   },
-   {
-    "content": "x.set(i, z.divide(N));",
-    "indent": 3
-   },
-   {
-    "content": "}",
-    "indent": 2
-   },
-   {
-    "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "fftBluestein",
-  "charCount": 1083,
-  "id": 222
+  "id": 120
  },
  {
   "lines": [
@@ -1181,7 +845,7 @@
   "fileEnding": "java",
   "title": "findMax",
   "charCount": 158,
-  "id": 223
+  "id": 121
  },
  {
   "lines": [
@@ -1202,7 +866,15 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "int mid = (low + high) >>> 1;",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1211,6 +883,10 @@
    },
    {
     "content": "int rightMax = max(array, mid + 1, high); // get max in [mid+1, high]",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1224,8 +900,8 @@
   ],
   "fileEnding": "java",
   "title": "max",
-  "charCount": 313,
-  "id": 224
+  "charCount": 316,
+  "id": 122
  },
  {
   "lines": [
@@ -1269,7 +945,7 @@
   "fileEnding": "java",
   "title": "findMin",
   "charCount": 158,
-  "id": 225
+  "id": 123
  },
  {
   "lines": [
@@ -1290,7 +966,15 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "int mid = (low + high) >>> 1;",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1299,6 +983,10 @@
    },
    {
     "content": "int rightMin = min(array, mid + 1, high); // get min in [mid+1, high]",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1312,8 +1000,8 @@
   ],
   "fileEnding": "java",
   "title": "min",
-  "charCount": 313,
-  "id": 226
+  "charCount": 316,
+  "id": 124
  },
  {
   "lines": [
@@ -1357,7 +1045,7 @@
   "fileEnding": "java",
   "title": "floor",
   "charCount": 192,
-  "id": 227
+  "id": 125
  },
  {
   "lines": [
@@ -1378,6 +1066,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "if (num1 == 0 || num2 == 0) {",
     "indent": 1
    },
@@ -1387,6 +1079,10 @@
    },
    {
     "content": "}",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1420,8 +1116,8 @@
   ],
   "fileEnding": "java",
   "title": "gcd",
-  "charCount": 273,
-  "id": 228
+  "charCount": 275,
+  "id": 126
  },
  {
   "lines": [
@@ -1442,6 +1138,10 @@
     "indent": 2
    },
    {
+    "content": "",
+    "indent": 2
+   },
+   {
     "content": "return result;",
     "indent": 1
    },
@@ -1452,13 +1152,17 @@
   ],
   "fileEnding": "java",
   "title": "gcd",
-  "charCount": 152,
-  "id": 229
+  "charCount": 153,
+  "id": 127
  },
  {
   "lines": [
    {
     "content": "public static int gcd(int a, int b) {",
+    "indent": 0
+   },
+   {
+    "content": "",
     "indent": 0
    },
    {
@@ -1474,6 +1178,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "if (a == 0 || b == 0) {",
     "indent": 1
    },
@@ -1483,6 +1191,10 @@
    },
    {
     "content": "}",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1512,8 +1224,8 @@
   ],
   "fileEnding": "java",
   "title": "gcd",
-  "charCount": 208,
-  "id": 230
+  "charCount": 211,
+  "id": 128
  },
  {
   "lines": [
@@ -1561,7 +1273,7 @@
   "fileEnding": "java",
   "title": "lucasSeriesIteration",
   "charCount": 201,
-  "id": 231
+  "id": 129
  },
  {
   "lines": [
@@ -1597,7 +1309,7 @@
   "fileEnding": "java",
   "title": "median",
   "charCount": 194,
-  "id": 232
+  "id": 130
  },
  {
   "lines": [
@@ -1606,11 +1318,23 @@
     "indent": 0
    },
    {
+    "content": "",
+    "indent": 0
+   },
+   {
     "content": "if (numbers.length == 0) return null;",
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "HashMap<Integer, Integer> count = new HashMap<>();",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1622,11 +1346,23 @@
     "indent": 2
    },
    {
+    "content": "",
+    "indent": 2
+   },
+   {
     "content": "count.put(num, count.get(num) + 1);",
     "indent": 3
    },
    {
+    "content": "",
+    "indent": 3
+   },
+   {
     "content": "} else {",
+    "indent": 2
+   },
+   {
+    "content": "",
     "indent": 2
    },
    {
@@ -1642,11 +1378,19 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "int max = Collections.max(count.values());",
     "indent": 1
    },
    {
     "content": "ArrayList<Integer> modes = new ArrayList<>();",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -1680,8 +1424,8 @@
   ],
   "fileEnding": "java",
   "title": "mode",
-  "charCount": 478,
-  "id": 233
+  "charCount": 486,
+  "id": 131
  },
  {
   "lines": [
@@ -1741,7 +1485,7 @@
   "fileEnding": "java",
   "title": "isPalindrome",
   "charCount": 327,
-  "id": 234
+  "id": 132
  },
  {
   "lines": [
@@ -1809,7 +1553,7 @@
   "fileEnding": "java",
   "title": "parseInt",
   "charCount": 474,
-  "id": 235
+  "id": 133
  },
  {
   "lines": [
@@ -1853,7 +1597,7 @@
   "fileEnding": "java",
   "title": "isPerfectNumber",
   "charCount": 196,
-  "id": 236
+  "id": 134
  },
  {
   "lines": [
@@ -1889,7 +1633,7 @@
   "fileEnding": "java",
   "title": "pow",
   "charCount": 119,
-  "id": 237
+  "id": 135
  },
  {
   "lines": [
@@ -1953,12 +1697,16 @@
   "fileEnding": "java",
   "title": "isPrime",
   "charCount": 228,
-  "id": 238
+  "id": 136
  },
  {
   "lines": [
    {
     "content": "public static void pfactors(int n) {",
+    "indent": 0
+   },
+   {
+    "content": "",
     "indent": 0
    },
    {
@@ -1975,6 +1723,10 @@
    },
    {
     "content": "}",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -2002,6 +1754,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "if (n > 2) System.out.print(n);",
     "indent": 1
    },
@@ -2012,8 +1768,8 @@
   ],
   "fileEnding": "java",
   "title": "pfactors",
-  "charCount": 234,
-  "id": 239
+  "charCount": 237,
+  "id": 137
  },
  {
   "lines": [
@@ -2049,7 +1805,7 @@
   "fileEnding": "java",
   "title": "isPythagTriple",
   "charCount": 158,
-  "id": 240
+  "id": 138
  },
  {
   "lines": [
@@ -2093,7 +1849,7 @@
   "fileEnding": "java",
   "title": "sumOfDigits",
   "charCount": 195,
-  "id": 241
+  "id": 139
  },
  {
   "lines": [
@@ -2137,7 +1893,7 @@
   "fileEnding": "java",
   "title": "sumOfDigitsFast",
   "charCount": 254,
-  "id": 242
+  "id": 140
  },
  {
   "lines": [
@@ -2151,6 +1907,10 @@
    },
    {
     "content": "StringBuilder res = new StringBuilder();",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -2196,13 +1956,17 @@
   ],
   "fileEnding": "java",
   "title": "test",
-  "charCount": 363,
-  "id": 243
+  "charCount": 364,
+  "id": 141
  },
  {
   "lines": [
    {
     "content": "static boolean isVampireNumber(int a, int b, boolean noPseudoVamireNumbers) {",
+    "indent": 0
+   },
+   {
+    "content": "",
     "indent": 0
    },
    {
@@ -2226,11 +1990,19 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "String mulDigits = splitIntoDigits(a * b, 0);",
     "indent": 1
    },
    {
     "content": "String faktorDigits = splitIntoDigits(a, b);",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -2244,8 +2016,8 @@
   ],
   "fileEnding": "java",
   "title": "isVampireNumber",
-  "charCount": 291,
-  "id": 244
+  "charCount": 294,
+  "id": 142
  },
  {
   "lines": [
@@ -2254,7 +2026,15 @@
     "indent": 0
    },
    {
+    "content": "",
+    "indent": 0
+   },
+   {
     "content": "StringBuilder res = new StringBuilder();",
+    "indent": 1
+   },
+   {
+    "content": "",
     "indent": 1
    },
    {
@@ -2310,6 +2090,10 @@
     "indent": 1
    },
    {
+    "content": "",
+    "indent": 1
+   },
+   {
     "content": "return res.toString();",
     "indent": 1
    },
@@ -2320,7 +2104,7 @@
   ],
   "fileEnding": "java",
   "title": "splitIntoDigits",
-  "charCount": 339,
-  "id": 245
+  "charCount": 342,
+  "id": 143
  }
 ]
