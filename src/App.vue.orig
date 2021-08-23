@@ -1,15 +1,14 @@
 <template>
     <div id="header">
       <img id="logo" src="@/assets/logo.svg" alt="Logo" />
-      <router-link to="/">Home</router-link>
-      <router-link id="login" to="/login">Login</router-link>
+      <span id="login">Login</span>
     </div>
     <div id="nav">
       <img src="@/assets/home.svg" alt="Home" />
       <img src="@/assets/stats.svg" alt="Statisctics" />
       <img src="@/assets/settings.svg" alt="Settings" />
     </div>
-    <router-view></router-view>
+    <CodeDisplay></CodeDisplay>
     <div id="footer">
       <ul>
         <li><a href="#"> Impressum </a></li>
