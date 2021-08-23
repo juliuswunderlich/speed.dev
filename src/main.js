@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { firebase } from '@firebase/app'
 import '@firebase/firestore'
-import { CodeDisplay } from './components/CodeDisplay'
-import VueRouter from 'vue-router'
+import CodeDisplay from './components/CodeDisplay'
+// hella clean import <3
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 
 //import { Login } from './components/Login'
@@ -37,11 +38,11 @@ const routes = [
 
 
 const app = createApp(App);
-app.use(VueRouter)
+//app.use(VueRouter)
 
-const router = VueRouter.createRouter({
+const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-  history: VueRouter.createWebHashHistory(),
+  history : createWebHashHistory(),
   routes, // short for `routes: routes`
 })
 
