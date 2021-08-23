@@ -22,12 +22,10 @@
 </template>
 
 <script>
-import CodeDisplay from "./components/CodeDisplay.vue";
 
 export default {
   name: "App",
   components: {
-    CodeDisplay,
   },
 };
 </script>
