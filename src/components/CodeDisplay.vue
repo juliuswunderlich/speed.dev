@@ -366,7 +366,7 @@ export default {
 }
 #wrapper {
   font-family: "Hack", monospace;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: white;
 
   display: grid;
@@ -379,6 +379,10 @@ export default {
   left: 50%;
   /* center snippet without line numbers -> deduct half the width of #line-numbers (50px) */
   transform: translate(calc(-50% - 25px), -50%);
+
+  @media only screen and (max-width: 1500px) {
+    font-size: 1rem;
+  }
 }
 #logo {
   max-width: 40px;
@@ -397,9 +401,10 @@ export default {
 }
 #code-field {
   grid-area: 1/ 2/ 2/ 6;
-  height: 22em;
-  width: 65ch;
+  height: 30em;
+  width: 100ch;
   padding: 0.5em;
+  overflow: hidden;
 
   border-color: #333;
   border-width: 2px;
