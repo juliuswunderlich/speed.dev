@@ -75,6 +75,8 @@ export default {
       texts: [],
       text: "",
       INDENT_EM: 1.6,
+      START_SCROLL_AFTER_LINE: 2,
+      scrolledDown: 0,
 
       //typing logic
       currentLine: 0,
@@ -105,7 +107,7 @@ export default {
         return "100%";
       } else if (line_index == this.currentLine + 1) {
         return "50%";
-        }else {
+      } else {
         return "10%";
       }
     },
@@ -129,23 +131,12 @@ export default {
         if (this.currentLine !== 0 || this.cursorPosition !== 0) {
           this.reverseCursor();
         }
-      } else if (key === "Enter") {
+      } else if (key === "Enter" || key.length === 1) {
         if (!this.timerRunning) {
           this.startTimer();
         }
-        this.keysTyped[this.currentLine].push("↵");
-        this.charsTyped[this.currentLine].push("↵");
-        if (this.cursorPosition >= this.currentLineLength - 1) {
-          this.newLine();
-        } else {
-          this.cursorPosition++;
-        }
-      } else if (key.length === 1) {
-        if (!this.timerRunning) {
-          this.startTimer();
-        }
-        this.charsTyped[this.currentLine].push(key);
-        this.keysTyped[this.currentLine].push(key);
+        this.keysTyped[this.currentLine].push(key === "Enter" ? "↵" : key);
+        this.charsTyped[this.currentLine].push(key === "Enter" ? "↵" : key);
         if (this.cursorPosition >= this.currentLineLength - 1) {
           this.newLine();
         } else {
@@ -199,6 +190,24 @@ export default {
       } else {
         this.currentLine++;
         this.cursorPosition = 0;
+        this.checkScrollForward();
+      }
+    },
+    isLineInCodeField(el) {
+      var rect = el.getBoundingClientRect();
+      var parentRect = el.parentNode.getBoundingClientRect();
+      return rect.top >= parentRect.top && rect.bottom <= parentRect.bottom;
+    },
+    checkScrollForward() {
+      let lastElem = this.lineElements[this.lineElements.length - 1];
+
+      if (!this.isLineInCodeField(lastElem)) {
+        if (this.currentLine > this.START_SCROLL_AFTER_LINE) {
+          this.scrolledDown++;
+          let elemToScrollTo = this.lineElements[this.scrolledDown];
+          elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+          console.log(this.currentLine + "; scroll: " + this.scrolledDown);
+        }
       }
     },
     reverseCursor() {
@@ -206,9 +215,24 @@ export default {
         this.currentLine--;
         this.charsTyped[this.currentLine].pop();
         this.cursorPosition = this.currentLineLength - 1;
+        this.checkScrollBackward();
       } else {
         this.charsTyped[this.currentLine].pop();
         this.cursorPosition--;
+      }
+    },
+    checkScrollBackward() {
+      if(this.scrolledDown == 0) {
+        return;
+      }
+      if (
+        this.currentLine <=
+        this.scrolledDown + this.START_SCROLL_AFTER_LINE
+      ) {
+        this.scrolledDown--;
+        let elemToScrollTo = this.lineElements[this.scrolledDown];
+        elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+        console.log(this.currentLine + "; scroll: " + this.scrolledDown);
       }
     },
     snippetFinished() {
@@ -231,6 +255,8 @@ export default {
 
       this.currentLine = 0;
       this.cursorPosition = 0;
+      this.scrolledDown = 0;
+      document.querySelector("#code-field").scrollTo(0, 0);
       this.resetTimer();
       this.displayStats = false;
     },
@@ -285,6 +311,9 @@ export default {
       }
       return list;
     },
+    lineElements() {
+      return document.querySelector("#code-field").children;
+    },
     formattedTime() {
       let minutes = Math.floor(this.secondsTotal / 60);
       let seconds = Math.floor(this.secondsTotal % 60);
@@ -337,6 +366,7 @@ export default {
   created() {
     //add keyListener
     document.onkeydown = this.onkeydown;
+    this.scrolledDown = 0;
 
     // load all snippets for now
     const firestore = this.$firebase.firestore();
@@ -406,7 +436,7 @@ export default {
   height: 30em;
   width: 100ch;
   padding: 0.5em;
-  overflow-y: scroll;
+  overflow-y: hidden;
 
   border-color: #333;
   border-width: 2px;
@@ -446,6 +476,7 @@ export default {
   display: block;
   margin: 0.1em 0;
   white-space: nowrap;
+  scroll-margin: 0.6em;
 }
 
 #info {
