@@ -80,7 +80,7 @@ export default {
       currentLine: 0,
       cursorPosition: 0,
       charsTyped: [],
-      preventDefaultKeys: ["Tab", "/", "'"],
+      preventDefaultKeys: ["Tab", "/", "'", " "],
 
       //timer
       timerRunning: false,
@@ -103,7 +103,9 @@ export default {
       }
       if (line_index <= this.currentLine) {
         return "100%";
-      } else {
+      } else if (line_index == this.currentLine + 1) {
+        return "50%";
+        }else {
         return "10%";
       }
     },
@@ -404,7 +406,7 @@ export default {
   height: 30em;
   width: 100ch;
   padding: 0.5em;
-  overflow: hidden;
+  overflow-y: scroll;
 
   border-color: #333;
   border-width: 2px;
