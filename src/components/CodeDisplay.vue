@@ -10,7 +10,9 @@
         {{ line_number + 1 }}
       </span>
     </div>
-    <div id="code-field">
+    <div id="code-field"
+      :style="{ overflowY: codeFieldScroll }"
+      >
       <span
         id="code-line"
         class="line"
@@ -206,7 +208,6 @@ export default {
           this.scrolledDown++;
           let elemToScrollTo = this.lineElements[this.scrolledDown];
           elemToScrollTo.scrollIntoView({ behavior: "smooth" });
-          console.log(this.currentLine + "; scroll: " + this.scrolledDown);
         }
       }
     },
@@ -232,7 +233,6 @@ export default {
         this.scrolledDown--;
         let elemToScrollTo = this.lineElements[this.scrolledDown];
         elemToScrollTo.scrollIntoView({ behavior: "smooth" });
-        console.log(this.currentLine + "; scroll: " + this.scrolledDown);
       }
     },
     snippetFinished() {
@@ -319,7 +319,9 @@ export default {
       let seconds = Math.floor(this.secondsTotal % 60);
       return minutes + ":" + seconds.toString().padStart(2, "0");
     },
-
+    codeFieldScroll() {
+      return this.displayStats ? 'scroll' : 'hidden';
+    },
     secondsTotal() {
       return this.msRunning / 1000;
     },
@@ -436,7 +438,6 @@ export default {
   height: 30em;
   width: 100ch;
   padding: 0.5em;
-  overflow-y: hidden;
 
   border-color: #333;
   border-width: 2px;
