@@ -10,15 +10,7 @@
       <img src="@/assets/settings.svg" alt="Settings" />
     </div>
     <router-view></router-view>
-      <div id="nav">
-        <img src="@/assets/home.svg" alt="Home" />
-        <img src="@/assets/stats.svg" alt="Statisctics" />
-        <img src="@/assets/settings.svg" alt="Settings" />
-      </div>
-      <span id="login">Login</span>
-    </div>
     
-    <CodeDisplay></CodeDisplay>
     <div id="footer">
       <ul>
         <li><a href="#"> Impressum </a></li>
