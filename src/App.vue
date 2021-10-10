@@ -1,6 +1,15 @@
 <template>
     <div id="header">
       <img id="logo" src="@/assets/logo.svg" alt="Logo" />
+      <router-link to="/">Home</router-link>
+      <router-link id="login" to="/login">Login</router-link>
+    </div>
+    <div id="nav">
+      <img src="@/assets/home.svg" alt="Home" />
+      <img src="@/assets/stats.svg" alt="Statisctics" />
+      <img src="@/assets/settings.svg" alt="Settings" />
+    </div>
+    <router-view></router-view>
       <div id="nav">
         <img src="@/assets/home.svg" alt="Home" />
         <img src="@/assets/stats.svg" alt="Statisctics" />
@@ -22,12 +31,10 @@
 </template>
 
 <script>
-import CodeDisplay from "./components/CodeDisplay.vue";
 
 export default {
   name: "App",
   components: {
-    CodeDisplay,
   },
 };
 </script>

@@ -2,6 +2,12 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { firebase } from '@firebase/app'
 import '@firebase/firestore'
+import CodeDisplay from './components/CodeDisplay'
+// hella clean import <3
+import { createRouter, createWebHashHistory } from 'vue-router'
+
+
+//import { Login } from './components/Login'
 
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
@@ -10,8 +16,39 @@ firebase.initializeApp({
   projectId: "speeddev-b728a",
 });
 
+// 1. Define route components.
+// These can be imported from other files
+
+// 2. Define some routes
+// Each route should map to a component.
+// We'll talk about nested routes later.
+const routes = [
+  { path: '/', component: CodeDisplay }
+  //{ path: '/login', component: Login },
+]
+
+
+// 3. Create the router instance and pass the `routes` option
+// You can pass in additional options here, but let's
+// keep it simple for now.
+
+
+
+// Now the app has started!
+
 
 const app = createApp(App);
+//app.use(VueRouter)
+
+const router = createRouter({
+  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  history : createWebHashHistory(),
+  routes, // short for `routes: routes`
+})
+
+app.use(router)
+// Make sure to _use_ the router instance to make the
+// whole app router-aware.
 
 // make firebase accessible in all Vue components
 app.config.globalProperties.$firebase = firebase;
