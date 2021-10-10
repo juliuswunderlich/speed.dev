@@ -1,9 +1,6 @@
 from os import listdir
 import json
 
-INPUT = 'C:/Users/Niklas/code/Java/Sorts/'
-OUTPUT = 'Codes/codes_java_sorts.json'
-START_ID = 200
 TAB_SIZE = 2
 
 def extractFunctions(filepath):
@@ -30,7 +27,8 @@ def extractFunctions(filepath):
                 if line.strip():
                     function += line[indent:]                    
                 else:
-                    function += "\n"
+                    pass
+                    # function += "\n"
 
                 #end of function is reached if indent is equal to beginning
                 if getIndent(line) == indent:
@@ -47,18 +45,18 @@ def extractFunctions(filepath):
     return functions
 
 
-def parseFiles(path):
+def parseFiles(input_path, output_path, start_id):
     Codes = []
-    code_id = START_ID
-    for filename in listdir(path):
-        functions = extractFunctions(path + filename)
+    code_id = start_id
+    for filename in listdir(input_path):
+        functions = extractFunctions(input_path + filename)
         for f in functions:
             Code = function_to_JSON(f)
             Code['id'] = code_id
             Codes.append(Code)
             code_id += 1
 
-    with open(OUTPUT, 'w') as outfile:
+    with open(output_path, 'w') as outfile:
         json.dump(Codes, outfile, indent=1)
 
 def getIndent(line):
@@ -74,6 +72,11 @@ def function_to_JSON(function_text):
         # ignore comments
         if l.strip().startswith(("//", "/*", "*")):
           continue
+        if "//" in l:
+            l = l.split("//")[0].rstrip()
+        if "/*" in l:
+            l = l.split("/*")[0].rstrip()
+        
         # build and add line structs
         line = {}
         # remove indent and newline char
@@ -101,5 +104,7 @@ def function_to_JSON(function_text):
     return Code
     
     
-if __name__ == '__main__':    
-    parseFiles(INPUT)
+if __name__ == '__main__':
+    code_id = 100
+    parseFiles('C:/Users/Niklas/code/Java/Sorts/', 'Codes/codes_java_sorts.json', 100)
+    parseFiles('C:/Users/Niklas/code/Java/Maths/', 'Codes/codes_java_math.json', 200)

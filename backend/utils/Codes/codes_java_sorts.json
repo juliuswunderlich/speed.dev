@@ -29,7 +29,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 124,
-  "id": 200
+  "id": 100
  },
  {
   "lines": [
@@ -97,7 +97,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 304,
-  "id": 201
+  "id": 101
  },
  {
   "lines": [
@@ -141,7 +141,7 @@
   "fileEnding": "java",
   "title": "max",
   "charCount": 127,
-  "id": 202
+  "id": 102
  },
  {
   "lines": [
@@ -185,16 +185,12 @@
   "fileEnding": "java",
   "title": "min",
   "charCount": 127,
-  "id": 203
+  "id": 103
  },
  {
   "lines": [
    {
     "content": "public <T extends Comparable<T>> T[] sort(T[] array) {",
-    "indent": 0
-   },
-   {
-    "content": "",
     "indent": 0
    },
    {
@@ -296,8 +292,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 554,
-  "id": 204
+  "charCount": 553,
+  "id": 104
  },
  {
   "lines": [
@@ -310,23 +306,11 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "int gap = size;",
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "boolean swapped = true;",
-    "indent": 1
-   },
-   {
-    "content": "",
     "indent": 1
    },
    {
@@ -338,15 +322,7 @@
     "indent": 2
    },
    {
-    "content": "",
-    "indent": 2
-   },
-   {
     "content": "swapped = false;",
-    "indent": 2
-   },
-   {
-    "content": "",
     "indent": 2
    },
    {
@@ -384,17 +360,13 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 314,
-  "id": 205
+  "charCount": 309,
+  "id": 105
  },
  {
   "lines": [
    {
     "content": "public <T extends Comparable<T>> List<T> sort(List<T> list) {",
-    "indent": 0
-   },
-   {
-    "content": "",
     "indent": 0
    },
    {
@@ -406,15 +378,7 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "list.forEach(v -> frequency.put(v, frequency.getOrDefault(v, 0) + 1));",
-    "indent": 1
-   },
-   {
-    "content": "",
     "indent": 1
    },
    {
@@ -438,10 +402,6 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "return sortedArray;",
     "indent": 1
    },
@@ -452,8 +412,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 403,
-  "id": 206
+  "charCount": 399,
+  "id": 106
  },
  {
   "lines": [
@@ -506,10 +466,6 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "return null;",
     "indent": 1
    },
@@ -520,8 +476,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 214,
-  "id": 207
+  "charCount": 213,
+  "id": 107
  },
  {
   "lines": [
@@ -534,10 +490,6 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "@SuppressWarnings(\"unchecked\")",
     "indent": 1
    },
@@ -546,11 +498,7 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
-    "content": "heap.makeMinHeap(0); // make min heap using index 0 as root.",
+    "content": "heap.makeMinHeap(0);",
     "indent": 1
    },
    {
@@ -574,10 +522,6 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "return sorted;",
     "indent": 1
    },
@@ -588,8 +532,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 398,
-  "id": 208
+  "charCount": 355,
+  "id": 108
  },
  {
   "lines": [
@@ -649,7 +593,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 284,
-  "id": 209
+  "id": 109
  },
  {
   "lines": [
@@ -659,10 +603,6 @@
    },
    {
     "content": "int size = array.length;",
-    "indent": 1
-   },
-   {
-    "content": "",
     "indent": 1
    },
    {
@@ -720,8 +660,8 @@
   ],
   "fileEnding": "java",
   "title": "sort",
-  "charCount": 302,
-  "id": 210
+  "charCount": 301,
+  "id": 110
  },
  {
   "lines": [
@@ -797,7 +737,7 @@
   "fileEnding": "java",
   "title": "sort",
   "charCount": 322,
-  "id": 211
+  "id": 111
  },
  {
   "lines": [
@@ -829,35 +769,7 @@
   "fileEnding": "java",
   "title": "swap",
   "charCount": 135,
-  "id": 212
- },
- {
-  "lines": [
-   {
-    "content": "static void print(List<?> toPrint) {",
-    "indent": 0
-   },
-   {
-    "content": "toPrint.stream().map(Object::toString).map(str -> str + \" \").forEach(System.out::print);",
-    "indent": 1
-   },
-   {
-    "content": "",
-    "indent": 1
-   },
-   {
-    "content": "System.out.println();",
-    "indent": 1
-   },
-   {
-    "content": "}",
-    "indent": 0
-   }
-  ],
-  "fileEnding": "java",
-  "title": "print",
-  "charCount": 151,
-  "id": 213
+  "id": 112
  },
  {
   "lines": [
@@ -885,7 +797,7 @@
   "fileEnding": "java",
   "title": "flip",
   "charCount": 135,
-  "id": 214
+  "id": 113
  },
  {
   "lines": [
@@ -937,16 +849,12 @@
   "fileEnding": "java",
   "title": "insertion_sort",
   "charCount": 273,
-  "id": 215
+  "id": 114
  },
  {
   "lines": [
    {
     "content": "public void merge_runs(int array[], int start, int mid, int end) {",
-    "indent": 0
-   },
-   {
-    "content": "",
     "indent": 0
    },
    {
@@ -962,19 +870,11 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "for (i = 0; i < first_array_size; i++) array1[i] = array[start + i];",
     "indent": 1
    },
    {
     "content": "for (i = 0; i < second_array_size; i++) array2[i] = array[mid + 1 + i];",
-    "indent": 1
-   },
-   {
-    "content": "",
     "indent": 1
    },
    {
@@ -987,10 +887,6 @@
    },
    {
     "content": "k = start;",
-    "indent": 1
-   },
-   {
-    "content": "",
     "indent": 1
    },
    {
@@ -1034,10 +930,6 @@
     "indent": 1
    },
    {
-    "content": "",
-    "indent": 1
-   },
-   {
     "content": "while (i < first_array_size) {",
     "indent": 1
    },
@@ -1055,10 +947,6 @@
    },
    {
     "content": "}",
-    "indent": 1
-   },
-   {
-    "content": "",
     "indent": 1
    },
    {
@@ -1088,7 +976,7 @@
   ],
   "fileEnding": "java",
   "title": "merge_runs",
-  "charCount": 707,
-  "id": 216
+  "charCount": 701,
+  "id": 115
  }
 ]
