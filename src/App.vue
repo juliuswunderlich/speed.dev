@@ -1,33 +1,35 @@
 <template>
-    <div id="header">
+  <div id="header">
+    <router-link to="/">
       <img id="logo" src="@/assets/logo.svg" alt="Logo" />
-      <router-link to="/">Home</router-link>
-      <router-link id="login" to="/login">Login</router-link>
-    </div>
+    </router-link>
     <div id="nav">
-      <img src="@/assets/home.svg" alt="Home" />
+      <router-link to="/">
+        <img src="@/assets/home.svg" alt="Home" />
+      </router-link>
       <img src="@/assets/stats.svg" alt="Statisctics" />
       <img src="@/assets/settings.svg" alt="Settings" />
     </div>
-    <router-view></router-view>
-    
-    <div id="footer">
-      <ul>
-        <li><a href="#"> Impressum </a></li>
-        <li>
-          <a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a>
-        </li>
-        <li><a href="https://twitter.com"> Twitter </a></li>
-      </ul>
-    </div>
+    <router-link id="login" to="/login">Login</router-link>
+  </div>
+
+  <router-view></router-view>
+
+  <div id="footer">
+    <ul>
+      <li><a href="#"> Impressum </a></li>
+      <li>
+        <a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a>
+      </li>
+      <li><a href="https://twitter.com"> Twitter </a></li>
+    </ul>
+  </div>
 </template>
 
 <script>
-
 export default {
   name: "App",
-  components: {
-  },
+  components: {},
 };
 </script>
 
@@ -65,6 +67,7 @@ body {
 
 #header {
   display: flex;
+  align-items: center;
   place-content: space-between;
 
   #logo {
@@ -72,7 +75,8 @@ body {
   }
 
   #login {
-    margin: 1em;
+    text-decoration: none;
+    color: #c4c4c4;
 
     &:hover {
       font-weight: bold;
@@ -83,8 +87,8 @@ body {
 
 #nav {
   display: flex;
+  align-items: center;
   flex-direction: row;
-  margin-top: 1em;
 
   img {
     width: 25px;
