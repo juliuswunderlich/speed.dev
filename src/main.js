@@ -3,6 +3,7 @@ import App from './App.vue'
 import { firebase } from '@firebase/app'
 import '@firebase/firestore'
 import CodeDisplay from './components/CodeDisplay'
+import Login from './components/Login'
 // hella clean import <3
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -23,8 +24,8 @@ firebase.initializeApp({
 // Each route should map to a component.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/', component: CodeDisplay }
-  //{ path: '/login', component: Login },
+  { path: '/', component: CodeDisplay },
+  { path: '/login', component: Login }
 ]
 
 
