@@ -3,13 +3,19 @@
     <input type="text" id="email" class="loginField" name="email" placeholder="email" tabindex="0" v-model="email"><br>
     <input type="text" id="pword" class="loginField" name="pword" placeholder="password" v-model="password"><br>
     <input type="submit" value="Submit" @click="handleSubmit">
+    <message-bar type="success" message="This is a huge success guys!"/>
+    <message-bar type="error" message="Oof. An error occured. Bummer."/>
+    <message-bar type="warning" message="Pass auf, Bursche!"/>
+    <message-bar type="info" message="Nur zur Info!"/>
   </form>
 </template>
 
 <script>
+import MessageBar from './MessageBar.vue';
 //import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
+  components: { MessageBar },
   name: "Login",
   data() {
     return {
