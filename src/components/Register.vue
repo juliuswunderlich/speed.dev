@@ -2,8 +2,9 @@
   <form>
     <input type="text" id="email" class="loginField" name="email" placeholder="email" tabindex="0" v-model="email"><br>
     <input type="text" id="pword" class="loginField" name="pword" placeholder="password" v-model="password"><br>
-    <input type="submit" value="Submit" @click="handleSubmit">
+    <input type="submit" value="Register" @click="handleRegister">
   </form>
+  
 </template>
 
 <script>
@@ -18,14 +19,12 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    handleRegister() {
       this.$firebase.auth()
       .createUserWithEmailAndPassword(this.email, this.password)
       .then((userCredential) => {
-          console.log("handle submit called");
           // Signed in 
           const user = userCredential.user;
-          console.log("user: " + user);
           // ...
         })
         .catch((error) => {
