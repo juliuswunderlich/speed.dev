@@ -1,6 +1,6 @@
 <template>
   <form>
-    <input type="text" id="uname" class="loginField" name="uname" placeholder="username" tabindex="0"><br>
+    <input type="text" id="uname" class="loginField" name="uname" placeholder="email" tabindex="0"><br>
     <input type="text" id="pword" class="loginField" name="pword" placeholder="password"><br>
     <input type="submit" value="Submit">
   </form>
