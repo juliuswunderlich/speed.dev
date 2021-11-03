@@ -2,17 +2,16 @@
   <div id="wrapper">
     <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
     <div id="line-numbers">
-      <span
+      <!-- <span
         class="line"
-        v-for="line_number in visibleLines"
-        :key="line_number.id"
+        v-for="(line, line_idx) in text.lines"
+        :key="line.id"
+        :style="{ opacity: getNumberOpacity(line_idx) }"
       >
-        {{ line_number + 1 }}
-      </span>
+        {{ line_idx + 1 }}
+      </span> -->
     </div>
-    <div id="code-field"
-      :style="{ overflowY: codeFieldScroll }"
-      >
+    <div id="code-field" :style="{ overflowY: codeFieldScroll }">
       <span
         id="code-line"
         class="line"
@@ -113,6 +112,16 @@ export default {
         return "10%";
       }
     },
+    getNumberOpacity(line_index) {
+      if (this.displayStats) {
+        return "0.1";
+      }
+      if (line_index <= this.currentLine) {
+        return "1";
+      } else {
+        return "0";
+      }
+    },
     onkeydown(event) {
       let key = event.key;
       if (this.preventDefaultKeys.includes(key)) {
@@ -208,6 +217,8 @@ export default {
           this.scrolledDown++;
           let elemToScrollTo = this.lineElements[this.scrolledDown];
           elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+          // let lineElemToScrollTo = this.lineNumberElements[this.scrolledDown];
+          // lineElemToScrollTo.scrollIntoView({ behavior: "smooth" });
         }
       }
     },
@@ -223,7 +234,7 @@ export default {
       }
     },
     checkScrollBackward() {
-      if(this.scrolledDown == 0) {
+      if (this.scrolledDown == 0) {
         return;
       }
       if (
@@ -233,6 +244,8 @@ export default {
         this.scrolledDown--;
         let elemToScrollTo = this.lineElements[this.scrolledDown];
         elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+        // let lineElemToScrollTo = this.lineNumberElements[this.scrolledDown];
+        // lineElemToScrollTo.scrollIntoView({ behavior: "smooth" });
       }
     },
     snippetFinished() {
@@ -257,6 +270,7 @@ export default {
       this.cursorPosition = 0;
       this.scrolledDown = 0;
       document.querySelector("#code-field").scrollTo(0, 0);
+      document.querySelector("#line-numbers").scrollTo(0, 0);
       this.resetTimer();
       this.displayStats = false;
     },
@@ -304,15 +318,18 @@ export default {
       //TODO
       return "@/assets/" + this.text.lang + ".svg";
     },
-    visibleLines() {
-      let list = [];
-      for (let i = 0; i <= this.currentLine; i++) {
-        list.push(i);
-      }
-      return list;
-    },
+    // visibleLines() {
+    //   let list = [];
+    //   for (let i = 0; i <= this.currentLine; i++) {
+    //     list.push(i);
+    //   }
+    //   return list;
+    // },
     lineElements() {
       return document.querySelector("#code-field").children;
+    },
+    lineNumberElements() {
+      return document.querySelector("#line-numbers").children;
     },
     formattedTime() {
       let minutes = Math.floor(this.secondsTotal / 60);
@@ -320,7 +337,7 @@ export default {
       return minutes + ":" + seconds.toString().padStart(2, "0");
     },
     codeFieldScroll() {
-      return this.displayStats ? 'scroll' : 'hidden';
+      return this.displayStats ? "scroll" : "hidden";
     },
     secondsTotal() {
       return this.msRunning / 1000;
@@ -365,6 +382,14 @@ export default {
       return 100 - (totalErrors / this.numKeysTyped) * 100;
     },
   },
+  mounted() {
+    let codeField = document.querySelector("#code-field");
+    let lineNumbers = document.querySelector("#line-numbers");
+
+    codeField.scroll(function () {
+      lineNumbers.scrollTop(codeField.scrollTop());
+    });
+  },
   created() {
     //add keyListener
     document.onkeydown = this.onkeydown;
@@ -395,6 +420,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+:root {
+  --code-display-height: 30em;
+}
 * {
   box-sizing: border-box;
 }
@@ -427,9 +455,12 @@ export default {
   opacity: 0.5;
 }
 #line-numbers {
+  border: 2px solid transparent;
   text-align: right;
+  height: 10em;
+  overflow-y: hidden;
   opacity: 0.1;
-  padding-top: 0.5em;
+  padding: 0.5em;
   padding-right: 1em;
   grid-area: 1/ 1/ 2/ 2;
 }
