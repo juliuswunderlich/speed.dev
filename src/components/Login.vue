@@ -2,11 +2,40 @@
   <form>
     <input type="text" id="uname" class="loginField" name="uname" placeholder="email" tabindex="0"><br>
     <input type="text" id="pword" class="loginField" name="pword" placeholder="password"><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" @click="createUserWithEmailAndPassword">
   </form>
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+const auth = getAuth();
+
+export default {
+  name: "Login",
+  data() {
+    return {
+
+    };
+  },
+  methods: {
+    handleSubmit() {
+      console.log("handle submit called");
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+    }
+    
+  }
+}
+
 </script>
 
 <style>
