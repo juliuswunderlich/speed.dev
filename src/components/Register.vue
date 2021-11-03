@@ -4,11 +4,10 @@
     <input type="text" id="pword" class="loginField" name="pword" placeholder="password" v-model="password"><br>
     <input type="submit" value="Register" @click="handleRegister">
   </form>
-  
+
 </template>
 
 <script>
-//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   name: "Login",

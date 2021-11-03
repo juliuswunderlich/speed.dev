@@ -1,13 +1,15 @@
 <template>
   <form>
-    <input type="text" id="email" class="loginField" name="email" placeholder="email" tabindex="0" v-model="email"><br>
-    <input type="text" id="pword" class="loginField" name="pword" placeholder="password" v-model="password"><br>
+    <input type="text" id="email" class="loginField" name="email" placeholder="email" tabindex="0" v-model="email">
+    <input type="text" id="pword" class="loginField" name="pword" placeholder="password" v-model="password">
     <input type="submit" value="Submit" @click="handleSubmit">
+    <div id=userMsg>
+      <p class="inline">New user? Go and</p><router-link id="register" class="inline" to="/register">register!</router-link>
+    </div>
   </form>
 </template>
 
 <script>
-//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   name: "Login",
@@ -20,21 +22,14 @@ export default {
   methods: {
     handleSubmit() {
       this.$firebase.auth()
-      .createUserWithEmailAndPassword(this.email, this.password)
+      .signInWithEmailAndPassword(this.email, this.password)
       .then((userCredential) => {
-          console.log("handle submit called");
           // Signed in 
           const user = userCredential.user;
-          console.log("user: " + user);
-          // ...
+          this.$router.push({name : 'user', params : { userName : user}});
         })
         .catch((error) => {
-          /*
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          */
           console.log(error);
-          // ..
         });
     }
     
@@ -43,12 +38,19 @@ export default {
 
 </script>
 
-<style>
+<style scoped lang="scss">
   form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    #pword {
+      margin: 0 0 25px;
+    }
   }
 
   .loginField {
@@ -61,10 +63,10 @@ export default {
   }
 
   input[type=submit] {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
     padding:5px 15px;
+    width: 50%;
+    left: unset;
+    transform: unset;
     /* background:#ccc;*/
     background: none;
     border:1px solid #c4c4c4;
@@ -78,6 +80,20 @@ export default {
     text-align: center;
     color: #c4c4c4;
     margin-bottom: 10px;
+  }
 
+  .inline {
+    float: left;
+  }
+
+  #userMsg {
+    margin: 5px;
+    p {
+      margin: 0 5px;
+    }
+    #register {
+      text-decoration: none;
+      color: lightskyblue;
+    }
   }
 </style>
