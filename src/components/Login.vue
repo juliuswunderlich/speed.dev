@@ -6,12 +6,19 @@
     <div id=userMsg>
       <p class="inline">New user? Go and</p><router-link id="register" class="inline" to="/register">register!</router-link>
     </div>
+    <message-bar type="success" message="This is a huge success guys!"/>
+    <message-bar type="error" message="Oof. An error occured. Bummer."/>
+    <message-bar type="warning" message="Pass auf, Bursche!"/>
+    <message-bar type="info" message="Nur zur Info!"/>
   </form>
 </template>
 
 <script>
+import MessageBar from './MessageBar.vue';
+//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
+  components: { MessageBar },
   name: "Login",
   data() {
     return {
