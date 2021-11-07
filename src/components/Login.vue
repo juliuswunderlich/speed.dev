@@ -15,7 +15,6 @@
 
 <script>
 import MessageBar from './MessageBar.vue';
-//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   components: { MessageBar },
