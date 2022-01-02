@@ -34,14 +34,14 @@ export default {
           console.log(user);
           this.logMsg = "Successfully registered your beautiful face!";
           this.displayErrorMsg = true;
-          setTimeout(function () {
+          setTimeout(() => {
             this.displayErrorMsg = false;
           }, 5000);
         })
         .catch((error) => {
           this.displayErrorMsg = true;
           console.log("an error occured", error);
-          setTimeout(function () {
+          setTimeout(() => {
             this.displayErrorMsg = false;
             this.logMsg = error;
           }, 5000);
