@@ -4,6 +4,9 @@ import { firebase } from '@firebase/app'
 import '@firebase/firestore'
 import CodeDisplay from './components/CodeDisplay'
 import Login from './components/Login'
+import Register from './components/Register'
+import Stats from './components/Stats'
+import Settings from './components/Settings'
 // hella clean import <3
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -25,7 +28,10 @@ firebase.initializeApp({
 // We'll talk about nested routes later.
 const routes = [
   { path: '/', component: CodeDisplay },
-  { path: '/login', component: Login }
+  { path: '/login', component: Login },
+  { path: '/register', component: Register},
+  { path: '/stats', component: Stats },
+  { path: '/settings', component: Settings}
 ]
 
 

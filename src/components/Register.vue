@@ -3,19 +3,24 @@
     <input type="text" id="email" class="loginField" name="email" placeholder="email" tabindex="0" v-model="email"><br>
     <input type="text" id="pword" class="loginField" name="pword" placeholder="password" v-model="password"><br>
     <input type="submit" value="Register" @click="handleRegister">
+    <message-bar v-if="displayErrorMsg" type="warning" :message="logMsg" />
   </form>
-  
+
 </template>
 
 <script>
-//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import MessageBar from './MessageBar.vue';
 
 export default {
+  components: { MessageBar },
   name: "Login",
   data() {
     return {
       email : "",
-      password: ""
+      password: "",
+      displayErrorMsg: false,
+      logMsg: ""
+
     };
   },
   methods: {
@@ -23,20 +28,25 @@ export default {
       this.$firebase.auth()
       .createUserWithEmailAndPassword(this.email, this.password)
       .then((userCredential) => {
+          console.log("everything went fine");
           // Signed in 
           const user = userCredential.user;
-          // ...
+          console.log(user);
+          this.logMsg = "kein Fehler aber testen";
+          this.displayErrorMsg = true;
+          setTimeout(function () {
+            this.displayErrorMsg = false;
+          }, 5000);
         })
         .catch((error) => {
-          /*
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          */
-          console.log(error);
-          // ..
+          this.displayErrorMsg = true;
+          console.log("an error occured", error);
+          setTimeout(function () {
+            this.displayErrorMsg = false;
+            this.logMsg = error;
+          }, 5000);
         });
     }
-    
   }
 }
 

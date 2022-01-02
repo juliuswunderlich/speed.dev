@@ -7,8 +7,12 @@
       <router-link to="/">
         <img src="@/assets/home.svg" alt="Home" />
       </router-link>
-      <img src="@/assets/stats.svg" alt="Statisctics" />
-      <img src="@/assets/settings.svg" alt="Settings" />
+      <router-link to="/stats">
+        <img src="@/assets/stats.svg" alt="Statisctics" />
+      </router-link>
+      <router-link to="/settings">
+        <img src="@/assets/settings.svg" alt="Settings" />
+      </router-link>
     </div>
     <router-link id="login" to="/login">Login</router-link>
   </div>
@@ -17,7 +21,7 @@
 
   <div id="footer">
     <ul>
-      <li><a href="#"> Impressum </a></li>
+      <li><a href="/"> Impressum </a></li>
       <li>
         <a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a>
       </li>
