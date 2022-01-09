@@ -29,10 +29,9 @@ export default {
     handleSubmit() {
       this.$firebase.auth()
       .signInWithEmailAndPassword(this.email, this.password)
-      .then((userCredential) => {
+      .then((/*userCredential*/) => {
           // Signed in 
-          const user = userCredential.user;
-          console.log(user);
+          this.$emit('loggedIn');
         })
         .catch((error) => {
           console.log(error);
