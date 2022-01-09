@@ -10,9 +10,7 @@
         {{ line_number + 1 }}
       </span>
     </div>
-    <div id="code-field"
-      :style="{ overflowY: codeFieldScroll }"
-      >
+    <div id="code-field" :style="{ overflowY: codeFieldScroll }">
       <span
         id="code-line"
         class="line"
@@ -70,13 +68,11 @@
 
 
 <script>
-
-
-
 export default {
   name: "CodeDisplay",
   data() {
     return {
+      fs: null,
       texts: [],
       text: "",
       INDENT_EM: 1.6,
@@ -226,7 +222,7 @@ export default {
       }
     },
     checkScrollBackward() {
-      if(this.scrolledDown == 0) {
+      if (this.scrolledDown == 0) {
         return;
       }
       if (
@@ -239,6 +235,25 @@ export default {
       }
     },
     snippetFinished() {
+      const userId = "23l13sdgj346ojg346"; //TODO!
+      this.fs
+        .collection("tests")
+        .add({
+          userId: userId,
+          timeFinished: this.$firebase.firestore.FieldValue.serverTimestamp(),
+          snippetId: this.text.id,
+          netWpm: this.netWpm,
+          rawWpm: this.rawWpm,
+          accuracy: this.accuracy,
+          secondsTotal: this.secondsTotal,
+        })
+        .then(() => {
+          console.log("Test results saved.");
+        })
+        .catch((error) => {
+          console.error("Error writing test: ", error);
+        });
+
       this.stopTimer();
       this.displayStats = true;
     },
@@ -323,7 +338,7 @@ export default {
       return minutes + ":" + seconds.toString().padStart(2, "0");
     },
     codeFieldScroll() {
-      return this.displayStats ? 'scroll' : 'hidden';
+      return this.displayStats ? "scroll" : "hidden";
     },
     secondsTotal() {
       return this.msRunning / 1000;
@@ -374,8 +389,8 @@ export default {
     this.scrolledDown = 0;
 
     // load all snippets for now
-    const firestore = this.$firebase.firestore();
-    firestore
+    this.fs = this.$firebase.firestore();
+    this.fs
       .collection("snippets")
       .get()
       .then((querySnapshot) => {
