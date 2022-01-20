@@ -74,7 +74,7 @@ export default {
     return {
       fs: null,
       texts: [],
-      text: "",
+      text: {},
       INDENT_EM: 1.6,
       START_SCROLL_AFTER_LINE: 2,
       scrolledDown: 0,
@@ -113,6 +113,9 @@ export default {
       }
     },
     onkeydown(event) {
+      if (this.$route.path !== "/") { // TODO: better way to only listen on this component??
+        return;
+      }
       let key = event.key;
       if (this.preventDefaultKeys.includes(key)) {
         event.preventDefault();
@@ -236,20 +239,21 @@ export default {
     },
     snippetFinished() {
       this.stopTimer();
-      this.displayStats = true
-      this.$router.push('results')
-      // this.$root.$emit('testResults', )
-      //TODO: repalce by state management
+      this.displayStats = true;
+      this.$router.push("results");
 
-      const results = {
+      const metrics = {
         snippetId: this.text.id,
         netWpm: Math.round(this.netWpm * 100) / 100,
         rawWpm: Math.round(this.rawWpm * 100) / 100,
         accuracy: Math.round(this.accuracy * 100) / 100,
         secondsTotal: Math.round(this.secondsTotal * 100) / 100,
-      }
+      };
 
-      this.$root.$emit('snippetFinished', {results: results, keysTyped: this.keysTyped, charsTyped: this.charsTyped})
+      const payload = { metrics: metrics, keysTyped: this.keysTyped };
+      this.$store.commit("newTestCompleted", payload);
+
+      // this.$root.$emit('snippetFinished', {results: results, keysTyped: this.keysTyped, charsTyped: this.charsTyped})
 
       const userId = "niklasLuehrUserId"; //TODO!
       this.fs
@@ -257,7 +261,7 @@ export default {
         .add({
           userId: userId,
           timeFinished: this.$firebase.firestore.FieldValue.serverTimestamp(),
-          ...results
+          ...metrics,
         })
         .then(() => {
           console.log("Test results saved.");
@@ -384,7 +388,10 @@ export default {
       return this.numKeysTyped / 5 / this.minutesTotal;
     },
     netWpm() {
-      return Math.max(0, this.rawWpm - this.numUncorrectedErrors / this.minutesTotal);
+      return Math.max(
+        0,
+        this.rawWpm - this.numUncorrectedErrors / this.minutesTotal
+      );
     },
     accuracy() {
       let correctedErrors = this.numKeysTyped - this.numCharsTyped;

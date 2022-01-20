@@ -2,10 +2,10 @@
   <div>
     <p>ResultsSingleView</p>
     <div id="stats">
-      <span>{{ Math.round(netWpm) }}wpm</span>
-      <span>{{ Math.round(rawWpm) }}raw</span>
-      <span>{{ Math.round(accuracy) }}%</span>
-      <span>{{ secondsTotal.toFixed(2) }}s</span>
+      <p>{{ Math.round(results.netWpm) }}wpm</p>
+      <p>{{ Math.round(results.rawWpm) }}raw</p>
+      <p>{{ Math.round(results.accuracy) }}%</p>
+      <p>{{ results.secondsTotal.toFixed(2) }}s</p>
     </div>
     <p v-for="line in keysTyped" :key="line.id">
       <span v-for="char in keysTyped" :key="char.id">char</span>
@@ -24,6 +24,10 @@ export default {
   },
   methods: {},
   created() {
+    const {metrics, keysTyped} = this.$store.state.lastTestResults;
+    this.results = metrics;
+    this.keysTyped = keysTyped;
+
     // this.$root.$on("snippetFinished", (data) => {
     //   this.results = data.results;
     //   this.keysTyped = data.keysTyped;

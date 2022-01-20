@@ -46,7 +46,8 @@ const routes = [
 const store = createStore({
   state () {
     return {
-      userLoggedIn: false
+      userLoggedIn: false,
+      lastTestResults: {}
     }
   },
   mutations: {
@@ -55,6 +56,9 @@ const store = createStore({
     },
     logOutUser (state) {
       state.userLoggedIn = false;
+    },
+    newTestCompleted (state, testResults) {
+      state.lastTestResults = testResults;
     }
   }
 })
