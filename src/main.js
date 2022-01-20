@@ -10,7 +10,7 @@ import Stats from './components/Stats'
 import Settings from './components/Settings'
 // hella clean import <3
 import { createRouter, createWebHashHistory } from 'vue-router'
-
+import { createStore } from 'vuex'
 
 //import { Login } from './components/Login'
 
@@ -40,6 +40,25 @@ const routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 
+// Create a new store instance.
+const store = createStore({
+  state () {
+    return {
+      userLoggedIn: false
+    }
+  },
+  mutations: {
+    logInUser (state) {
+      state.userLoggedIn = true;
+    },
+    logOutUser (state) {
+      state.userLoggedIn = false;
+    }
+  }
+})
+
+
+
 
 
 // Now the app has started!
@@ -55,6 +74,7 @@ const router = createRouter({
 })
 
 app.use(router)
+app.use(store)
 // Make sure to _use_ the router instance to make the
 // whole app router-aware.
 
