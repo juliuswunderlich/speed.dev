@@ -14,10 +14,12 @@
         <img src="@/assets/settings.svg" alt="Settings" />
       </router-link>
     </div>
-    <router-link id="login" :to="routerTarget">{{ statusText }}</router-link>
+    <router-link v-show="!this.$store.state.userLoggedIn" class="login" to="/login">Login</router-link>
+    <a v-if="this.$store.state.userLoggedIn" class="login" @click="logout">Logout</a>
+
   </div>
 
-  <router-view @loggedIn="loggedIn" @loggedOut="loggedOut" ></router-view>
+  <router-view></router-view>
 
   <div id="footer">
     <ul>
@@ -36,39 +38,28 @@ export default {
   components: {},
   data() {
     return {
-      user: null,
-      statusText: "Login"
     }
   },
   created() {
-    this.$firebase.auth().onAuthStateChanged((user) => {
-      if (user) { // logged in
-        console.log("user logged in")
-        this.user = user
-        console.log(user)
-        this.statusText = "Logout"
-      } else { // logged out
-        console.log("user logged out")
-        this.user = null
-      }
-    });
   },
   computed: {
-    routerTarget() {
-        if (this.user) { // logged in
-          return "/login"
-        } else { // logged out
-          return "/logout"
-        }
-    },
   },
   methods: {
-    loggedIn() {
-    },
-    loggedOut() {
+    logout() {
+      // TODO: move this into the store to have a single point?
+      // TODO: also do it with login?
+      this.$firebase.auth().signOut()
+      .then(function() {
+        this.$store.commit("logoutUser")
+        this.$router.push('/')
+      })
+      .catch(function(error) {
+        // XXX
+        console.log(error);
+      });
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -112,7 +103,7 @@ body {
     max-width: 80px;
   }
 
-  #login {
+  .login {
     text-decoration: none;
     color: #c4c4c4;
 

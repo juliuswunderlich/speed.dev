@@ -31,12 +31,7 @@ export default {
       .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user);
-          this.logMsg = "Successfully registered your beautiful face!";
-          this.displayErrorMsg = true;
-          setTimeout(() => {
-            this.displayErrorMsg = false;
-          }, 5000);
+          this.$store.commit('loginUser', user)
         })
         .catch((error) => {
           this.displayErrorMsg = true;

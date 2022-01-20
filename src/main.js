@@ -44,21 +44,22 @@ const routes = [
 const store = createStore({
   state () {
     return {
-      userLoggedIn: false
+      userLoggedIn: false,
+      currentUser: null 
     }
   },
   mutations: {
-    logInUser (state) {
-      state.userLoggedIn = true;
+    loginUser (state, user) {
+      state.userLoggedIn = true
+      state.currentUser = user
+      console.log("state has registered a new user")
     },
-    logOutUser (state) {
-      state.userLoggedIn = false;
+    logoutUser (state) {
+      console.log("user has been logged out")
+      state.userLoggedIn = false
     }
   }
 })
-
-
-
 
 
 // Now the app has started!
