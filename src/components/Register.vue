@@ -11,6 +11,7 @@
 <script>
 import MessageBar from './MessageBar.vue';
 
+
 export default {
   components: { MessageBar },
   name: "Login",
@@ -28,20 +29,19 @@ export default {
       this.$firebase.auth()
       .createUserWithEmailAndPassword(this.email, this.password)
       .then((userCredential) => {
-          console.log("everything went fine");
           // Signed in 
           const user = userCredential.user;
           console.log(user);
-          this.logMsg = "kein Fehler aber testen";
+          this.logMsg = "Successfully registered your beautiful face!";
           this.displayErrorMsg = true;
-          setTimeout(function () {
+          setTimeout(() => {
             this.displayErrorMsg = false;
           }, 5000);
         })
         .catch((error) => {
           this.displayErrorMsg = true;
           console.log("an error occured", error);
-          setTimeout(function () {
+          setTimeout(() => {
             this.displayErrorMsg = false;
             this.logMsg = error;
           }, 5000);

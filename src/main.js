@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { firebase } from '@firebase/app'
 import '@firebase/firestore'
+import { } from '@firebase/auth';
 import CodeDisplay from './components/CodeDisplay'
 import Login from './components/Login'
 import Register from './components/Register'

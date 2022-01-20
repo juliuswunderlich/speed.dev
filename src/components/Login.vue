@@ -6,7 +6,7 @@
     <div id=userMsg>
       <p class="inline">New user? Go and</p><router-link id="register" class="inline" to="/register">register!</router-link>
     </div>
-    <message-bar type="success" message="This is a huge success guys!"/>
+    <message-bar v-if="displayMsg" type="error" :message="logMsg" />
   </form>
 </template>
 
@@ -19,20 +19,28 @@ export default {
   data() {
     return {
       email : "",
-      password: ""
+      password: "",
+      displayMsg: false,
+      logMsg: ""
+
     };
   },
   methods: {
     handleSubmit() {
       this.$firebase.auth()
       .signInWithEmailAndPassword(this.email, this.password)
-      .then((userCredential) => {
+      .then((/*userCredential*/) => {
           // Signed in 
-          const user = userCredential.user;
-          this.$router.push({name : 'user', params : { userName : user}});
+          this.$emit('loggedIn');
         })
         .catch((error) => {
           console.log(error);
+          this.logMsg = "Failed to login your average looking face!";
+          this.displayMsg = true;
+          setTimeout(() => {
+            console.log("babahujaaaaaaa");
+            this.displayMsg = false;
+          }, 1000);
         });
     }
     

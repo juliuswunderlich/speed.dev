@@ -14,10 +14,10 @@
         <img src="@/assets/settings.svg" alt="Settings" />
       </router-link>
     </div>
-    <router-link id="login" to="/login">Login</router-link>
+    <router-link id="login" :to="routerTarget">{{ statusText }}</router-link>
   </div>
 
-  <router-view></router-view>
+  <router-view @loggedIn="loggedIn" @loggedOut="loggedOut" ></router-view>
 
   <div id="footer">
     <ul>
@@ -34,6 +34,40 @@
 export default {
   name: "App",
   components: {},
+  data() {
+    return {
+      user: null,
+      statusText: "Login"
+    }
+  },
+  created() {
+    this.$firebase.auth().onAuthStateChanged((user) => {
+      if (user) { // logged in
+        console.log("user logged in")
+        this.user = user
+        console.log(user)
+        this.statusText = "Logout"
+      } else { // logged out
+        console.log("user logged out")
+        this.user = null
+      }
+    });
+  },
+  computed: {
+    routerTarget() {
+        if (this.user) { // logged in
+          return "/login"
+        } else { // logged out
+          return "/logout"
+        }
+    },
+  },
+  methods: {
+    loggedIn() {
+    },
+    loggedOut() {
+    }
+  }
 };
 </script>
 
