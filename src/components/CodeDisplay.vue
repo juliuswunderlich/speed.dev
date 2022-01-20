@@ -58,7 +58,7 @@
       {{ formattedTime }}
     </div>
     <div id="stats" v-if="displayStats">
-      <span>{{ Math.max(0, Math.round(netWpm)) }}wpm</span>
+      <span>{{ Math.round(netWpm) }}wpm</span>
       <span>{{ Math.round(rawWpm) }}raw</span>
       <span>{{ Math.round(accuracy) }}%</span>
       <span>{{ secondsTotal.toFixed(2) }}s</span>
@@ -235,17 +235,29 @@ export default {
       }
     },
     snippetFinished() {
-      const userId = "23l13sdgj346ojg346"; //TODO!
+      this.stopTimer();
+      this.displayStats = true
+      this.$router.push('results')
+      // this.$root.$emit('testResults', )
+      //TODO: repalce by state management
+
+      const results = {
+        snippetId: this.text.id,
+        netWpm: Math.round(this.netWpm * 100) / 100,
+        rawWpm: Math.round(this.rawWpm * 100) / 100,
+        accuracy: Math.round(this.accuracy * 100) / 100,
+        secondsTotal: Math.round(this.secondsTotal * 100) / 100,
+      }
+
+      this.$root.$emit('snippetFinished', {results: results, keysTyped: this.keysTyped, charsTyped: this.charsTyped})
+
+      const userId = "niklasLuehrUserId"; //TODO!
       this.fs
         .collection("tests")
         .add({
           userId: userId,
           timeFinished: this.$firebase.firestore.FieldValue.serverTimestamp(),
-          snippetId: this.text.id,
-          netWpm: this.netWpm,
-          rawWpm: this.rawWpm,
-          accuracy: this.accuracy,
-          secondsTotal: this.secondsTotal,
+          ...results
         })
         .then(() => {
           console.log("Test results saved.");
@@ -253,9 +265,6 @@ export default {
         .catch((error) => {
           console.error("Error writing test: ", error);
         });
-
-      this.stopTimer();
-      this.displayStats = true;
     },
     displayNewSnippet() {
       // TODO: get new snippets from server once all buffered snippets have been shown
@@ -375,7 +384,7 @@ export default {
       return this.numKeysTyped / 5 / this.minutesTotal;
     },
     netWpm() {
-      return this.rawWpm - this.numUncorrectedErrors / this.minutesTotal;
+      return Math.max(0, this.rawWpm - this.numUncorrectedErrors / this.minutesTotal);
     },
     accuracy() {
       let correctedErrors = this.numKeysTyped - this.numCharsTyped;
@@ -389,6 +398,8 @@ export default {
     this.scrolledDown = 0;
 
     // load all snippets for now
+    //TODO: this happens every time this component is loaded
+    // -> put in App.vue (?)
     this.fs = this.$firebase.firestore();
     this.fs
       .collection("snippets")

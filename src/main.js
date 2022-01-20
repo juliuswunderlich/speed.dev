@@ -6,6 +6,7 @@ import CodeDisplay from './components/CodeDisplay'
 import Login from './components/Login'
 import Register from './components/Register'
 import Stats from './components/Stats'
+import ResultsSingleView from './components/ResultsSingleView'
 import Settings from './components/Settings'
 // hella clean import <3
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -31,6 +32,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Register},
   { path: '/stats', component: Stats },
+  { path: '/results', component: ResultsSingleView },
   { path: '/settings', component: Settings}
 ]
 
