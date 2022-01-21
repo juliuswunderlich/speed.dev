@@ -73,7 +73,6 @@ export default {
   data() {
     return {
       fs: null,
-      texts: [],
       text: {},
       INDENT_EM: 1.6,
       START_SCROLL_AFTER_LINE: 2,
@@ -113,7 +112,8 @@ export default {
       }
     },
     onkeydown(event) {
-      if (this.$route.path !== "/") { // TODO: better way to only listen on this component??
+      if (this.$route.path !== "/") {
+        // TODO: better way to only listen on this component??
         return;
       }
       let key = event.key;
@@ -260,7 +260,7 @@ export default {
         .collection("tests")
         .add({
           userId: userId,
-          timeFinished: this.$firebase.firestore.FieldValue.serverTimestamp(),
+          finishedAt: this.$firebase.firestore.FieldValue.serverTimestamp(),
           ...metrics,
         })
         .then(() => {
@@ -270,9 +270,9 @@ export default {
           console.error("Error writing test: ", error);
         });
     },
-    displayNewSnippet() {
+    async displayNewSnippet() {
       // TODO: get new snippets from server once all buffered snippets have been shown
-      this.text = this.randomChoice(this.texts);
+      this.text = await this.$store.dispatch('popRandomSnippet');
       this.resetSnippet();
     },
     resetSnippet() {
@@ -293,9 +293,6 @@ export default {
     },
     showInfo() {
       //TODO
-    },
-    randomChoice(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
     },
     startTimer() {
       this.timerRunning = true;
@@ -404,26 +401,9 @@ export default {
     document.onkeydown = this.onkeydown;
     this.scrolledDown = 0;
 
-    // load all snippets for now
-    //TODO: this happens every time this component is loaded
-    // -> put in App.vue (?)
     this.fs = this.$firebase.firestore();
-    this.fs
-      .collection("snippets")
-      .get()
-      .then((querySnapshot) => {
-        this.texts = querySnapshot.docs.map((doc) => doc.data());
-
-        // add newline symbols
-        for (let t = 0; t < this.texts.length; t++) {
-          for (let l = 0; l < this.texts[t].lines.length; l++) {
-            this.texts[t].lines[l].content = this.texts[t].lines[l].content +=
-              "↵";
-          }
-        }
-
-        this.displayNewSnippet();
-      });
+    
+    this.displayNewSnippet();    
   },
 };
 </script>

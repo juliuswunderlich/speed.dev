@@ -17,7 +17,7 @@
     <router-link id="login" :to="routerTarget">{{ statusText }}</router-link>
   </div>
 
-  <router-view @loggedIn="loggedIn" @loggedOut="loggedOut" ></router-view>
+  <router-view @loggedIn="loggedIn" @loggedOut="loggedOut"></router-view>
 
   <div id="footer">
     <ul>
@@ -36,38 +36,43 @@ export default {
   components: {},
   data() {
     return {
+      fs: null,
       user: null,
-      statusText: "Login"
-    }
+      statusText: "Login",
+    };
   },
   created() {
+    this.$store.dispatch("loadSnippets");
+
     this.$firebase.auth().onAuthStateChanged((user) => {
-      if (user) { // logged in
-        console.log("user logged in")
-        this.user = user
-        console.log(user)
-        this.statusText = "Logout"
-      } else { // logged out
-        console.log("user logged out")
-        this.user = null
+      if (user) {
+        // logged in
+        console.log("user logged in");
+        this.user = user;
+        console.log(user);
+        this.statusText = "Logout";
+      } else {
+        // logged out
+        console.log("user logged out");
+        this.user = null;
       }
     });
   },
   computed: {
     routerTarget() {
-        if (this.user) { // logged in
-          return "/login"
-        } else { // logged out
-          return "/logout"
-        }
+      if (this.user) {
+        // logged in
+        return "/login";
+      } else {
+        // logged out
+        return "/logout";
+      }
     },
   },
   methods: {
-    loggedIn() {
-    },
-    loggedOut() {
-    }
-  }
+    loggedIn() {},
+    loggedOut() {},
+  },
 };
 </script>
 
