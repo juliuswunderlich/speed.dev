@@ -49,11 +49,11 @@ export default {
       // TODO: move this into the store to have a single point?
       // TODO: also do it with login?
       this.$firebase.auth().signOut()
-      .then(function() {
-        this.$store.commit("logoutUser")
-        this.$router.push('/')
+        .then(() => {
+            this.$store.commit("logoutUser")
+            this.$router.push('/')
       })
-      .catch(function(error) {
+        .catch((error) => {
         // XXX
         console.log(error);
       });
