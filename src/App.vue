@@ -98,7 +98,10 @@ body {
 
 #app {
   position: relative;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  // max-height: 100%;
   color: #c4c4c4;
   margin: 0em 10%;
   padding: 1em;
@@ -152,10 +155,6 @@ body {
 }
 
 #footer {
-  position: absolute;
-  bottom: 0em;
-  padding-bottom: inherit;
-
   ul {
     list-style-type: none;
     margin: 0;

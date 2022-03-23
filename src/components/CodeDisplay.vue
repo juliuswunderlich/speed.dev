@@ -1,67 +1,69 @@
 <template>
-  <div id="wrapper">
-    <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
-    <div id="line-numbers">
-      <span
-        class="line"
-        v-for="line_number in visibleLines"
-        :key="line_number.id"
-      >
-        {{ line_number + 1 }}
-      </span>
-    </div>
-    <div id="code-field" :style="{ overflowY: codeFieldScroll }">
-      <span
-        id="code-line"
-        class="line"
-        v-for="(line, line_idx) in text.lines"
-        :key="line.id"
-        :style="{
-          paddingLeft: getIndent(line_idx) + 'em',
-          opacity: getOpacity(line_idx),
-        }"
-      >
+  <div class="code-display">
+    <div id="wrapper">
+      <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
+      <div id="line-numbers">
         <span
-          v-for="(character, char_idx) in line.content"
-          :key="character.id"
-          :class="getClassAt(line_idx, char_idx)"
+          class="line"
+          v-for="line_number in visibleLines"
+          :key="line_number.id"
         >
-          {{ getCharacterAt(line_idx, char_idx) }}
+          {{ line_number + 1 }}
         </span>
-      </span>
-    </div>
-    <div id="info">
-      <img
-        src="@/assets/buttonInfo.svg"
-        alt="info"
-        class="icon"
-        v-on:click="showInfo"
-      />
-    </div>
-    <div id="retry" title="Restart (TAB)">
-      <img
-        src="@/assets/buttonRetry.svg"
-        alt="retry"
-        class="icon"
-        v-on:click="resetSnippet"
-      />
-    </div>
-    <div id="next" title="Next (TAB)">
-      <img
-        src="@/assets/buttonNext.svg"
-        alt="next"
-        class="icon"
-        v-on:click="displayNewSnippet"
-      />
-    </div>
-    <div id="timer">
-      {{ formattedTime }}
-    </div>
-    <div id="stats" v-if="displayStats">
-      <span>{{ Math.round(netWpm) }}wpm</span>
-      <span>{{ Math.round(rawWpm) }}raw</span>
-      <span>{{ Math.round(accuracy) }}%</span>
-      <span>{{ secondsTotal.toFixed(2) }}s</span>
+      </div>
+      <div id="code-field">
+        <span
+          id="code-line"
+          class="line"
+          v-for="(line, line_idx) in text.lines"
+          :key="line.id"
+          :style="{
+            paddingLeft: getIndent(line_idx) + 'em',
+            opacity: getOpacity(line_idx),
+          }"
+        >
+          <span
+            v-for="(character, char_idx) in line.content"
+            :key="character.id"
+            :class="getClassAt(line_idx, char_idx)"
+          >
+            {{ getCharacterAt(line_idx, char_idx) }}
+          </span>
+        </span>
+      </div>
+      <div id="info">
+        <img
+          src="@/assets/buttonInfo.svg"
+          alt="info"
+          class="icon"
+          v-on:click="showInfo"
+        />
+      </div>
+      <div id="retry" title="Restart (TAB)">
+        <img
+          src="@/assets/buttonRetry.svg"
+          alt="retry"
+          class="icon"
+          v-on:click="resetSnippet"
+        />
+      </div>
+      <div id="next" title="Next (TAB)">
+        <img
+          src="@/assets/buttonNext.svg"
+          alt="next"
+          class="icon"
+          v-on:click="displayNewSnippet"
+        />
+      </div>
+      <div id="timer">
+        {{ formattedTime }}
+      </div>
+      <div id="stats" v-if="displayStats">
+        <span>{{ Math.round(netWpm) }}wpm</span>
+        <span>{{ Math.round(rawWpm) }}raw</span>
+        <span>{{ Math.round(accuracy) }}%</span>
+        <span>{{ secondsTotal.toFixed(2) }}s</span>
+      </div>
     </div>
   </div>
 </template>
@@ -112,10 +114,6 @@ export default {
       }
     },
     onkeydown(event) {
-      if (this.$route.path !== "/") {
-        // TODO: better way to only listen on this component??
-        return;
-      }
       let key = event.key;
       if (this.preventDefaultKeys.includes(key)) {
         event.preventDefault();
@@ -250,7 +248,12 @@ export default {
         secondsTotal: Math.round(this.secondsTotal * 100) / 100,
       };
 
-      const payload = { metrics: metrics, keysTyped: this.keysTyped };
+      const payload = {
+        metrics: metrics,
+        lines: this.text.lines,
+        keysTyped: this.keysTyped,
+        charsTyped: this.charsTyped,
+      };
       this.$store.commit("newTestCompleted", payload);
 
       // this.$root.$emit('snippetFinished', {results: results, keysTyped: this.keysTyped, charsTyped: this.charsTyped})
@@ -272,7 +275,7 @@ export default {
     },
     async displayNewSnippet() {
       // TODO: get new snippets from server once all buffered snippets have been shown
-      this.text = await this.$store.dispatch('popRandomSnippet');
+      this.text = await this.$store.dispatch("popRandomSnippet");
       this.resetSnippet();
     },
     resetSnippet() {
@@ -347,9 +350,6 @@ export default {
       let seconds = Math.floor(this.secondsTotal % 60);
       return minutes + ":" + seconds.toString().padStart(2, "0");
     },
-    codeFieldScroll() {
-      return this.displayStats ? "scroll" : "hidden";
-    },
     secondsTotal() {
       return this.msRunning / 1000;
     },
@@ -402,8 +402,13 @@ export default {
     this.scrolledDown = 0;
 
     this.fs = this.$firebase.firestore();
-    
-    this.displayNewSnippet();    
+
+    this.displayNewSnippet();
+  },
+  beforeUnmount() {
+    // remove keyListener
+    //TODO: maybe a cleaner way to do this?
+    document.onkeydown = undefined;
   },
 };
 </script>
@@ -414,7 +419,17 @@ export default {
 * {
   box-sizing: border-box;
 }
+.code-display {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 #wrapper {
+  height: 75%;
+  max-height: 75%;
   font-family: "Hack", monospace;
   font-size: 1.1rem;
   color: white;
@@ -424,16 +439,10 @@ export default {
   grid-template-rows: auto 30px;
   row-gap: 1.5em;
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
   /* center snippet without line numbers -> deduct half the width of #line-numbers (50px) */
-  transform: translate(calc(-50% - 25px), -50%);
-
-  @media only screen and (max-width: 1500px) {
-    font-size: 1rem;
-  }
+  transform: translateX(calc(-25px));
 }
+
 #logo {
   max-width: 40px;
   height: 40px;
@@ -442,6 +451,7 @@ export default {
   align-self: end;
   opacity: 0.5;
 }
+
 #line-numbers {
   text-align: right;
   opacity: 0.1;
@@ -449,11 +459,12 @@ export default {
   padding-right: 1em;
   grid-area: 1/ 1/ 2/ 2;
 }
+
 #code-field {
   grid-area: 1/ 2/ 2/ 6;
-  height: 30em;
   width: 100ch;
   padding: 0.5em;
+  overflow: hidden;
 
   border-color: #333;
   border-width: 2px;
