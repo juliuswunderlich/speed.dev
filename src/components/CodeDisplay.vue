@@ -5,10 +5,13 @@
       <div id="line-numbers">
         <span
           class="line"
-          v-for="line_number in visibleLines"
+          v-for="line_number in numberOfLines"
           :key="line_number.id"
+          :style="{
+            opacity: getLineNumberOpacity(line_number),
+          }"
         >
-          {{ line_number + 1 }}
+          {{ line_number }}
         </span>
       </div>
       <div id="code-field">
@@ -31,14 +34,14 @@
           </span>
         </span>
       </div>
-      <div id="info">
+      <!-- <div id="info">
         <img
           src="@/assets/buttonInfo.svg"
           alt="info"
           class="icon"
           v-on:click="showInfo"
         />
-      </div>
+      </div> -->
       <div id="retry" title="Restart (TAB)">
         <img
           src="@/assets/buttonRetry.svg"
@@ -57,12 +60,6 @@
       </div>
       <div id="timer">
         {{ formattedTime }}
-      </div>
-      <div id="stats" v-if="displayStats">
-        <span>{{ Math.round(netWpm) }}wpm</span>
-        <span>{{ Math.round(rawWpm) }}raw</span>
-        <span>{{ Math.round(accuracy) }}%</span>
-        <span>{{ secondsTotal.toFixed(2) }}s</span>
       </div>
     </div>
   </div>
@@ -112,6 +109,9 @@ export default {
       } else {
         return "10%";
       }
+    },
+    getLineNumberOpacity(lineNumber) {
+     return lineNumber <= this.currentLine + 1 ? "0.3" : "0";
     },
     onkeydown(event) {
       let key = event.key;
@@ -208,6 +208,8 @@ export default {
           this.scrolledDown++;
           let elemToScrollTo = this.lineElements[this.scrolledDown];
           elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+          let lineElemToScrollTo = this.lineNumberElements[this.scrolledDown];
+          lineElemToScrollTo.scrollIntoView({ behavior: "smooth" });
         }
       }
     },
@@ -233,6 +235,8 @@ export default {
         this.scrolledDown--;
         let elemToScrollTo = this.lineElements[this.scrolledDown];
         elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+        let lineElemToScrollTo = this.lineNumberElements[this.scrolledDown];
+        lineElemToScrollTo.scrollIntoView({ behavior: "smooth" });
       }
     },
     snippetFinished() {
@@ -258,20 +262,20 @@ export default {
 
       // this.$root.$emit('snippetFinished', {results: results, keysTyped: this.keysTyped, charsTyped: this.charsTyped})
 
-      const userId = "niklasLuehrUserId"; //TODO!
-      this.fs
-        .collection("tests")
-        .add({
-          userId: userId,
-          finishedAt: this.$firebase.firestore.FieldValue.serverTimestamp(),
-          ...metrics,
-        })
-        .then(() => {
-          console.log("Test results saved.");
-        })
-        .catch((error) => {
-          console.error("Error writing test: ", error);
-        });
+      // const userId = "niklasLuehrUserId"; //TODO!
+      // this.fs
+      //   .collection("tests")
+      //   .add({
+      //     userId: userId,
+      //     finishedAt: this.$firebase.firestore.FieldValue.serverTimestamp(),
+      //     ...metrics,
+      //   })
+      //   .then(() => {
+      //     console.log("Test results saved.");
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error writing test: ", error);
+      //   });
     },
     async displayNewSnippet() {
       // TODO: get new snippets from server once all buffered snippets have been shown
@@ -291,6 +295,7 @@ export default {
       this.cursorPosition = 0;
       this.scrolledDown = 0;
       document.querySelector("#code-field").scrollTo(0, 0);
+      document.querySelector("#line-numbers").scrollTo(0, 0);
       this.resetTimer();
       this.displayStats = false;
     },
@@ -329,7 +334,11 @@ export default {
       return this.getLine(this.currentLine);
     },
     numberOfLines() {
-      return this.text.lines.length;
+      if (this.text.lines) {
+        return this.text.lines.length;
+      } else {
+        return 3;
+      }
     },
     currentLogo() {
       //TODO
@@ -344,6 +353,9 @@ export default {
     },
     lineElements() {
       return document.querySelector("#code-field").children;
+    },
+    lineNumberElements() {
+      return document.querySelector("#line-numbers").children;
     },
     formattedTime() {
       let minutes = Math.floor(this.secondsTotal / 60);
@@ -454,7 +466,7 @@ export default {
 
 #line-numbers {
   text-align: right;
-  opacity: 0.1;
+  overflow: hidden;
   padding-top: 0.5em;
   padding-right: 1em;
   grid-area: 1/ 1/ 2/ 2;
@@ -473,31 +485,6 @@ export default {
 
   // box-shadow: rgb(223, 222, 222) 0px 0px 6px 1px inset;
   // background-color: rgba(233, 233, 233, 0.25);
-}
-
-#stats {
-  font-family: "Roboto Mono", monospace;
-  grid-area: 1/ 2/ 2/ 6;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 999;
-  border-radius: 0.5em;
-
-  padding: 1.5em;
-  background-color: #111213;
-  opacity: 0.9;
-  display: flex;
-  place-content: center;
-  align-items: center;
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-
-  span {
-    font-size: 1.5rem;
-    padding: 0 1.5em;
-  }
 }
 
 .line {

@@ -7,14 +7,15 @@
       <span>{{ results.secondsTotal.toFixed(2) }}s</span>
     </div>
     <div id="text">
-      <p
-        class="line"
-        v-for="(line, lineIndex) in keysTyped"
-        :key="line.id"
-        :style="{
-          paddingLeft: getIndent(lineIndex) + 'em',
-        }"
-      >
+      <p class="line" v-for="(line, lineIndex) in keysTyped" :key="line.id">
+        <span
+          class="line-number"
+          :style="{
+            marginRight: getIndent(lineIndex) + 'em',
+          }"
+        >
+          {{ lineIndex + 1 }}
+        </span>
         <span
           v-for="(char, charIndex) in line"
           :class="getClassAt(lineIndex, charIndex)"
@@ -42,7 +43,7 @@ export default {
   },
   methods: {
     getIndent(lineIndex) {
-      return this.lines[lineIndex].indent * this.INDENT_EM;
+      return 2 + this.lines[lineIndex].indent * this.INDENT_EM;
     },
     getClassAt(lineIndex, charIndex) {
       return this.correctMap[lineIndex][charIndex];
@@ -62,7 +63,7 @@ export default {
         event.preventDefault();
         this.$router.push("/");
       }
-    }
+    };
     const { metrics, lines, keysTyped, charsTyped } =
       this.$store.state.lastTestResults;
     this.results = metrics;
@@ -134,8 +135,16 @@ export default {
   height: 55%;
   width: 80ch;
 }
+
 .line {
   margin: 0.1em 0;
+}
+
+.line-number {
+  display: inline-block;
+  text-align: right;
+  width: 3ch;
+
 }
 .correct {
   /*background-color: rgba(0, 255, 0, .1);*/
