@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <router-link to="/">
+    <router-link to="/" class="left">
       <img id="logo" src="@/assets/logo.svg" alt="Logo" />
     </router-link>
     <div id="nav">
@@ -14,18 +14,19 @@
         <img src="@/assets/settings.svg" alt="Settings" />
       </router-link>
     </div>
-    <router-link id="login" :to="routerTarget">{{ statusText }}</router-link>
+    <!-- <router-link id="login" class="right" :to="routerTarget">{{ statusText }}</router-link> -->
+    <span class="right">Login (coming soon)</span>
   </div>
 
   <router-view @loggedIn="loggedIn" @loggedOut="loggedOut"></router-view>
 
   <div id="footer">
     <ul>
-      <li><a href="/"> Impressum </a></li>
+      <!-- <li><a href="/"> Impressum </a></li> -->
       <li>
         <a href="https://github.com/juliuswunderlich/speed.dev"> GitHub </a>
       </li>
-      <li><a href="https://twitter.com"> Twitter </a></li>
+      <!-- <li><a href="https://twitter.com"> Twitter </a></li> -->
     </ul>
   </div>
 </template>
@@ -114,7 +115,16 @@ body {
 #header {
   display: flex;
   align-items: center;
-  place-content: space-between;
+  justify-content: space-between;
+
+  .left, .right {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+
+  .right {
+    text-align: right;
+  }
 
   #logo {
     max-width: 80px;

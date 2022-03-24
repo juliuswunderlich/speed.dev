@@ -57,11 +57,16 @@ export default {
     },
   },
   created() {
+    document.onkeydown = (event) => {
+      if (event.key === "Tab") {
+        event.preventDefault();
+        this.$router.push("/");
+      }
+    }
     const { metrics, lines, keysTyped, charsTyped } =
       this.$store.state.lastTestResults;
     this.results = metrics;
     this.keysTyped = keysTyped;
-    // this.charsTyped = charsTyped;
     this.lines = lines;
 
     //generate correct/incorrect map
@@ -86,12 +91,11 @@ export default {
     });
 
     this.correctMap = correctMap;
-    console.log(correctMap);
-    // this.$root.$on("snippetFinished", (data) => {
-    //   this.results = data.results;
-    //   this.keysTyped = data.keysTyped;
-    // });
-    //TODO: replace this by state management
+  },
+  beforeUnmount() {
+    // remove keyListener
+    //TODO: maybe a cleaner way to do this?
+    document.onkeydown = undefined;
   },
 };
 </script>
@@ -103,6 +107,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 #metrics {
@@ -116,7 +121,7 @@ export default {
     font-weight: bold;
   }
 
-  > span{
+  > span {
     font-size: 1.2rem;
   }
 }
@@ -126,6 +131,8 @@ export default {
   border: 1px solid #c4c4c4;
   border-radius: 0.5em;
   overflow: auto;
+  height: 55%;
+  width: 80ch;
 }
 .line {
   margin: 0.1em 0;
