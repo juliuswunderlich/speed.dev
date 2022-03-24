@@ -24,6 +24,24 @@
         >
       </p>
     </div>
+    <div class="buttons">
+      <div id="retry" title="Restart">
+        <img
+          src="@/assets/buttonRetry.svg"
+          alt="retry"
+          class="icon"
+          v-on:click="resetSnippet"
+        />
+      </div>
+      <div id="next" title="Next (TAB)">
+        <img
+          src="@/assets/buttonNext.svg"
+          alt="next"
+          class="icon"
+          v-on:click="startNextSnippet"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,6 +75,9 @@ export default {
         return char;
       }
     },
+    startNextSnippet() {
+      this.$router.push("/");
+    },
   },
   created() {
     document.onkeydown = (event) => {
@@ -64,12 +85,11 @@ export default {
         event.preventDefault();
       }
       if (event.key === "Tab") {
-        this.$router.push("/");
+        this.startNextSnippet();
       }
     };
     const { metrics, lines, keysTyped, charsTyped } =
       this.$store.state.lastTestResults;
-      console.log(this.$store.state.lastTestResults);
     this.results = metrics;
     this.keysTyped = keysTyped;
     this.lines = lines;
@@ -148,8 +168,28 @@ export default {
   display: inline-block;
   text-align: right;
   width: 3ch;
-
 }
+
+.buttons {
+  display: flex;
+  justify-content: end;
+  gap: 2em;
+  margin-top: 1em;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  opacity: 0.25;
+}
+.icon:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.icon:active {
+  transform: scale(1.1);
+}
+
 .correct {
   /*background-color: rgba(0, 255, 0, .1);*/
   color: white;
