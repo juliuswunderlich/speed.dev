@@ -49,7 +49,7 @@ const store = createStore({
       userLoggedIn: false,
       snippets: [],
       initialSnippetsLoaded: Promise,
-      lastTestResults: {}
+      lastTestResults: null, 
     }
   },
   mutations: {

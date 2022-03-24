@@ -81,7 +81,7 @@ export default {
       currentLine: 0,
       cursorPosition: 0,
       charsTyped: [],
-      preventDefaultKeys: ["Tab", "/", "'", " "],
+      preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
 
       //timer
       timerRunning: false,

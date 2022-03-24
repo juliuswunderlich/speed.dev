@@ -38,6 +38,7 @@ export default {
       lines: [],
       correctMap: [],
 
+      preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
       INDENT_EM: 1.6,
     };
   },
@@ -59,13 +60,16 @@ export default {
   },
   created() {
     document.onkeydown = (event) => {
-      if (event.key === "Tab") {
+      if (this.preventDefaultKeys.includes(event.key)) {
         event.preventDefault();
+      }
+      if (event.key === "Tab") {
         this.$router.push("/");
       }
     };
     const { metrics, lines, keysTyped, charsTyped } =
       this.$store.state.lastTestResults;
+      console.log(this.$store.state.lastTestResults);
     this.results = metrics;
     this.keysTyped = keysTyped;
     this.lines = lines;
