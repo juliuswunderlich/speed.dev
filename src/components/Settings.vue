@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>Settings</p>
+  <div class="settings">
+    <p>Settings (coming soon)</p>
   </div>
 </template>
 
@@ -22,5 +22,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.settings {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
   
 </style>

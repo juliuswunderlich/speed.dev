@@ -1,84 +1,78 @@
 <template>
-  <div id="wrapper">
-    <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
-    <div id="line-numbers">
-      <span
-        class="line"
-        v-for="line_number in visibleLines"
-        :key="line_number.id"
-      >
-        {{ line_number + 1 }}
-      </span>
-    </div>
-    <div id="code-field"
-      :style="{ overflowY: codeFieldScroll }"
-      >
-      <span
-        id="code-line"
-        class="line"
-        v-for="(line, line_idx) in text.lines"
-        :key="line.id"
-        :style="{
-          paddingLeft: getIndent(line_idx) + 'em',
-          opacity: getOpacity(line_idx),
-        }"
-      >
+  <div class="code-display">
+    <div id="wrapper">
+      <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
+      <div id="line-numbers">
         <span
-          v-for="(character, char_idx) in line.content"
-          :key="character.id"
-          :class="getClassAt(line_idx, char_idx)"
+          class="line"
+          v-for="line_number in numberOfLines"
+          :key="line_number.id"
+          :style="{
+            opacity: getLineNumberOpacity(line_number),
+          }"
         >
-          {{ getCharacterAt(line_idx, char_idx) }}
+          {{ line_number }}
         </span>
-      </span>
-    </div>
-    <div id="info">
-      <img
-        src="@/assets/buttonInfo.svg"
-        alt="info"
-        class="icon"
-        v-on:click="showInfo"
-      />
-    </div>
-    <div id="retry" title="Restart (TAB)">
-      <img
-        src="@/assets/buttonRetry.svg"
-        alt="retry"
-        class="icon"
-        v-on:click="resetSnippet"
-      />
-    </div>
-    <div id="next" title="Next (TAB)">
-      <img
-        src="@/assets/buttonNext.svg"
-        alt="next"
-        class="icon"
-        v-on:click="displayNewSnippet"
-      />
-    </div>
-    <div id="timer">
-      {{ formattedTime }}
-    </div>
-    <div id="stats" v-if="displayStats">
-      <span>{{ Math.max(0, Math.round(netWpm)) }}wpm</span>
-      <span>{{ Math.round(rawWpm) }}raw</span>
-      <span>{{ Math.round(accuracy) }}%</span>
-      <span>{{ secondsTotal.toFixed(2) }}s</span>
+      </div>
+      <div id="code-field">
+        <span
+          id="code-line"
+          class="line"
+          v-for="(line, line_idx) in text.lines"
+          :key="line.id"
+          :style="{
+            paddingLeft: getIndent(line_idx) + 'em',
+            opacity: getOpacity(line_idx),
+          }"
+        >
+          <span
+            v-for="(character, char_idx) in line.content"
+            :key="character.id"
+            :class="getClassAt(line_idx, char_idx)"
+          >
+            {{ getCharacterAt(line_idx, char_idx) }}
+          </span>
+        </span>
+      </div>
+      <!-- <div id="info">
+        <img
+          src="@/assets/buttonInfo.svg"
+          alt="info"
+          class="icon"
+          v-on:click="showInfo"
+        />
+      </div> -->
+      <div id="retry" title="Restart (TAB)">
+        <img
+          src="@/assets/buttonRetry.svg"
+          alt="retry"
+          class="icon"
+          v-on:click="resetSnippet"
+        />
+      </div>
+      <div id="next" title="Next (TAB)">
+        <img
+          src="@/assets/buttonNext.svg"
+          alt="next"
+          class="icon"
+          v-on:click="displayNewSnippet"
+        />
+      </div>
+      <div id="timer">
+        {{ formattedTime }}
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
-
-
-
 export default {
   name: "CodeDisplay",
   data() {
     return {
-      texts: [],
-      text: "",
+      fs: null,
+      text: {},
       INDENT_EM: 1.6,
       START_SCROLL_AFTER_LINE: 2,
       scrolledDown: 0,
@@ -87,7 +81,7 @@ export default {
       currentLine: 0,
       cursorPosition: 0,
       charsTyped: [],
-      preventDefaultKeys: ["Tab", "/", "'", " "],
+      preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
 
       //timer
       timerRunning: false,
@@ -115,6 +109,9 @@ export default {
       } else {
         return "10%";
       }
+    },
+    getLineNumberOpacity(lineNumber) {
+      return lineNumber <= this.currentLine + 1 ? "0.3" : "0";
     },
     onkeydown(event) {
       let key = event.key;
@@ -211,6 +208,8 @@ export default {
           this.scrolledDown++;
           let elemToScrollTo = this.lineElements[this.scrolledDown];
           elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+          let lineElemToScrollTo = this.lineNumberElements[this.scrolledDown];
+          lineElemToScrollTo.scrollIntoView({ behavior: "smooth" });
         }
       }
     },
@@ -226,7 +225,7 @@ export default {
       }
     },
     checkScrollBackward() {
-      if(this.scrolledDown == 0) {
+      if (this.scrolledDown == 0) {
         return;
       }
       if (
@@ -236,15 +235,56 @@ export default {
         this.scrolledDown--;
         let elemToScrollTo = this.lineElements[this.scrolledDown];
         elemToScrollTo.scrollIntoView({ behavior: "smooth" });
+        let lineElemToScrollTo = this.lineNumberElements[this.scrolledDown];
+        lineElemToScrollTo.scrollIntoView({ behavior: "smooth" });
       }
     },
     snippetFinished() {
       this.stopTimer();
       this.displayStats = true;
+      this.$router.push("results");
+
+      const metrics = {
+        snippetId: this.text.id,
+        netWpm: Math.round(this.netWpm * 100) / 100,
+        rawWpm: Math.round(this.rawWpm * 100) / 100,
+        accuracy: Math.round(this.accuracy * 100) / 100,
+        secondsTotal: Math.round(this.secondsTotal * 100) / 100,
+      };
+
+      const payload = {
+        metrics: metrics,
+        lines: this.text.lines,
+        keysTyped: this.keysTyped,
+        charsTyped: this.charsTyped,
+      };
+      this.$store.commit("newTestCompleted", payload);
+
+      // this.$root.$emit('snippetFinished', {results: results, keysTyped: this.keysTyped, charsTyped: this.charsTyped})
+
+      // const userId = "niklasLuehrUserId"; //TODO!
+      // this.fs
+      //   .collection("tests")
+      //   .add({
+      //     userId: userId,
+      //     finishedAt: this.$firebase.firestore.FieldValue.serverTimestamp(),
+      //     ...metrics,
+      //   })
+      //   .then(() => {
+      //     console.log("Test results saved.");
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error writing test: ", error);
+      //   });
     },
-    displayNewSnippet() {
-      // TODO: get new snippets from server once all buffered snippets have been shown
-      this.text = this.randomChoice(this.texts);
+    async displayNewSnippet() {
+      const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
+      if (repeatLastSnippet) {
+        this.text = this.$store.getters.getLastSnippet;
+        this.$store.commit('setRepeatLastSnippet', false);
+      } else {
+        this.text = await this.$store.dispatch("popRandomSnippet");
+      }
       this.resetSnippet();
     },
     resetSnippet() {
@@ -260,14 +300,12 @@ export default {
       this.cursorPosition = 0;
       this.scrolledDown = 0;
       document.querySelector("#code-field").scrollTo(0, 0);
+      document.querySelector("#line-numbers").scrollTo(0, 0);
       this.resetTimer();
       this.displayStats = false;
     },
     showInfo() {
       //TODO
-    },
-    randomChoice(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
     },
     startTimer() {
       this.timerRunning = true;
@@ -301,7 +339,11 @@ export default {
       return this.getLine(this.currentLine);
     },
     numberOfLines() {
-      return this.text.lines.length;
+      if (this.text.lines) {
+        return this.text.lines.length;
+      } else {
+        return 3;
+      }
     },
     currentLogo() {
       //TODO
@@ -317,13 +359,13 @@ export default {
     lineElements() {
       return document.querySelector("#code-field").children;
     },
+    lineNumberElements() {
+      return document.querySelector("#line-numbers").children;
+    },
     formattedTime() {
       let minutes = Math.floor(this.secondsTotal / 60);
       let seconds = Math.floor(this.secondsTotal % 60);
       return minutes + ":" + seconds.toString().padStart(2, "0");
-    },
-    codeFieldScroll() {
-      return this.displayStats ? 'scroll' : 'hidden';
     },
     secondsTotal() {
       return this.msRunning / 1000;
@@ -360,7 +402,10 @@ export default {
       return this.numKeysTyped / 5 / this.minutesTotal;
     },
     netWpm() {
-      return this.rawWpm - this.numUncorrectedErrors / this.minutesTotal;
+      return Math.max(
+        0,
+        this.rawWpm - this.numUncorrectedErrors / this.minutesTotal
+      );
     },
     accuracy() {
       let correctedErrors = this.numKeysTyped - this.numCharsTyped;
@@ -373,24 +418,15 @@ export default {
     document.onkeydown = this.onkeydown;
     this.scrolledDown = 0;
 
-    // load all snippets for now
-    const firestore = this.$firebase.firestore();
-    firestore
-      .collection("snippets")
-      .get()
-      .then((querySnapshot) => {
-        this.texts = querySnapshot.docs.map((doc) => doc.data());
-
-        // add newline symbols
-        for (let t = 0; t < this.texts.length; t++) {
-          for (let l = 0; l < this.texts[t].lines.length; l++) {
-            this.texts[t].lines[l].content = this.texts[t].lines[l].content +=
-              "↵";
-          }
-        }
-
-        this.displayNewSnippet();
-      });
+    this.fs = this.$firebase.firestore();
+  },
+  mounted() {
+    this.displayNewSnippet();
+  },
+  beforeUnmount() {
+    // remove keyListener
+    //TODO: maybe a cleaner way to do this?
+    document.onkeydown = undefined;
   },
 };
 </script>
@@ -401,7 +437,17 @@ export default {
 * {
   box-sizing: border-box;
 }
+.code-display {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 #wrapper {
+  height: 75%;
+  max-height: 75%;
   font-family: "Hack", monospace;
   font-size: 1.1rem;
   color: white;
@@ -411,16 +457,10 @@ export default {
   grid-template-rows: auto 30px;
   row-gap: 1.5em;
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
   /* center snippet without line numbers -> deduct half the width of #line-numbers (50px) */
-  transform: translate(calc(-50% - 25px), -50%);
-
-  @media only screen and (max-width: 1500px) {
-    font-size: 1rem;
-  }
+  transform: translateX(calc(-25px));
 }
+
 #logo {
   max-width: 40px;
   height: 40px;
@@ -429,18 +469,20 @@ export default {
   align-self: end;
   opacity: 0.5;
 }
+
 #line-numbers {
   text-align: right;
-  opacity: 0.1;
+  overflow: hidden;
   padding-top: 0.5em;
   padding-right: 1em;
   grid-area: 1/ 1/ 2/ 2;
 }
+
 #code-field {
   grid-area: 1/ 2/ 2/ 6;
-  height: 30em;
   width: 100ch;
   padding: 0.5em;
+  overflow: hidden;
 
   border-color: #333;
   border-width: 2px;
@@ -449,31 +491,6 @@ export default {
 
   // box-shadow: rgb(223, 222, 222) 0px 0px 6px 1px inset;
   // background-color: rgba(233, 233, 233, 0.25);
-}
-
-#stats {
-  font-family: "Roboto Mono", monospace;
-  grid-area: 1/ 2/ 2/ 6;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 999;
-  border-radius: 0.5em;
-
-  padding: 1.5em;
-  background-color: #111213;
-  opacity: 0.9;
-  display: flex;
-  place-content: center;
-  align-items: center;
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-
-  span {
-    font-size: 1.5rem;
-    padding: 0 1.5em;
-  }
 }
 
 .line {

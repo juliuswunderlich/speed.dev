@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>Stats</p>
+  <div class="stats">
+    <p>Stats (coming soon)</p>
   </div>
 </template>
 
@@ -22,5 +22,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.stats{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
   
 </style>

@@ -7,6 +7,7 @@ import CodeDisplay from './components/CodeDisplay'
 import Login from './components/Login'
 import Register from './components/Register'
 import Stats from './components/Stats'
+import ResultsSingleView from './components/ResultsSingleView'
 import Settings from './components/Settings'
 // hella clean import <3
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -30,9 +31,10 @@ firebase.initializeApp({
 const routes = [
   { path: '/', component: CodeDisplay },
   { path: '/login', component: Login },
-  { path: '/register', component: Register},
+  { path: '/register', component: Register },
   { path: '/stats', component: Stats },
-  { path: '/settings', component: Settings}
+  { path: '/results', component: ResultsSingleView },
+  { path: '/settings', component: Settings }
 ]
 
 
@@ -42,17 +44,86 @@ const routes = [
 
 // Create a new store instance.
 const store = createStore({
-  state () {
+  state() {
     return {
-      userLoggedIn: false
+      userLoggedIn: false,
+      snippets: [],
+      initialSnippetsLoaded: Promise,
+      lastTestResults: null, 
+      lastSnippet: null,
+      repeatLastSnippet: false,
+    }
+  },
+  getters: {
+    getLastSnippet(state) {
+      return state.lastSnippet;
+    },
+    getRepeatLastSnippet(state) {
+      return state.repeatLastSnippet;
     }
   },
   mutations: {
-    logInUser (state) {
+    logInUser(state) {
       state.userLoggedIn = true;
     },
-    logOutUser (state) {
+    logOutUser(state) {
       state.userLoggedIn = false;
+    },
+    // storeNewSnippets(state, newSnippets) {
+    //   state.snippets.push(...newSnippets)
+    // },
+    setSnippets(state, newSnippets) {
+      state.snippets = newSnippets
+    },
+    setInitialSnippetsLoadedPromise(state, promise) {
+      state.initialSnippetsLoaded = promise;
+    },
+    newTestCompleted(state, testResults) {
+      state.lastTestResults = testResults;
+    },
+    setRepeatLastSnippet(state, repeat) {
+      state.repeatLastSnippet = repeat;
+    },
+    setLastSnippet(state, lastSnippet) {
+      state.lastSnippet = lastSnippet;
+    }
+  },
+  actions: {
+    //load snippets from firestore, for now all of them
+    loadSnippets({ commit }) {
+      const promise = new Promise(function (resolve) {
+        firebase.firestore()
+        .collection("snippets")
+        .get()
+        .then((querySnapshot) => {
+          //store doc id as field inside doc
+          let snippets = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
+
+          //add return symbols at end of each line
+          for (let s = 0; s < snippets.length; s++) {
+            for (let l = 0; l < snippets[s].lines.length; l++) {
+              snippets[s].lines[l].content = snippets[s].lines[l].content +=
+                "↵";
+            }
+          }
+          commit('setSnippets', snippets);
+          resolve();
+        });
+      })
+      commit("setInitialSnippetsLoadedPromise", promise)
+      
+    },
+    async popRandomSnippet({ state, commit }) {
+      //wait until any snippets have been loaded before popping one
+      await state.initialSnippetsLoaded;
+
+      //TODO: if there are less than x snippets buffered, load new ones
+      
+      const newSnippets = [...state.snippets]
+      const removedItem = newSnippets.splice(Math.floor(Math.random() * newSnippets.length), 1)[0];
+      commit('setSnippets', newSnippets);
+      commit('setLastSnippet', removedItem);
+      return removedItem;
     }
   }
 })
@@ -69,7 +140,7 @@ const app = createApp(App);
 
 const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-  history : createWebHashHistory(),
+  history: createWebHashHistory(),
   routes, // short for `routes: routes`
 })
 
