@@ -30,7 +30,7 @@
           src="@/assets/buttonRetry.svg"
           alt="retry"
           class="icon"
-          v-on:click="resetSnippet"
+          v-on:click="repeatSnippet"
         />
       </div>
       <div id="next" title="Next (TAB)">
@@ -78,6 +78,10 @@ export default {
     startNextSnippet() {
       this.$router.push("/");
     },
+    repeatSnippet() {
+      this.$store.commit('setRepeatLastSnippet', true);
+      this.startNextSnippet();
+    }
   },
   created() {
     document.onkeydown = (event) => {
@@ -152,12 +156,12 @@ export default {
 }
 
 #text {
-  padding: 0.5em 1.5em;
+  padding: 1em 1.5em;
   border: 1px solid #c4c4c4;
   border-radius: 0.5em;
   overflow: auto;
-  height: 55%;
-  width: 80ch;
+  max-height: 55%;
+  // width: 100ch;
 }
 
 .line {
@@ -172,7 +176,7 @@ export default {
 
 .buttons {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 2em;
   margin-top: 1em;
 }

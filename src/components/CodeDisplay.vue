@@ -111,7 +111,7 @@ export default {
       }
     },
     getLineNumberOpacity(lineNumber) {
-     return lineNumber <= this.currentLine + 1 ? "0.3" : "0";
+      return lineNumber <= this.currentLine + 1 ? "0.3" : "0";
     },
     onkeydown(event) {
       let key = event.key;
@@ -278,8 +278,13 @@ export default {
       //   });
     },
     async displayNewSnippet() {
-      // TODO: get new snippets from server once all buffered snippets have been shown
-      this.text = await this.$store.dispatch("popRandomSnippet");
+      const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
+      if (repeatLastSnippet) {
+        this.text = this.$store.getters.getLastSnippet;
+        this.$store.commit('setRepeatLastSnippet', false);
+      } else {
+        this.text = await this.$store.dispatch("popRandomSnippet");
+      }
       this.resetSnippet();
     },
     resetSnippet() {
@@ -414,7 +419,8 @@ export default {
     this.scrolledDown = 0;
 
     this.fs = this.$firebase.firestore();
-
+  },
+  mounted() {
     this.displayNewSnippet();
   },
   beforeUnmount() {

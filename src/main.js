@@ -50,6 +50,16 @@ const store = createStore({
       snippets: [],
       initialSnippetsLoaded: Promise,
       lastTestResults: null, 
+      lastSnippet: null,
+      repeatLastSnippet: false,
+    }
+  },
+  getters: {
+    getLastSnippet(state) {
+      return state.lastSnippet;
+    },
+    getRepeatLastSnippet(state) {
+      return state.repeatLastSnippet;
     }
   },
   mutations: {
@@ -70,6 +80,12 @@ const store = createStore({
     },
     newTestCompleted(state, testResults) {
       state.lastTestResults = testResults;
+    },
+    setRepeatLastSnippet(state, repeat) {
+      state.repeatLastSnippet = repeat;
+    },
+    setLastSnippet(state, lastSnippet) {
+      state.lastSnippet = lastSnippet;
     }
   },
   actions: {
@@ -99,14 +115,15 @@ const store = createStore({
     },
     async popRandomSnippet({ state, commit }) {
       //wait until any snippets have been loaded before popping one
-      await state.initialSnippetsLoaded
+      await state.initialSnippetsLoaded;
 
       //TODO: if there are less than x snippets buffered, load new ones
       
       const newSnippets = [...state.snippets]
       const removedItem = newSnippets.splice(Math.floor(Math.random() * newSnippets.length), 1)[0];
-      commit('setSnippets', newSnippets)
-      return removedItem
+      commit('setSnippets', newSnippets);
+      commit('setLastSnippet', removedItem);
+      return removedItem;
     }
   }
 })
