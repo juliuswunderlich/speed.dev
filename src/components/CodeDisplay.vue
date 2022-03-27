@@ -1,6 +1,10 @@
 <template>
   <div class="code-display">
-    <div id="wrapper">
+    <div
+      id="wrapper"
+      @mousemove="typing = false"
+      :style="{ cursor: typing ? 'none' : 'auto' }"
+    >
       <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
       <div id="line-numbers">
         <span
@@ -85,6 +89,7 @@ export default {
 
       //timer
       timerRunning: false,
+      typing: false,
       msRunning: 0,
       startTime: 0,
       endTime: 0,
@@ -129,6 +134,7 @@ export default {
       if (this.displayStats) {
         return;
       }
+      this.typing = true;
       if (key === "Backspace") {
         if (this.currentLine !== 0 || this.cursorPosition !== 0) {
           this.reverseCursor();
@@ -281,7 +287,7 @@ export default {
       const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
       if (repeatLastSnippet) {
         this.text = this.$store.getters.getLastSnippet;
-        this.$store.commit('setRepeatLastSnippet', false);
+        this.$store.commit("setRepeatLastSnippet", false);
       } else {
         this.text = await this.$store.dispatch("popRandomSnippet");
       }

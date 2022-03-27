@@ -17,6 +17,8 @@
           {{ lineIndex + 1 }}
         </span>
         <span
+          @mouseover="mouseOver(lineIndex, charIndex)"
+          @mouselevae="mouseLeave()"
           v-for="(char, charIndex) in line"
           :class="getClassAt(lineIndex, charIndex)"
           :key="char.id"
@@ -56,6 +58,9 @@ export default {
       lines: [],
       correctMap: [],
 
+      hoverLine: -1,
+      hoverChar: -1,
+
       preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
       INDENT_EM: 1.6,
     };
@@ -81,6 +86,14 @@ export default {
     repeatSnippet() {
       this.$store.commit('setRepeatLastSnippet', true);
       this.startNextSnippet();
+    },
+    mouseOver(lineIndex, charIndex) {
+      this.lineIndex = lineIndex;
+      this.charIndex = charIndex;
+    },
+    mouseLeave() {
+      this.lineIndex = -1; 
+      this.charIndex = -1;
     }
   },
   created() {
@@ -161,6 +174,7 @@ export default {
   border-radius: 0.5em;
   overflow: auto;
   max-height: 55%;
+  font-size: 1.1em;
   // width: 100ch;
 }
 
@@ -206,6 +220,7 @@ export default {
 
 .corrected {
   color: #ff4a4a;
+  font-size: 0.9em;
 }
 //TODO: class corrected: rote schrift
 //vs. class wrong: roter hintergrund (also unkorrigierte fehler)
