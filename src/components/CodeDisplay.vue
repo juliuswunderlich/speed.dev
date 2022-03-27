@@ -1,10 +1,10 @@
 <template>
-  <div class="code-display">
-    <div
-      id="wrapper"
-      @mousemove="typing = false"
-      :style="{ cursor: typing ? 'none' : 'auto' }"
-    >
+  <div
+    class="code-display"
+    @mousemove="typing = false"
+    :style="{ cursor: typing ? 'none' : 'auto' }"
+  >
+    <div id="wrapper">
       <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
       <div id="line-numbers">
         <span
