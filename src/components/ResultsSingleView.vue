@@ -170,7 +170,7 @@ export default {
 
 #text {
   padding: 1em 1.5em;
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--primary);
   border-radius: 0.5em;
   overflow-y: scroll;
   max-height: 55%;

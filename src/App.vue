@@ -94,7 +94,7 @@ body {
 body {
   height: 100vh;
   width: 100vw;
-  background-color: #151718;
+  background-color: var(--background);
 }
 
 #app {
@@ -103,7 +103,7 @@ body {
   flex-direction: column;
   height: 100%;
   // max-height: 100%;
-  color: #c4c4c4;
+  color: var(--primary);
   margin: 0em 10%;
   padding: 1em;
 
@@ -124,7 +124,6 @@ body {
 
   #login {
     text-decoration: none;
-    color: #c4c4c4;
 
     &:hover {
       font-weight: bold;
@@ -171,7 +170,7 @@ body {
 
     a {
       text-decoration: none;
-      color: #c4c4c4;
+      color: var(--primary);
       display: block;
       padding-right: 1.6em;
 
@@ -181,13 +180,4 @@ body {
     }
   }
 }
-
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
 </style>

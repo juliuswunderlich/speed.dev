@@ -80,7 +80,7 @@ export default {
     transform: unset;
     /* background:#ccc;*/
     background: none;
-    border:1px solid #c4c4c4;
+    border:1px solid var(--primary);
     border-radius: 5px;
     cursor:pointer;
     -webkit-border-radius: 5px;
@@ -89,7 +89,7 @@ export default {
 
   input {
     text-align: center;
-    color: #c4c4c4;
+    color: var(--primary);
     margin-bottom: 10px;
   }
 
