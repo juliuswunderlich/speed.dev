@@ -84,7 +84,7 @@ export default {
       this.$router.push("/");
     },
     repeatSnippet() {
-      this.$store.commit('setRepeatLastSnippet', true);
+      this.$store.commit("setRepeatLastSnippet", true);
       this.startNextSnippet();
     },
     mouseOver(lineIndex, charIndex) {
@@ -92,9 +92,9 @@ export default {
       this.charIndex = charIndex;
     },
     mouseLeave() {
-      this.lineIndex = -1; 
+      this.lineIndex = -1;
       this.charIndex = -1;
-    }
+    },
   },
   created() {
     document.onkeydown = (event) => {
@@ -172,10 +172,9 @@ export default {
   padding: 1em 1.5em;
   border: 1px solid #c4c4c4;
   border-radius: 0.5em;
-  overflow: auto;
+  overflow-y: scroll;
   max-height: 55%;
   font-size: 1.1em;
-  // width: 100ch;
 }
 
 .line {
