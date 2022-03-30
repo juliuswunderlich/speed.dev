@@ -134,6 +134,14 @@ export default {
 
     this.correctMap = correctMap;
   },
+  mounted() {
+    //make text field wider to fit scroll bar in case it's needed
+    const textField = document.getElementById("text");
+    const width = window.getComputedStyle(textField).getPropertyValue('width');
+    const newWidth = parseFloat(width.replace("px", "")) + 40 + "px";
+    textField.style.width = newWidth;
+    console.log(newWidth);
+  },
   beforeUnmount() {
     // remove keyListener
     //TODO: maybe a cleaner way to do this?
@@ -172,7 +180,7 @@ export default {
   padding: 1em 1.5em;
   border: 1px solid var(--primary);
   border-radius: 0.5em;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 55%;
   font-size: 1.1em;
 }

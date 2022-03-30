@@ -284,14 +284,26 @@ export default {
       //   });
     },
     async displayNewSnippet() {
-      const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
-      if (repeatLastSnippet) {
-        this.text = this.$store.getters.getLastSnippet;
-        this.$store.commit("setRepeatLastSnippet", false);
-      } else {
-        this.text = await this.$store.dispatch("popRandomSnippet");
+      //offline:
+      const text = require("../../backend/utils/Codes/codes_java_math.json")[
+        Math.floor(Math.random() * 20)
+      ];
+      if (text.lines[0].content[text.lines[0].content.length - 1] !== "↵") {
+        for (let l = 0; l < text.lines.length; l++) {
+          text.lines[l].content = text.lines[l].content += "↵";
+        }
       }
+      this.text = text;
       this.resetSnippet();
+
+      // const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
+      // if (repeatLastSnippet) {
+      //   this.text = this.$store.getters.getLastSnippet;
+      //   this.$store.commit("setRepeatLastSnippet", false);
+      // } else {
+      //   this.text = await this.$store.dispatch("popRandomSnippet");
+      // }
+      // this.resetSnippet();
     },
     resetSnippet() {
       //initialize/reset key history for each line
@@ -490,13 +502,8 @@ export default {
   padding: 0.5em;
   overflow: hidden;
 
-  border-color: #333;
-  border-width: 2px;
-  border-style: solid;
+  border: 2px solid #333;
   border-radius: 10px;
-
-  // box-shadow: rgb(223, 222, 222) 0px 0px 6px 1px inset;
-  // background-color: rgba(233, 233, 233, 0.25);
 }
 
 .line {
