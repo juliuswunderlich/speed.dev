@@ -521,7 +521,7 @@ export default {
   align-self: end;
 }
 #timer {
-  grid-area: 2/ 3/ 3/ 4;
+  grid-area: 2/ 3/ 3/ 5;
   justify-self: center;
   align-self: center;
   line-height: 100%;

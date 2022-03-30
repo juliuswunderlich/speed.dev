@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <router-link to="/" class="left">
+    <router-link to="/">
       <img id="logo" src="@/assets/logo.svg" alt="Logo" />
     </router-link>
     <div id="nav">
@@ -15,7 +15,7 @@
       </router-link>
     </div>
     <!-- <router-link id="login" class="right" :to="routerTarget">{{ statusText }}</router-link> -->
-    <span class="right">Login (coming soon)</span>
+    <span>Login (coming soon)</span>
   </div>
 
   <router-view @loggedIn="loggedIn" @loggedOut="loggedOut"></router-view>
@@ -113,18 +113,10 @@ body {
 }
 
 #header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  .left, .right {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-
-  .right {
-    text-align: right;
-  }
 
   #logo {
     max-width: 80px;
@@ -142,6 +134,9 @@ body {
 }
 
 #nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   flex-direction: row;
