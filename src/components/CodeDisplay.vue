@@ -7,7 +7,7 @@
     <div id="wrapper">
       <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
       <div id="line-numbers">
-        <span
+        <p
           class="line"
           v-for="line_number in numberOfLines"
           :key="line_number.id"
@@ -16,10 +16,10 @@
           }"
         >
           {{ line_number }}
-        </span>
+        </p>
       </div>
-      <div id="code-field">
-        <span
+      <div id="code-field" :style="{ borderColor: codeFieldBorderColor }">
+        <p
           id="code-line"
           class="line"
           v-for="(line, line_idx) in text.lines"
@@ -36,7 +36,8 @@
           >
             {{ getCharacterAt(line_idx, char_idx) }}
           </span>
-        </span>
+        </p>
+        <span v-if="capsLock" class="caps-warning">caps activated</span>
       </div>
       <!-- <div id="info">
         <img
@@ -86,10 +87,11 @@ export default {
       cursorPosition: 0,
       charsTyped: [],
       preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
+      typing: false,
+      capsLock: false,
 
       //timer
       timerRunning: false,
-      typing: false,
       msRunning: 0,
       startTime: 0,
       endTime: 0,
@@ -120,6 +122,7 @@ export default {
     },
     onkeydown(event) {
       let key = event.key;
+      this.capsLock = event.getModifierState("CapsLock");
       if (this.preventDefaultKeys.includes(key)) {
         event.preventDefault();
       }
@@ -143,6 +146,7 @@ export default {
         if (!this.timerRunning) {
           this.startTimer();
         }
+
         this.keysTyped[this.currentLine].push(key === "Enter" ? "↵" : key);
         this.charsTyped[this.currentLine].push(key === "Enter" ? "↵" : key);
         if (this.cursorPosition >= this.currentLineLength - 1) {
@@ -194,7 +198,6 @@ export default {
     newLine() {
       if (this.currentLine === this.numberOfLines - 1) {
         this.snippetFinished();
-        // this.displayNewSnippet()
       } else {
         this.currentLine++;
         this.cursorPosition = 0;
@@ -285,25 +288,25 @@ export default {
     },
     async displayNewSnippet() {
       //offline:
-      const text = require("../../backend/utils/Codes/codes_java_math.json")[
-        Math.floor(Math.random() * 20)
-      ];
-      if (text.lines[0].content[text.lines[0].content.length - 1] !== "↵") {
-        for (let l = 0; l < text.lines.length; l++) {
-          text.lines[l].content = text.lines[l].content += "↵";
-        }
-      }
-      this.text = text;
-      this.resetSnippet();
-
-      // const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
-      // if (repeatLastSnippet) {
-      //   this.text = this.$store.getters.getLastSnippet;
-      //   this.$store.commit("setRepeatLastSnippet", false);
-      // } else {
-      //   this.text = await this.$store.dispatch("popRandomSnippet");
+      // const text = require("../../backend/utils/Codes/codes_java_math.json")[
+      //   Math.floor(Math.random() * 20)
+      // ];
+      // if (text.lines[0].content[text.lines[0].content.length - 1] !== "↵") {
+      //   for (let l = 0; l < text.lines.length; l++) {
+      //     text.lines[l].content = text.lines[l].content += "↵";
+      //   }
       // }
+      // this.text = text;
       // this.resetSnippet();
+
+      const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
+      if (repeatLastSnippet) {
+        this.text = this.$store.getters.getLastSnippet;
+        this.$store.commit("setRepeatLastSnippet", false);
+      } else {
+        this.text = await this.$store.dispatch("popRandomSnippet");
+      }
+      this.resetSnippet();
     },
     resetSnippet() {
       //initialize/reset key history for each line
@@ -379,6 +382,9 @@ export default {
     },
     lineNumberElements() {
       return document.querySelector("#line-numbers").children;
+    },
+    codeFieldBorderColor() {
+      return this.capsLock ? "#ff4a4a" : "#333";
     },
     formattedTime() {
       let minutes = Math.floor(this.secondsTotal / 60);
@@ -497,20 +503,32 @@ export default {
 }
 
 #code-field {
+  position: relative;
   grid-area: 1/ 2/ 2/ 6;
   width: 100ch;
   padding: 0.5em;
   overflow: hidden;
 
-  border: 2px solid #333;
+  border-style: solid;
+  border-width: 2px;
   border-radius: 10px;
 }
 
 .line {
-  display: block;
+  // display: block;
   margin: 0.1em 0;
   white-space: nowrap;
   scroll-margin: 0.6em;
+}
+
+.caps-warning {
+  position: absolute;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  bottom: 0.8em;
+  right: 1.2em;
+  color: #ff4a4a;
+  font-size: 0.7em;
 }
 
 #info {
