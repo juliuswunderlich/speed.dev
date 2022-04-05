@@ -17,6 +17,8 @@
           {{ lineIndex + 1 }}
         </span>
         <span
+          @mouseover="mouseOver(lineIndex, charIndex)"
+          @mouselevae="mouseLeave()"
           v-for="(char, charIndex) in line"
           :class="getClassAt(lineIndex, charIndex)"
           :key="char.id"
@@ -56,6 +58,9 @@ export default {
       lines: [],
       correctMap: [],
 
+      hoverLine: -1,
+      hoverChar: -1,
+
       preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
       INDENT_EM: 1.6,
     };
@@ -79,9 +84,17 @@ export default {
       this.$router.push("/");
     },
     repeatSnippet() {
-      this.$store.commit('setRepeatLastSnippet', true);
+      this.$store.commit("setRepeatLastSnippet", true);
       this.startNextSnippet();
-    }
+    },
+    mouseOver(lineIndex, charIndex) {
+      this.lineIndex = lineIndex;
+      this.charIndex = charIndex;
+    },
+    mouseLeave() {
+      this.lineIndex = -1;
+      this.charIndex = -1;
+    },
   },
   created() {
     document.onkeydown = (event) => {
@@ -121,6 +134,14 @@ export default {
 
     this.correctMap = correctMap;
   },
+  mounted() {
+    //make text field wider to fit scroll bar in case it's needed
+    const textField = document.getElementById("text");
+    const width = window.getComputedStyle(textField).getPropertyValue('width');
+    const newWidth = parseFloat(width.replace("px", "")) + 40 + "px";
+    textField.style.width = newWidth;
+    console.log(newWidth);
+  },
   beforeUnmount() {
     // remove keyListener
     //TODO: maybe a cleaner way to do this?
@@ -157,11 +178,11 @@ export default {
 
 #text {
   padding: 1em 1.5em;
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--primary);
   border-radius: 0.5em;
-  overflow: auto;
+  overflow-y: auto;
   max-height: 55%;
-  // width: 100ch;
+  font-size: 1.1em;
 }
 
 .line {
@@ -206,6 +227,7 @@ export default {
 
 .corrected {
   color: #ff4a4a;
+  font-size: 0.9em;
 }
 //TODO: class corrected: rote schrift
 //vs. class wrong: roter hintergrund (also unkorrigierte fehler)

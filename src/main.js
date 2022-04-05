@@ -1,19 +1,23 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import "@/assets/global.css"
+
 import { firebase } from '@firebase/app'
 import '@firebase/firestore'
 import { } from '@firebase/auth';
+
 import CodeDisplay from './components/CodeDisplay'
 import Login from './components/Login'
 import Register from './components/Register'
 import Stats from './components/Stats'
 import ResultsSingleView from './components/ResultsSingleView'
 import Settings from './components/Settings'
-// hella clean import <3
+//import { Login } from './components/Login'
+
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { createStore } from 'vuex'
 
-//import { Login } from './components/Login'
+
 
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
@@ -128,12 +132,7 @@ const store = createStore({
   }
 })
 
-
-
-
-
 // Now the app has started!
-
 
 const app = createApp(App);
 //app.use(VueRouter)
