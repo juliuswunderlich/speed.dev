@@ -37,6 +37,9 @@
             {{ getCharacterAt(line_idx, char_idx) }}
           </span>
         </p>
+        <p v-if="loading" class="loading">
+          loading snippets<span>.</span><span>.</span><span>.</span>
+        </p>
         <span v-if="capsLock" class="caps-warning">caps activated</span>
       </div>
       <!-- <div id="info">
@@ -77,6 +80,7 @@ export default {
   data() {
     return {
       fs: null,
+      loading: true,
       text: {},
       INDENT_EM: 1.6,
       START_SCROLL_AFTER_LINE: 2,
@@ -305,6 +309,7 @@ export default {
         this.$store.commit("setRepeatLastSnippet", false);
       } else {
         this.text = await this.$store.dispatch("popRandomSnippet");
+        this.loading = false;
       }
       this.resetSnippet();
     },
@@ -519,6 +524,41 @@ export default {
   margin: 0.1em 0;
   white-space: nowrap;
   scroll-margin: 0.6em;
+}
+
+.loading {
+  margin: 0;
+  position: absolute;
+  top: 0.7em;
+  left: 0.7em;
+}
+
+.loading span {
+  font-size: 1.1em;
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.loading span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
 }
 
 .caps-warning {
