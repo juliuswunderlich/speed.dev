@@ -1,8 +1,15 @@
 <template>
+  <ResultsSingleView
+    @nextSnippet="displayNewSnippet"
+    @repeatSnippet="resetSnippet"
+    :test-results="testResults"
+    v-if="displayStats"
+  />
   <div
+    v-else
     class="code-display"
     @mousemove="typing = false"
-    :style="{ cursor: typing ? 'none' : 'auto' }"
+    :style="{ cursor: typing ? 'none' : 'default' }"
   >
     <div id="wrapper">
       <!-- <img id="logo" src="@/assets/java.svg" alt="java logo" /> -->
@@ -75,8 +82,11 @@
 
 
 <script>
+import ResultsSingleView from "./ResultsSingleView.vue";
+
 export default {
   name: "CodeDisplay",
+  components: { ResultsSingleView },
   data() {
     return {
       fs: null,
@@ -93,6 +103,10 @@ export default {
       preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
       typing: false,
       capsLock: false,
+      
+      //scroll
+      lineElements: [],
+      lineNumberElements: [],
 
       //timer
       timerRunning: false,
@@ -103,6 +117,7 @@ export default {
       //stats
       keysTyped: [],
       displayStats: false,
+      testResults: null,
     };
   },
   methods: {
@@ -130,15 +145,19 @@ export default {
       if (this.preventDefaultKeys.includes(key)) {
         event.preventDefault();
       }
+      if (this.displayStats) {
+        if (key == "Tab") {
+          this.displayStats = false;
+          this.displayNewSnippet();
+        }
+        return;
+      }
       if (key === "Tab") {
         if (this.timerRunning) {
           this.resetSnippet();
         } else {
           this.displayNewSnippet();
         }
-        return;
-      }
-      if (this.displayStats) {
         return;
       }
       this.typing = true;
@@ -255,7 +274,6 @@ export default {
     snippetFinished() {
       this.stopTimer();
       this.displayStats = true;
-      this.$router.push("results");
 
       const metrics = {
         snippetId: this.text.id,
@@ -265,13 +283,14 @@ export default {
         secondsTotal: Math.round(this.secondsTotal * 100) / 100,
       };
 
-      const payload = {
+      const results = {
         metrics: metrics,
         lines: this.text.lines,
         keysTyped: this.keysTyped,
         charsTyped: this.charsTyped,
       };
-      this.$store.commit("newTestCompleted", payload);
+      this.testResults = results;
+      // this.$store.commit("newTestCompleted", payload);
 
       // this.$root.$emit('snippetFinished', {results: results, keysTyped: this.keysTyped, charsTyped: this.charsTyped})
 
@@ -303,17 +322,13 @@ export default {
       // this.text = text;
       // this.resetSnippet();
 
-      const repeatLastSnippet = this.$store.getters.getRepeatLastSnippet;
-      if (repeatLastSnippet) {
-        this.text = this.$store.getters.getLastSnippet;
-        this.$store.commit("setRepeatLastSnippet", false);
-      } else {
-        this.text = await this.$store.dispatch("popRandomSnippet");
-        this.loading = false;
-      }
+      this.text = await this.$store.dispatch("popRandomSnippet");
+      this.loading = false;
       this.resetSnippet();
     },
-    resetSnippet() {
+    async resetSnippet() {
+      this.displayStats = false;
+
       //initialize/reset key history for each line
       this.charsTyped.length = 0;
       this.keysTyped.length = 0;
@@ -325,10 +340,15 @@ export default {
       this.currentLine = 0;
       this.cursorPosition = 0;
       this.scrolledDown = 0;
+
+      await this.$nextTick();
       document.querySelector("#code-field").scrollTo(0, 0);
       document.querySelector("#line-numbers").scrollTo(0, 0);
+
+      this.lineElements = document.querySelector("#code-field").children;
+      this.lineNumberElements = document.querySelector("#line-numbers").children;
+
       this.resetTimer();
-      this.displayStats = false;
     },
     showInfo() {
       //TODO
@@ -381,12 +401,6 @@ export default {
         list.push(i);
       }
       return list;
-    },
-    lineElements() {
-      return document.querySelector("#code-field").children;
-    },
-    lineNumberElements() {
-      return document.querySelector("#line-numbers").children;
     },
     codeFieldBorderColor() {
       return this.capsLock ? "#ff4a4a" : "#333";
@@ -467,6 +481,7 @@ export default {
   box-sizing: border-box;
 }
 .code-display {
+  cursor: default;
   flex: 1;
   display: flex;
   justify-content: center;

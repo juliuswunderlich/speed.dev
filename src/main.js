@@ -10,7 +10,6 @@ import CodeDisplay from './components/CodeDisplay'
 import Login from './components/Login'
 import Register from './components/Register'
 import Stats from './components/Stats'
-import ResultsSingleView from './components/ResultsSingleView'
 import Settings from './components/Settings'
 //import { Login } from './components/Login'
 
@@ -37,7 +36,6 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   { path: '/stats', component: Stats },
-  { path: '/results', component: ResultsSingleView },
   { path: '/settings', component: Settings }
 ]
 
@@ -53,17 +51,6 @@ const store = createStore({
       userLoggedIn: false,
       snippets: [],
       initialSnippetsLoaded: Promise,
-      lastTestResults: null, 
-      lastSnippet: null,
-      repeatLastSnippet: false,
-    }
-  },
-  getters: {
-    getLastSnippet(state) {
-      return state.lastSnippet;
-    },
-    getRepeatLastSnippet(state) {
-      return state.repeatLastSnippet;
     }
   },
   mutations: {
@@ -82,15 +69,6 @@ const store = createStore({
     setInitialSnippetsLoadedPromise(state, promise) {
       state.initialSnippetsLoaded = promise;
     },
-    newTestCompleted(state, testResults) {
-      state.lastTestResults = testResults;
-    },
-    setRepeatLastSnippet(state, repeat) {
-      state.repeatLastSnippet = repeat;
-    },
-    setLastSnippet(state, lastSnippet) {
-      state.lastSnippet = lastSnippet;
-    }
   },
   actions: {
     //load snippets from firestore, for now all of them
@@ -126,7 +104,6 @@ const store = createStore({
       const newSnippets = [...state.snippets]
       const removedItem = newSnippets.splice(Math.floor(Math.random() * newSnippets.length), 1)[0];
       commit('setSnippets', newSnippets);
-      commit('setLastSnippet', removedItem);
       return removedItem;
     }
   }

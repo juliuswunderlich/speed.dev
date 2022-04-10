@@ -50,6 +50,7 @@
 <script>
 export default {
   name: "ResultsSingleView",
+  props: ['testResults'],
   data() {
     return {
       results: {},
@@ -61,7 +62,6 @@ export default {
       hoverLine: -1,
       hoverChar: -1,
 
-      preventDefaultKeys: ["Tab", "/", "'", " ", "Enter"],
       INDENT_EM: 1.6,
     };
   },
@@ -70,6 +70,9 @@ export default {
       return 2 + this.lines[lineIndex].indent * this.INDENT_EM;
     },
     getClassAt(lineIndex, charIndex) {
+      // if (this.hoverLine == lineIndex && this.hoverChar == charIndex) {
+      //   return 'hovering';
+      // }
       return this.correctMap[lineIndex][charIndex];
     },
     getCharacterAt(lineIndex, charIndex) {
@@ -81,32 +84,22 @@ export default {
       }
     },
     startNextSnippet() {
-      this.$router.push("/");
+      this.$emit("nextSnippet");
     },
     repeatSnippet() {
-      this.$store.commit("setRepeatLastSnippet", true);
-      this.startNextSnippet();
+      this.$emit("repeatSnippet");
     },
     mouseOver(lineIndex, charIndex) {
-      this.lineIndex = lineIndex;
-      this.charIndex = charIndex;
+      this.hoverLine = lineIndex;
+      this.hoverChar = charIndex;
     },
     mouseLeave() {
-      this.lineIndex = -1;
-      this.charIndex = -1;
+      this.hoverLine = -1;
+      this.hoverChar = -1;
     },
   },
   created() {
-    document.onkeydown = (event) => {
-      if (this.preventDefaultKeys.includes(event.key)) {
-        event.preventDefault();
-      }
-      if (event.key === "Tab") {
-        this.startNextSnippet();
-      }
-    };
-    const { metrics, lines, keysTyped, charsTyped } =
-      this.$store.state.lastTestResults;
+    const {metrics, lines, keysTyped, charsTyped } = this.testResults;
     this.results = metrics;
     this.keysTyped = keysTyped;
     this.lines = lines;
@@ -137,21 +130,16 @@ export default {
   mounted() {
     //make text field wider to fit scroll bar in case it's needed
     const textField = document.getElementById("text");
-    const width = window.getComputedStyle(textField).getPropertyValue('width');
+    const width = window.getComputedStyle(textField).getPropertyValue("width");
     const newWidth = parseFloat(width.replace("px", "")) + 40 + "px";
     textField.style.width = newWidth;
-    console.log(newWidth);
-  },
-  beforeUnmount() {
-    // remove keyListener
-    //TODO: maybe a cleaner way to do this?
-    document.onkeydown = undefined;
   },
 };
 </script>
 
 <style scoped lang="scss">
 .stats {
+  cursor: default;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -229,6 +217,4 @@ export default {
   color: #ff4a4a;
   font-size: 0.9em;
 }
-//TODO: class corrected: rote schrift
-//vs. class wrong: roter hintergrund (also unkorrigierte fehler)
 </style>
