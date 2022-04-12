@@ -168,8 +168,10 @@ export default {
   padding: 1em 1.5em;
   border: 1px solid var(--primary);
   border-radius: 0.5em;
-  overflow-y: auto;
+  overflow: auto;
+  white-space: nowrap;
   max-height: 55%;
+  max-width: 100ch;
   font-size: 1.1em;
 }
 
